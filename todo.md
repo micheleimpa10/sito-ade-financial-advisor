@@ -18,32 +18,32 @@
 - [x] ComponentShowcase.tsx - Showcase componenti
 
 ## Funzionalità Stripe
-- [ ] Integrare Stripe Checkout nel shop
-- [ ] Configurare webhook /api/stripe/webhook
-- [ ] Registrare ordini nel database TiDB
-- [ ] Testare flusso pagamento end-to-end
+- [x] Integrare Stripe Checkout nel shop
+- [x] Configurare webhook /api/stripe/webhook
+- [x] Registrare ordini nel database TiDB
+- [x] Testare flusso pagamento end-to-end
 
 ## Database e Autenticazione
-- [ ] Verificare schema users e orders su TiDB
-- [ ] Configurare Manus OAuth
+- [x] Verificare schema users e orders su TiDB
+- [x] Configurare Manus OAuth
 - [ ] Testare login/logout
 - [ ] Verificare protezione pagine autenticate
 
 ## Stile e Design
-- [ ] Configurare palette Swiss Minimalism (navy/crema/oro)
-- [ ] Implementare tipografia serif + sans-serif
-- [ ] Layout asimmetrico ed elegante
-- [ ] Hover effects e card reveals
-- [ ] Polaroid-style photo frames
+- [x] Configurare palette Swiss Minimalism (navy/crema/oro)
+- [x] Implementare tipografia serif + sans-serif
+- [x] Layout asimmetrico ed elegante
+- [x] Hover effects e card reveals
+- [x] Polaroid-style photo frames
 
 ## Multi-lingua
-- [ ] Implementare supporto IT, EN, FR, DE
-- [ ] Configurare language switcher
-- [ ] Tradurre contenuti principali
+- [x] Implementare supporto IT, EN, FR, DE
+- [x] Configurare language switcher
+- [x] Tradurre contenuti principali
 
 ## Configurazione Finale
-- [ ] Verificare variabili d'ambiente (DATABASE_URL, STRIPE_*)
-- [ ] Testare build locale
-- [ ] Salvare checkpoint
+- [x] Verificare variabili d'ambiente (DATABASE_URL, STRIPE_*)
+- [x] Testare build locale
+- [x] Salvare checkpoint
 - [ ] Configurare visibilità pubblica
 - [ ] Pubblicare sito

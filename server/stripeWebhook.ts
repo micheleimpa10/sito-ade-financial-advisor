@@ -23,7 +23,7 @@ export function registerStripeWebhook(app: Express) {
         return;
       }
 
-      const stripe = new Stripe(stripeKey, { apiVersion: "2026-05-27.dahlia" });
+      const stripe = new Stripe(stripeKey, { apiVersion: "2026-06-24.dahlia" });
 
       let event: Stripe.Event;
 

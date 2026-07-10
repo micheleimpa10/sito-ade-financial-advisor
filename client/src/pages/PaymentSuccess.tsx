@@ -29,7 +29,7 @@ function UpsellOffer({ onDismiss }: { onDismiss: () => void }) {
   const createCheckout = trpc.stripe.createCheckout.useMutation({
     onSuccess: (data) => {
       toast.info("Redirecting to checkout…");
-      window.open(data.url, "_blank");
+      if (data.url) window.open(data.url, "_blank");
     },
     onError: (err) => {
       toast.error(err.message || "Could not start checkout. Please try again.");

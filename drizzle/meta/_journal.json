@@ -1,5 +1,27 @@
 {
   "version": "7",
   "dialect": "mysql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1781277187234,
+      "tag": "0000_chunky_purifiers",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1781277370344,
+      "tag": "0001_flimsy_the_phantom",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1783000354033,
+      "tag": "0002_clear_enchantress",
+      "breakpoints": true
+    }
+  ]
 }

@@ -15,7 +15,7 @@ export function registerStripeWebhook(app: Express) {
     async (req: Request, res: Response) => {
       const sig = req.headers["stripe-signature"] as string;
       const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-      const stripeKey = process.env.STRIPE_SECRET_KEY;
+      const stripeKey = process.env.STRIPE_SECRET_KEY || process.env.VITE_STRIPE_SECRET_KEY;
 
       if (!stripeKey) {
         console.error("[Webhook] STRIPE_SECRET_KEY not configured");

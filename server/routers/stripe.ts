@@ -8,7 +8,7 @@ import { eq, desc, inArray } from "drizzle-orm";
 import Stripe from "stripe";
 
 function getStripe() {
-  const key = process.env.STRIPE_SECRET_KEY;
+  const key = process.env.STRIPE_SECRET_KEY || process.env.VITE_STRIPE_SECRET_KEY;
   if (!key) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Stripe not configured" });
   return new Stripe(key, { apiVersion: "2026-05-27" as any });
 }

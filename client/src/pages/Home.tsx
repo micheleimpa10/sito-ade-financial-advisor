@@ -900,20 +900,20 @@ const translations = {
 type Lang = "en" | "it" | "fr" | "de";
 
 // ─── IMAGES ────────────────────────────────────────────────────────────────────
-const HERO_BG = "/manus-storage/services-phone_ca517372.png";
-const ABOUT_PORTRAIT = "/manus-storage/adelaide-card_298df3df.png";
-const SERVICES_BG = "/manus-storage/consultation-cafe_d43a3ac4.png";
-const PHOTO_OUTDOOR_MEETING = "/manus-storage/photo-outdoor-meeting_0504b478.jpg";
-const PHOTO_VIDEO_CALL = "/manus-storage/photo-video-call_e59f5d26.jpg";
-const PHOTO_CAFE_MEETING = "/manus-storage/photo-cafe-meeting_37b0033a.jpg";
-const PHOTO_PHONE_CALL = "/manus-storage/photo-phone-call_7c557d43.jpg";
-const PHOTO_ZURICH_TERRACE = "/manus-storage/photo-zurich-terrace_4311734f.jpg";
-const PHOTO_CITY_PHONE = "/manus-storage/photo-city-phone_3eb73536.jpg";
-const CONSULTATION_ALPS = "/manus-storage/consultation-alps_5eeca1a1.png";
-const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_75fdf55b.jpg";
-const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_d233a35a.jpg";
-const PHOTO_WORKING_DESK = "/manus-storage/working-desk_8aa59a79.webp";
-const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_0386804d.png";
+const HERO_BG = "/manus-storage/services-phone_23312165.png";
+const ABOUT_PORTRAIT = "/manus-storage/adelaide-card_1c9273db.png";
+const SERVICES_BG = "/manus-storage/consultation-cafe_2e0b555e.jpg";
+const PHOTO_OUTDOOR_MEETING = "/manus-storage/photo-outdoor-meeting_ae5e9a10.jpg";
+const PHOTO_VIDEO_CALL = "/manus-storage/photo-cafe-meeting_c0aebbba.jpg";
+const PHOTO_CAFE_MEETING = "/manus-storage/photo-cafe-meeting_c0aebbba.jpg";
+const PHOTO_PHONE_CALL = "/manus-storage/photo-phone-call_caa155a1.jpg";
+const PHOTO_ZURICH_TERRACE = "/manus-storage/photo-zurich-terrace_c878f27a.jpg";
+const PHOTO_CITY_PHONE = "/manus-storage/consultation-sofa_33ea1447.jpg";
+const CONSULTATION_ALPS = "/manus-storage/consultation-alps_c3d8206c.png";
+const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_33ea1447.jpg";
+const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_f4e33082.jpg";
+const PHOTO_WORKING_DESK = "/manus-storage/working-desk_cc6dd45c.webp";
+const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_baaa31f2.png";
 
 // ─── SERVICE ICONS ─────────────────────────────────────────────────────────────
 const SERVICE_ICONS = [

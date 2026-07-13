@@ -26,8 +26,8 @@
 ## Database e Autenticazione
 - [x] Verificare schema users e orders su TiDB
 - [x] Configurare Manus OAuth
-- [ ] Testare login/logout
-- [ ] Verificare protezione pagine autenticate
+- [x] Testare login/logout
+- [x] Verificare protezione pagine autenticate
 
 ## Stile e Design
 - [x] Configurare palette Swiss Minimalism (navy/crema/oro)
@@ -45,5 +45,5 @@
 - [x] Verificare variabili d'ambiente (DATABASE_URL, STRIPE_*)
 - [x] Testare build locale
 - [x] Salvare checkpoint
-- [ ] Configurare visibilità pubblica
-- [ ] Pubblicare sito
+- [x] Configurare visibilità pubblica
+- [x] Pubblicare sito

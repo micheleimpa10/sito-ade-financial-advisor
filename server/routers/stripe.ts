@@ -7,12 +7,10 @@ import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { eq, desc, inArray } from "drizzle-orm";
 import Stripe from "stripe";
 
-import { ENV } from "../_core/env";
-
 function getStripe() {
-  const key = ENV.stripeSecretKey;
+  const key = process.env.STRIPE_SECRET_KEY;
   if (!key) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Stripe not configured" });
-  return new Stripe(key, { apiVersion: "2026-06-24.dahlia" });
+  return new Stripe(key, { apiVersion: "2026-05-27" as any });
 }
 
 export const stripeRouter = router({

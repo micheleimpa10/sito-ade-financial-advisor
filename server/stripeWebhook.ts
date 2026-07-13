@@ -6,6 +6,7 @@ import { orders } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { notifyOwner } from "./_core/notification";
 import { getProduct } from "./products";
+import { ENV } from "./_core/env";
 
 export function registerStripeWebhook(app: Express) {
   // MUST use express.raw BEFORE express.json for webhook signature verification
@@ -15,7 +16,7 @@ export function registerStripeWebhook(app: Express) {
     async (req: Request, res: Response) => {
       const sig = req.headers["stripe-signature"] as string;
       const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-      const stripeKey = process.env.STRIPE_SECRET_KEY;
+      const stripeKey = ENV.stripeSecretKey;
 
       if (!stripeKey) {
         console.error("[Webhook] STRIPE_SECRET_KEY not configured");

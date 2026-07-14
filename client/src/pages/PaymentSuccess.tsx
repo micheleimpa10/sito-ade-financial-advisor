@@ -7,13 +7,13 @@ import { toast } from "sonner";
 
 // All download paths keyed by productKey
 const DOWNLOAD_PATHS: Record<string, string> = {
-  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_bc6ea1e4.zip",
-  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_2b1157ed.zip",
-  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_52388b82.zip",
-  "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_93051c50.zip",
-  "budget-manager-family": "/manus-storage/05_BudgetManager_Family_9d8db1bc.zip",
-  "single-bundle": "/manus-storage/06_Single_Bundle_47a2cadd.zip",
-  "family-bundle": "/manus-storage/07_Family_Bundle_bf86d0cc.zip",
+  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_9c74fc92.zip",
+  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_6912de6d.zip",
+  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_1507f5ac.zip",
+  "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_f4338eb9.zip",
+  "budget-manager-family": "/manus-storage/05_BudgetManager_Family_057b7e97.zip",
+  "single-bundle": "/manus-storage/06_Single_Bundle_d79925dd.zip",
+  "family-bundle": "/manus-storage/07_Family_Bundle_bf36c9a6.zip",
 };
 
 function getDownloadLabel(productKey: string): string | null {

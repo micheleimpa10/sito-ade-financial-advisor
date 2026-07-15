@@ -44,7 +44,7 @@ const translations = {
       title: "UPCOMING EVENTS",
       events: [
         {
-          date: "July 22nd",
+          date: "June 7th",
           category: "Wellness & Health",
           title: "Outdoor Wellness Talk & Complementary Medicine Session",
           desc: "An open-air event with a certified Swiss practitioner, addressing complementary treatments and microcirculation techniques. This session aims to offer clarity on integrating these services into Swiss health insurance.",
@@ -54,7 +54,7 @@ const translations = {
           location: "Zurich, Switzerland",
         },
         {
-          date: "August 10th",
+          date: "July 4th",
           category: "Movement & Community",
           title: "Pilates & Social Gathering",
           desc: "A one-hour Pilates class followed by a social gathering. This event combines movement with insights into wellness professionals eligible for Swiss supplementary insurance reimbursement.",
@@ -66,6 +66,31 @@ const translations = {
       ],
       themeLabel: "Theme",
       activitiesLabel: "Key Activities",
+    },
+    past: {
+      title: "PAST EVENTS",
+      events: [
+        {
+          date: "May 15th",
+          category: "Financial Planning",
+          title: "Swiss Tax Optimization Workshop",
+          desc: "An in-depth workshop on optimizing tax strategies for high-net-worth individuals in Switzerland. Covered cantonal differences, deductions, and planning strategies.",
+          theme: "Tax efficiency, wealth preservation, and strategic planning.",
+          activities:
+            "Interactive workshop, Q&A session, and personalized consultation insights.",
+          location: "Bern, Switzerland",
+        },
+        {
+          date: "April 20th",
+          category: "Wellness & Community",
+          title: "Spring Wellness Retreat",
+          desc: "A rejuvenating day combining wellness practices with professional networking. Featured yoga, meditation, and informal discussions on work-life balance.",
+          theme: "Holistic wellness, community building, and professional connections.",
+          activities:
+            "Yoga session, meditation, wellness talks, and networking aperitivo.",
+          location: "Lugano, Switzerland",
+        },
+      ],
     },
     collab: {
       title: "COLLABORATIONS",
@@ -138,7 +163,7 @@ const translations = {
       title: "PROSSIMI EVENTI",
       events: [
         {
-          date: "22 Luglio",
+          date: "7 Giugno",
           category: "Benessere & Salute",
           title: "Talk all'Aperto sul Benessere e Medicina Complementare",
           desc: "Un evento all'aperto con un professionista svizzero certificato, dedicato ai trattamenti complementari e alle tecniche di microcircolazione. Questa sessione mira a offrire chiarezza sull'integrazione di questi servizi nell'assicurazione sanitaria svizzera.",
@@ -148,7 +173,7 @@ const translations = {
           location: "Zurigo, Svizzera",
         },
         {
-          date: "10 Agosto",
+          date: "4 Luglio",
           category: "Movimento & Comunità",
           title: "Pilates & Incontro Sociale",
           desc: "Un'ora di Pilates seguita da un incontro sociale. Questo evento unisce il movimento con approfondimenti sui professionisti del benessere idonei al rimborso dell'assicurazione complementare svizzera.",
@@ -160,6 +185,31 @@ const translations = {
       ],
       themeLabel: "Tema",
       activitiesLabel: "Attività Principali",
+    },
+    past: {
+      title: "EVENTI PASSATI",
+      events: [
+        {
+          date: "15 Maggio",
+          category: "Pianificazione Finanziaria",
+          title: "Workshop di Ottimizzazione Fiscale Svizzera",
+          desc: "Un workshop approfondito su strategie fiscali ottimizzate per individui ad alto patrimonio netto in Svizzera. Coperte differenze cantonali, detrazioni e strategie di pianificazione.",
+          theme: "Efficienza fiscale, preservazione della ricchezza e pianificazione strategica.",
+          activities:
+            "Workshop interattivo, sessione Q&A e approfondimenti di consulenza personalizzata.",
+          location: "Berna, Svizzera",
+        },
+        {
+          date: "20 Aprile",
+          category: "Benessere & Comunità",
+          title: "Ritiro Benessere Primaverile",
+          desc: "Una giornata rigenerante che combina pratiche di benessere con networking professionale. Ha presentato yoga, meditazione e discussioni informali sull'equilibrio lavoro-vita.",
+          theme: "Benessere olistico, costruzione della comunità e connessioni professionali.",
+          activities:
+            "Sessione di yoga, meditazione, talk sul benessere e aperitivo di networking.",
+          location: "Lugano, Svizzera",
+        },
+      ],
     },
     collab: {
       title: "COLLABORAZIONI",
@@ -232,7 +282,7 @@ const translations = {
       title: "PROCHAINS ÉVÉNEMENTS",
       events: [
         {
-          date: "22 Juillet",
+          date: "7 Juin",
           category: "Bien-être & Santé",
           title: "Conférence Bien-être en Plein Air & Médecine Complémentaire",
           desc: "Un événement en plein air avec un praticien suisse certifié, abordant les traitements complémentaires et les techniques de microcirculation. Cette session vise à clarifier l'intégration de ces services dans l'assurance maladie suisse.",
@@ -242,7 +292,7 @@ const translations = {
           location: "Zurich, Suisse",
         },
         {
-          date: "10 Août",
+          date: "4 Juillet",
           category: "Mouvement & Communauté",
           title: "Pilates & Rassemblement Social",
           desc: "Une heure de Pilates suivie d'un rassemblement social. Cet événement combine le mouvement avec des informations sur les professionnels du bien-être éligibles au remboursement de l'assurance complémentaire suisse.",
@@ -254,6 +304,31 @@ const translations = {
       ],
       themeLabel: "Thème",
       activitiesLabel: "Activités Clés",
+    },
+    past: {
+      title: "ÉVÉNEMENTS PASSÉS",
+      events: [
+        {
+          date: "15 Mai",
+          category: "Planification Financière",
+          title: "Atelier d'Optimisation Fiscale Suisse",
+          desc: "Un atelier approfondi sur les stratégies fiscales optimisées pour les particuliers fortunés en Suisse. Couvrait les différences cantonales, les déductions et les stratégies de planification.",
+          theme: "Efficacité fiscale, préservation de la richesse et planification stratégique.",
+          activities:
+            "Atelier interactif, session Q&A et aperçus de consultation personnalisée.",
+          location: "Berne, Suisse",
+        },
+        {
+          date: "20 Avril",
+          category: "Bien-être & Communauté",
+          title: "Retraite Bien-être Printanière",
+          desc: "Une journée régénérante combinant des pratiques de bien-être avec du réseautage professionnel. Présentait yoga, méditation et discussions informelles sur l'équilibre travail-vie.",
+          theme: "Bien-être holistique, création de communauté et connexions professionnelles.",
+          activities:
+            "Séance de yoga, méditation, talks bien-être et apéritif de réseautage.",
+          location: "Lugano, Suisse",
+        },
+      ],
     },
     collab: {
       title: "COLLABORATIONS",
@@ -326,7 +401,7 @@ const translations = {
       title: "BEVORSTEHENDE VERANSTALTUNGEN",
       events: [
         {
-          date: "22. Juli",
+          date: "7. Juni",
           category: "Wellness & Gesundheit",
           title: "Outdoor-Wellness-Gespräch & Komplementärmedizin-Sitzung",
           desc: "Eine Outdoor-Veranstaltung mit einem zertifizierten Schweizer Praktiker, der sich mit komplementären Behandlungen und Mikrozirkulationstechniken befasst. Diese Sitzung zielt darauf ab, Klarheit über die Integration dieser Dienstleistungen in die Schweizer Krankenversicherung zu schaffen.",
@@ -336,7 +411,7 @@ const translations = {
           location: "Zürich, Schweiz",
         },
         {
-          date: "10. August",
+          date: "4. Juli",
           category: "Bewegung & Gemeinschaft",
           title: "Pilates & Soziales Treffen",
           desc: "Eine einstündige Pilates-Klasse gefolgt von einem sozialen Treffen. Diese Veranstaltung verbindet Bewegung mit Einblicken in Wellnessprofis, die für die Schweizer Zusatzversicherung erstattet werden können.",
@@ -347,7 +422,32 @@ const translations = {
         },
       ],
       themeLabel: "Thema",
-      activitiesLabel: "Hauptaktivitäten",
+      activitiesLabel: "Wichtigste Aktivitäten",
+    },
+    past: {
+      title: "VERGANGENE VERANSTALTUNGEN",
+      events: [
+        {
+          date: "15. Mai",
+          category: "Finanzplanung",
+          title: "Schweizer Steueroptimierungs-Workshop",
+          desc: "Ein umfassender Workshop zu optimierten Steuerstrategien für vermögende Privatpersonen in der Schweiz. Behandelte kantonale Unterschiede, Abzüge und Planungsstrategien.",
+          theme: "Steuereffizienz, Vermögensschutz und strategische Planung.",
+          activities:
+            "Interaktiver Workshop, Fragerunde und Einblicke in personalisierte Beratung.",
+          location: "Bern, Schweiz",
+        },
+        {
+          date: "20. April",
+          category: "Wellness & Gemeinschaft",
+          title: "Frühlings-Wellness-Retreat",
+          desc: "Ein verjüngender Tag, der Wellnesspraktiken mit professionellem Networking verbindet. Umfasste Yoga, Meditation und informelle Diskussionen über Work-Life-Balance.",
+          theme: "Ganzheitliches Wohlbefinden, Gemeinschaftsbildung und berufliche Verbindungen.",
+          activities:
+            "Yoga-Sitzung, Meditation, Wellness-Talks und Networking-Aperitif.",
+          location: "Lugano, Schweiz",
+        },
+      ],
     },
     collab: {
       title: "KOOPERATIONEN",
@@ -641,20 +741,22 @@ export default function EventsPage() {
       {/* ─── MAIN CONTENT ────────────────────────────────────────────────────── */}
       <section className="py-16 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
-          {/* LEFT: Upcoming Events */}
+          {/* LEFT: Upcoming & Past Events */}
           <Reveal>
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-8 h-8 rounded-lg bg-[#1a2744] flex items-center justify-center">
-                  <Calendar className="h-4 w-4 text-[#c9a84c]" />
+            <div className="space-y-8">
+              {/* UPCOMING EVENTS */}
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-8 h-8 rounded-lg bg-[#1a2744] flex items-center justify-center">
+                    <Calendar className="h-4 w-4 text-[#c9a84c]" />
+                  </div>
+                  <h2 className="text-sm font-black tracking-widest text-[#1a2744] uppercase">
+                    {t.upcoming.title}
+                  </h2>
                 </div>
-                <h2 className="text-sm font-black tracking-widest text-[#1a2744] uppercase">
-                  {t.upcoming.title}
-                </h2>
-              </div>
 
-              <div className="flex flex-col gap-6">
-                {t.upcoming.events.map((event, i) => (
+                <div className="flex flex-col gap-6">
+                  {t.upcoming.events.map((event, i) => (
                   <div
                     key={i}
                     className="border border-gray-100 rounded-xl p-6 hover:border-[#c9a84c]/30 hover:shadow-md transition-all duration-300"
@@ -699,8 +801,70 @@ export default function EventsPage() {
                       </div>
                     </div>
                   </div>
-                ))}
+                                  ))}
+                </div>
               </div>
+
+              {/* PAST EVENTS */}
+              {t.past && t.past.events && t.past.events.length > 0 && (
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                  <div className="flex items-center gap-3 mb-8">
+                    <div className="w-8 h-8 rounded-lg bg-gray-400 flex items-center justify-center">
+                      <Calendar className="h-4 w-4 text-white" />
+                    </div>
+                    <h2 className="text-sm font-black tracking-widest text-[#1a2744] uppercase">
+                      {t.past.title}
+                    </h2>
+                  </div>
+
+                  <div className="flex flex-col gap-6">
+                    {t.past.events.map((event, i) => (
+                      <div
+                        key={i}
+                        className="border border-gray-100 rounded-xl p-6 hover:border-[#c9a84c]/30 hover:shadow-md transition-all duration-300 opacity-75"
+                      >
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="bg-gray-400 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
+                            {event.date}
+                          </span>
+                          <span
+                            className={`text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wide ${CATEGORY_COLORS[event.category] || "bg-gray-100 text-gray-700"}`}
+                          >
+                            {event.category}
+                          </span>
+                        </div>
+                        <h3
+                          className="text-lg font-bold text-[#1a2744] mb-3 leading-snug"
+                          style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                          {event.title}
+                        </h3>
+                        <p className="text-gray-600 text-sm leading-relaxed mb-4">{event.desc}</p>
+
+                        <div className="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                          <MapPin className="h-3.5 w-3.5 text-[#c9a84c]" />
+                          {event.location}
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4 bg-[#f8f5f0] rounded-lg p-4">
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-[#1a2744] mb-1.5">
+                              {t.upcoming.themeLabel}
+                            </p>
+                            <p className="text-xs text-gray-600 leading-relaxed">{event.theme}</p>
+                          </div>
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-[#1a2744] mb-1.5">
+                              {t.upcoming.activitiesLabel}
+                            </p>
+                            <p className="text-xs text-gray-600 leading-relaxed">{event.activities}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </Reveal>
 

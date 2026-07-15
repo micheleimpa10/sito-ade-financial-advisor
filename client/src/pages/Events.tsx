@@ -597,25 +597,22 @@ function filterEventsByDate(allEvents: any[], pastEvents: any[]) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const upcoming = allEvents.filter((e) => {
-    const eventDate = parseEventDate(e.date);
-    return eventDate >= today;
-  });
+  // Combine all events and sort by date (newest first)
+  const allEventsWithDate = [...allEvents, ...pastEvents].map((e) => ({
+    ...e,
+    dateObj: parseEventDate(e.date),
+  }));
 
-  const past = pastEvents.filter((e) => {
-    const eventDate = parseEventDate(e.date);
-    return eventDate < today;
-  });
+  // Sort by date descending (newest first)
+  allEventsWithDate.sort((a, b) => b.dateObj.getTime() - a.dateObj.getTime());
 
-  // Add any upcoming events that have passed to past events
-  const movedToPast = allEvents.filter((e) => {
-    const eventDate = parseEventDate(e.date);
-    return eventDate < today;
-  });
+  // Filter into upcoming and past
+  const upcoming = allEventsWithDate.filter((e) => e.dateObj >= today);
+  const past = allEventsWithDate.filter((e) => e.dateObj < today);
 
   return {
     upcoming,
-    past: [...past, ...movedToPast],
+    past,
   };
 }
 

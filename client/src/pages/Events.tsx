@@ -44,16 +44,6 @@ const translations = {
       title: "UPCOMING EVENTS",
       events: [
         {
-          date: "June 7th",
-          category: "Wellness & Health",
-          title: "Outdoor Wellness Talk & Complementary Medicine Session",
-          desc: "An open-air event with a certified Swiss practitioner, addressing complementary treatments and microcirculation techniques. This session aims to offer clarity on integrating these services into Swiss health insurance.",
-          theme: "Complementary care, prevention, and insurance understanding.",
-          activities:
-            "Open discussion, practitioner insights, and practical guidance on Swiss coverage options.",
-          location: "Zurich, Switzerland",
-        },
-        {
           date: "July 4th",
           category: "Movement & Community",
           title: "Pilates & Social Gathering",
@@ -63,6 +53,16 @@ const translations = {
             "Pilates practice, informal networking, and guidance around reimbursable wellness services.",
           location: "Geneva, Switzerland",
         },
+        {
+          date: "June 7th",
+          category: "Wellness & Health",
+          title: "Outdoor Wellness Talk & Complementary Medicine Session",
+          desc: "An open-air event with a certified Swiss practitioner, addressing complementary treatments and microcirculation techniques. This session aims to offer clarity on integrating these services into Swiss health insurance.",
+          theme: "Complementary care, prevention, and insurance understanding.",
+          activities:
+            "Open discussion, practitioner insights, and practical guidance on Swiss coverage options.",
+          location: "Zurich, Switzerland",
+        },
       ],
       themeLabel: "Theme",
       activitiesLabel: "Key Activities",
@@ -70,16 +70,6 @@ const translations = {
     past: {
       title: "PAST EVENTS",
       events: [
-        {
-          date: "April 20th",
-          category: "Wellness & Community",
-          title: "Spring Wellness Retreat",
-          desc: "A rejuvenating day combining wellness practices with professional networking. Featured yoga, meditation, and informal discussions on work-life balance.",
-          theme: "Holistic wellness, community building, and professional connections.",
-          activities:
-            "Yoga session, meditation, wellness talks, and networking aperitivo.",
-          location: "Lugano, Switzerland",
-        },
         {
           date: "May 15th",
           category: "Financial Planning",
@@ -89,6 +79,16 @@ const translations = {
           activities:
             "Interactive workshop, Q&A session, and personalized consultation insights.",
           location: "Bern, Switzerland",
+        },
+        {
+          date: "April 20th",
+          category: "Wellness & Community",
+          title: "Spring Wellness Retreat",
+          desc: "A rejuvenating day combining wellness practices with professional networking. Featured yoga, meditation, and informal discussions on work-life balance.",
+          theme: "Holistic wellness, community building, and professional connections.",
+          activities:
+            "Yoga session, meditation, wellness talks, and networking aperitivo.",
+          location: "Lugano, Switzerland",
         },
       ],
     },
@@ -163,16 +163,6 @@ const translations = {
       title: "PROSSIMI EVENTI",
       events: [
         {
-          date: "7 Giugno",
-          category: "Benessere & Salute",
-          title: "Talk all'Aperto sul Benessere e Medicina Complementare",
-          desc: "Un evento all'aperto con un professionista svizzero certificato, dedicato ai trattamenti complementari e alle tecniche di microcircolazione. Questa sessione mira a offrire chiarezza sull'integrazione di questi servizi nell'assicurazione sanitaria svizzera.",
-          theme: "Cure complementari, prevenzione e comprensione delle assicurazioni.",
-          activities:
-            "Discussione aperta, approfondimenti del professionista e guida pratica sulle opzioni di copertura svizzera.",
-          location: "Zurigo, Svizzera",
-        },
-        {
           date: "4 Luglio",
           category: "Movimento & Comunità",
           title: "Pilates & Incontro Sociale",
@@ -182,6 +172,16 @@ const translations = {
             "Pratica di Pilates, networking informale e guida sui servizi di benessere rimborsabili.",
           location: "Ginevra, Svizzera",
         },
+        {
+          date: "7 Giugno",
+          category: "Benessere & Salute",
+          title: "Talk all'Aperto sul Benessere e Medicina Complementare",
+          desc: "Un evento all'aperto con un professionista svizzero certificato, dedicato ai trattamenti complementari e alle tecniche di microcircolazione. Questa sessione mira a offrire chiarezza sull'integrazione di questi servizi nell'assicurazione sanitaria svizzera.",
+          theme: "Cure complementari, prevenzione e comprensione delle assicurazioni.",
+          activities:
+            "Discussione aperta, approfondimenti del professionista e guida pratica sulle opzioni di copertura svizzera.",
+          location: "Zurigo, Svizzera",
+        },
       ],
       themeLabel: "Tema",
       activitiesLabel: "Attività Principali",
@@ -189,16 +189,6 @@ const translations = {
     past: {
       title: "EVENTI PASSATI",
       events: [
-        {
-          date: "20 Aprile",
-          category: "Benessere & Comunità",
-          title: "Ritiro Benessere Primaverile",
-          desc: "Una giornata rigenerante che combina pratiche di benessere con networking professionale. Ha presentato yoga, meditazione e discussioni informali sull'equilibrio lavoro-vita.",
-          theme: "Benessere olistico, costruzione della comunità e connessioni professionali.",
-          activities:
-            "Sessione di yoga, meditazione, talk sul benessere e aperitivo di networking.",
-          location: "Lugano, Svizzera",
-        },
         {
           date: "15 Maggio",
           category: "Pianificazione Finanziaria",
@@ -208,6 +198,16 @@ const translations = {
           activities:
             "Workshop interattivo, sessione Q&A e approfondimenti di consulenza personalizzata.",
           location: "Berna, Svizzera",
+        },
+        {
+          date: "20 Aprile",
+          category: "Benessere & Comunità",
+          title: "Ritiro Benessere Primaverile",
+          desc: "Una giornata rigenerante che combina pratiche di benessere con networking professionale. Ha presentato yoga, meditazione e discussioni informali sull'equilibrio lavoro-vita.",
+          theme: "Benessere olistico, costruzione della comunità e connessioni professionali.",
+          activities:
+            "Sessione di yoga, meditazione, talk sul benessere e aperitivo di networking.",
+          location: "Lugano, Svizzera",
         },
       ],
     },
@@ -282,16 +282,6 @@ const translations = {
       title: "PROCHAINS ÉVÉNEMENTS",
       events: [
         {
-          date: "7 Juin",
-          category: "Bien-être & Santé",
-          title: "Conférence Bien-être en Plein Air & Médecine Complémentaire",
-          desc: "Un événement en plein air avec un praticien suisse certifié, abordant les traitements complémentaires et les techniques de microcirculation. Cette session vise à clarifier l'intégration de ces services dans l'assurance maladie suisse.",
-          theme: "Soins complémentaires, prévention et compréhension des assurances.",
-          activities:
-            "Discussion ouverte, éclairages du praticien et conseils pratiques sur les options de couverture suisse.",
-          location: "Zurich, Suisse",
-        },
-        {
           date: "4 Juillet",
           category: "Mouvement & Communauté",
           title: "Pilates & Rassemblement Social",
@@ -301,6 +291,16 @@ const translations = {
             "Pratique du Pilates, réseautage informel et conseils sur les services de bien-être remboursables.",
           location: "Genève, Suisse",
         },
+        {
+          date: "7 Juin",
+          category: "Bien-être & Santé",
+          title: "Conférence Bien-être en Plein Air & Médecine Complémentaire",
+          desc: "Un événement en plein air avec un praticien suisse certifié, abordant les traitements complémentaires et les techniques de microcirculation. Cette session vise à clarifier l'intégration de ces services dans l'assurance maladie suisse.",
+          theme: "Soins complémentaires, prévention et compréhension des assurances.",
+          activities:
+            "Discussion ouverte, éclairages du praticien et conseils pratiques sur les options de couverture suisse.",
+          location: "Zurich, Suisse",
+        },
       ],
       themeLabel: "Thème",
       activitiesLabel: "Activités Clés",
@@ -308,16 +308,6 @@ const translations = {
     past: {
       title: "ÉVÉNEMENTS PASSÉS",
       events: [
-        {
-          date: "20 Avril",
-          category: "Bien-être & Communauté",
-          title: "Retraite Bien-être Printanière",
-          desc: "Une journée régénérante combinant des pratiques de bien-être avec du réseautage professionnel. Présentait yoga, méditation et discussions informelles sur l'équilibre travail-vie.",
-          theme: "Bien-être holistique, création de communauté et connexions professionnelles.",
-          activities:
-            "Séance de yoga, méditation, talks bien-être et apéritif de réseautage.",
-          location: "Lugano, Suisse",
-        },
         {
           date: "15 Mai",
           category: "Planification Financière",
@@ -327,6 +317,16 @@ const translations = {
           activities:
             "Atelier interactif, session Q&A et aperçus de consultation personnalisée.",
           location: "Berne, Suisse",
+        },
+        {
+          date: "20 Avril",
+          category: "Bien-être & Communauté",
+          title: "Retraite Bien-être Printanière",
+          desc: "Une journée régénérante combinant des pratiques de bien-être avec du réseautage professionnel. Présentait yoga, méditation et discussions informelles sur l'équilibre travail-vie.",
+          theme: "Bien-être holistique, création de communauté et connexions professionnelles.",
+          activities:
+            "Séance de yoga, méditation, talks bien-être et apéritif de réseautage.",
+          location: "Lugano, Suisse",
         },
       ],
     },
@@ -401,16 +401,6 @@ const translations = {
       title: "BEVORSTEHENDE VERANSTALTUNGEN",
       events: [
         {
-          date: "7. Juni",
-          category: "Wellness & Gesundheit",
-          title: "Outdoor-Wellness-Gespräch & Komplementärmedizin-Sitzung",
-          desc: "Eine Outdoor-Veranstaltung mit einem zertifizierten Schweizer Praktiker, der sich mit komplementären Behandlungen und Mikrozirkulationstechniken befasst. Diese Sitzung zielt darauf ab, Klarheit über die Integration dieser Dienstleistungen in die Schweizer Krankenversicherung zu schaffen.",
-          theme: "Komplementäre Pflege, Prävention und Versicherungsverständnis.",
-          activities:
-            "Offene Diskussion, Einblicke des Praktikers und praktische Anleitung zu Schweizer Deckungsoptionen.",
-          location: "Zürich, Schweiz",
-        },
-        {
           date: "4. Juli",
           category: "Bewegung & Gemeinschaft",
           title: "Pilates & Soziales Treffen",
@@ -420,6 +410,16 @@ const translations = {
             "Pilates-Praxis, informelles Networking und Anleitung zu erstattungsfähigen Wellnessdienstleistungen.",
           location: "Genf, Schweiz",
         },
+        {
+          date: "7. Juni",
+          category: "Wellness & Gesundheit",
+          title: "Outdoor-Wellness-Gespräch & Komplementärmedizin-Sitzung",
+          desc: "Eine Outdoor-Veranstaltung mit einem zertifizierten Schweizer Praktiker, der sich mit komplementären Behandlungen und Mikrozirkulationstechniken befasst. Diese Sitzung zielt darauf ab, Klarheit über die Integration dieser Dienstleistungen in die Schweizer Krankenversicherung zu schaffen.",
+          theme: "Komplementäre Pflege, Prävention und Versicherungsverständnis.",
+          activities:
+            "Offene Diskussion, Einblicke des Praktikers und praktische Anleitung zu Schweizer Deckungsoptionen.",
+          location: "Zürich, Schweiz",
+        },
       ],
       themeLabel: "Thema",
       activitiesLabel: "Wichtigste Aktivitäten",
@@ -427,16 +427,6 @@ const translations = {
     past: {
       title: "VERGANGENE VERANSTALTUNGEN",
       events: [
-        {
-          date: "20. April",
-          category: "Wellness & Gemeinschaft",
-          title: "Frühlings-Wellness-Retreat",
-          desc: "Ein verjüngender Tag, der Wellnesspraktiken mit professionellem Networking verbindet. Umfasste Yoga, Meditation und informelle Diskussionen über Work-Life-Balance.",
-          theme: "Ganzheitliches Wohlbefinden, Gemeinschaftsbildung und berufliche Verbindungen.",
-          activities:
-            "Yoga-Sitzung, Meditation, Wellness-Talks und Networking-Aperitif.",
-          location: "Lugano, Schweiz",
-        },
         {
           date: "15. Mai",
           category: "Finanzplanung",
@@ -446,6 +436,16 @@ const translations = {
           activities:
             "Interaktiver Workshop, Fragerunde und Einblicke in personalisierte Beratung.",
           location: "Bern, Schweiz",
+        },
+        {
+          date: "20. April",
+          category: "Wellness & Gemeinschaft",
+          title: "Frühlings-Wellness-Retreat",
+          desc: "Ein verjüngender Tag, der Wellnesspraktiken mit professionellem Networking verbindet. Umfasste Yoga, Meditation und informelle Diskussionen über Work-Life-Balance.",
+          theme: "Ganzheitliches Wohlbefinden, Gemeinschaftsbildung und berufliche Verbindungen.",
+          activities:
+            "Yoga-Sitzung, Meditation, Wellness-Talks und Networking-Aperitif.",
+          location: "Lugano, Schweiz",
         },
       ],
     },

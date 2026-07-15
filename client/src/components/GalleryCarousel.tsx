@@ -93,9 +93,10 @@ export function GalleryCarousel() {
         {/* Image */}
         <div className="relative bg-[#1a2744] flex items-center justify-center">
           <img
+            key={currentIndex}
             src={currentImage.src}
             alt={currentImage.alt}
-            className="h-auto max-h-[600px] w-auto"
+            className="h-auto max-h-[600px] w-auto animate-in fade-in duration-500"
           />
         </div>
 

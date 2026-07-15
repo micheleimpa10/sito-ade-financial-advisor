@@ -89,14 +89,13 @@ export function GalleryCarousel() {
   return (
     <div className="relative w-full">
       {/* Main carousel container */}
-      <div className="relative w-full rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-white/5">
+      <div className="relative w-full rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-[#1a2744] flex items-center justify-center">
         {/* Image */}
-        <div className="relative w-full aspect-video bg-[#1a2744]">
+        <div className="relative bg-[#1a2744] flex items-center justify-center">
           <img
             src={currentImage.src}
             alt={currentImage.alt}
-            className="w-full h-full object-cover"
-            style={{ objectPosition: currentImage.position }}
+            className="h-auto max-h-[600px] w-auto"
           />
         </div>
 

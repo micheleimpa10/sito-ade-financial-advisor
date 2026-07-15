@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const GALLERY_IMAGES = [
@@ -56,13 +56,32 @@ const GALLERY_IMAGES = [
 
 export function GalleryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoplay, setIsAutoplay] = useState(true);
+
+  // Autoplay effect
+  useEffect(() => {
+    if (!isAutoplay) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev === GALLERY_IMAGES.length - 1 ? 0 : prev + 1));
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isAutoplay]);
 
   const goToPrevious = () => {
+    setIsAutoplay(false);
     setCurrentIndex((prev) => (prev === 0 ? GALLERY_IMAGES.length - 1 : prev - 1));
   };
 
   const goToNext = () => {
+    setIsAutoplay(false);
     setCurrentIndex((prev) => (prev === GALLERY_IMAGES.length - 1 ? 0 : prev + 1));
+  };
+
+  const handleDotClick = (index: number) => {
+    setIsAutoplay(false);
+    setCurrentIndex(index);
   };
 
   const currentImage = GALLERY_IMAGES[currentIndex];
@@ -109,7 +128,7 @@ export function GalleryCarousel() {
         {GALLERY_IMAGES.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => handleDotClick(index)}
             className={`h-2 rounded-full transition-all duration-300 ${
               index === currentIndex
                 ? 'bg-[#c9a84c] w-8'
@@ -118,6 +137,16 @@ export function GalleryCarousel() {
             aria-label={`Go to image ${index + 1}`}
           />
         ))}
+      </div>
+
+      {/* Autoplay indicator */}
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={() => setIsAutoplay(!isAutoplay)}
+          className="text-white/60 hover:text-white text-xs font-medium transition-colors"
+        >
+          {isAutoplay ? '⏸ Autoplay ON' : '▶ Autoplay OFF'}
+        </button>
       </div>
     </div>
   );

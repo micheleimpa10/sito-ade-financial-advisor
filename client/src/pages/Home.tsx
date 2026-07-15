@@ -899,20 +899,20 @@ const translations = {
 
 // ─── TYPES ─────────────────────────────────────────────────────────────────────
 // ─── IMAGES ────────────────────────────────────────────────────────────────────
-const HERO_BG = "/manus-storage/services-phone_ca517372.png";
-const ABOUT_PORTRAIT = "/manus-storage/adelaide-card_298df3df.png";
-const SERVICES_BG = "/manus-storage/consultation-cafe_d43a3ac4.png";
-const PHOTO_OUTDOOR_MEETING = "/manus-storage/photo-outdoor-meeting_0504b478.jpg";
-const PHOTO_VIDEO_CALL = "/manus-storage/photo-video-call_e59f5d26.jpg";
-const PHOTO_CAFE_MEETING = "/manus-storage/photo-cafe-meeting_37b0033a.jpg";
-const PHOTO_PHONE_CALL = "/manus-storage/photo-phone-call_7c557d43.jpg";
-const PHOTO_ZURICH_TERRACE = "/manus-storage/photo-zurich-terrace_4311734f.jpg";
-const PHOTO_CITY_PHONE = "/manus-storage/photo-city-phone_3eb73536.jpg";
-const CONSULTATION_ALPS = "/manus-storage/consultation-alps_5eeca1a1.png";
-const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_75fdf55b.jpg";
-const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_d233a35a.jpg";
-const PHOTO_WORKING_DESK = "/manus-storage/working-desk_8aa59a79.webp";
-const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_0386804d.png";
+const HERO_BG = "/manus-storage/services-phone_5451249b.png";
+const ABOUT_PORTRAIT = "/manus-storage/adelaide-card_0d905b7a.png";
+const SERVICES_BG = "/manus-storage/consultation-cafe_26ad27a5.png";
+const PHOTO_OUTDOOR_MEETING = "/manus-storage/photo-outdoor-meeting_1333fbfb.jpg";
+const PHOTO_VIDEO_CALL = "/manus-storage/photo-video-call_b3d73909.jpg";
+const PHOTO_CAFE_MEETING = "/manus-storage/photo-cafe-meeting_777984eb.jpg";
+const PHOTO_PHONE_CALL = "/manus-storage/photo-phone-call_ad4e596b.jpg";
+const PHOTO_ZURICH_TERRACE = "/manus-storage/photo-zurich-terrace_2c3e9ead.jpg";
+const PHOTO_CITY_PHONE = "/manus-storage/photo-city-phone_6bb4d1a5.jpg";
+const CONSULTATION_ALPS = "/manus-storage/consultation-alps_42619a86.png";
+const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_5d10909b.jpg";
+const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_7d10391a.jpg";
+const PHOTO_WORKING_DESK = "/manus-storage/working-desk_ebdc9f86.webp";
+const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_b99c4547.png";
 
 // ─── SERVICE ICONS ─────────────────────────────────────────────────────────────
 const SERVICE_ICONS = [
@@ -1021,7 +1021,7 @@ export default function HomePage() {
       price: "CHF 9.90",
       regularPrice: "CHF 14.90",
       badge: "NEW",
-      cover: "/manus-storage/cover_01_moving_guide_d8095922.png",
+      cover: "/manus-storage/cover_01_Moving_to_Switzerland_512a9fd1.png",
       name: lang === "it" ? "Trasferirsi in Svizzera 2026 — Guida Completa"
         : lang === "fr" ? "S'installer en Suisse 2026 — Guide Complet"
         : lang === "de" ? "Umzug in die Schweiz 2026 — Vollständiger Ratgeber"
@@ -1036,7 +1036,7 @@ export default function HomePage() {
       price: "CHF 17.90",
       regularPrice: "CHF 22.90",
       badge: null,
-      cover: "/manus-storage/cover_02_agenda_couples_0dd5af53.png",
+      cover: "/manus-storage/cover_02_Financial_Agenda_Couples_fc1aa658.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Coppia"
         : lang === "fr" ? "Agenda Financier 2026 — Couple"
         : lang === "de" ? "Finanzagenda 2026 — Paar"
@@ -1051,7 +1051,7 @@ export default function HomePage() {
       price: "CHF 12.90",
       regularPrice: "CHF 16.90",
       badge: null,
-      cover: "/manus-storage/cover_03_agenda_single_0291e04f.png",
+      cover: "/manus-storage/cover_03_Financial_Agenda_Single_aa27413b.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Single"
         : lang === "fr" ? "Agenda Financier 2026 — Célibataire"
         : lang === "de" ? "Finanzagenda 2026 — Einzelperson"
@@ -1066,7 +1066,7 @@ export default function HomePage() {
       price: "CHF 24.90",
       regularPrice: "CHF 29.90",
       badge: lang === "it" ? "PIÙ VENDUTO" : lang === "fr" ? "BEST-SELLER" : lang === "de" ? "BESTSELLER" : "BEST SELLER",
-      cover: "/manus-storage/cover_04_budget_personal_49bbe804.png",
+      cover: "/manus-storage/cover_04_BudgetManager_Personal_2749627b.png",
       name: lang === "it" ? "BudgetManager Pro — Personale"
         : lang === "fr" ? "BudgetManager Pro — Personnel"
         : lang === "de" ? "BudgetManager Pro — Persönlich"
@@ -1081,7 +1081,7 @@ export default function HomePage() {
       price: "CHF 34.90",
       regularPrice: "CHF 39.90",
       badge: null,
-      cover: "/manus-storage/cover_05_budget_family_9f868d9e.png",
+      cover: "/manus-storage/cover_05_BudgetManager_Family_9f2389a1.png",
       name: lang === "it" ? "BudgetManager Pro — Famiglia"
         : lang === "fr" ? "BudgetManager Pro — Famille"
         : lang === "de" ? "BudgetManager Pro — Familie"
@@ -1944,7 +1944,7 @@ export default function HomePage() {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c9a84c] via-[#e8c97a] to-[#c9a84c]" />
                 <div className="flex items-start gap-4 mb-5">
                   <div className="hidden sm:block flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden shadow-md">
-                    <img src="/manus-storage/cover_06_single_bundle_d9635c21.png" alt="Single Money Bundle" className="w-full h-full object-cover" />
+                    <img src="/manus-storage/cover_06_Single_Bundle_aa227737.png" alt="Single Money Bundle" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <div className="inline-flex items-center gap-1.5 bg-[#c9a84c] text-[#1a2744] text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-2">
@@ -1998,7 +1998,7 @@ export default function HomePage() {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c9a84c] via-[#e8c97a] to-[#c9a84c]" />
                 <div className="flex items-start gap-4 mb-5">
                   <div className="hidden sm:block flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden shadow-md">
-                    <img src="/manus-storage/cover_07_family_bundle_13fb04e9.png" alt="Family Money Bundle" className="w-full h-full object-cover" />
+                    <img src="/manus-storage/cover_07_Family_Bundle_bbf47607.png" alt="Family Money Bundle" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <div className="inline-flex items-center gap-1.5 bg-[#c9a84c] text-[#1a2744] text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-2">

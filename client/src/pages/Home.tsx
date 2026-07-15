@@ -1557,7 +1557,7 @@ export default function HomePage() {
             <p className="text-[#1a2744]/60 max-w-xl mx-auto">{t.plans.subtitle}</p>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
             {/* Basic Plan */}
             <Reveal>
               <div className="border border-gray-200 rounded-2xl p-8 h-full flex flex-col bg-white">

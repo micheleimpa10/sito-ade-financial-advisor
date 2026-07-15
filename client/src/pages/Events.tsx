@@ -559,6 +559,66 @@ function CollabIcon({ icon }: { icon: string }) {
   return <Briefcase className="h-5 w-5 text-[#c9a84c]" />;
 }
 
+// ─── UTILITY: Parse date string to Date object ──────────────────────────────────
+function parseEventDate(dateStr: string): Date {
+  // Formats: "June 7th", "7 Giugno", "7 Juin", "7. Juni"
+  const monthMap: Record<string, number> = {
+    // English
+    january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+    july: 6, august: 7, september: 8, october: 9, november: 10, december: 11,
+    // Italian
+    gennaio: 0, febbraio: 1, marzo: 2, aprile: 3, maggio: 4, giugno: 5,
+    luglio: 6, agosto: 7, settembre: 8, ottobre: 9, novembre_it: 10, dicembre: 11,
+    // French
+    janvier: 0, février: 1, mars_fr: 2, avril_fr: 3, mai_fr: 4, juin: 5,
+    juillet: 6, août: 7, septembre_fr: 8, octobre_fr: 9, décembre: 11,
+    // German
+    januar: 0, februar: 1, märz: 2, juni_de: 5,
+    juli: 6, september_de: 8, oktober: 9, dezember: 11,
+  };
+
+  const parts = dateStr.toLowerCase().split(/\s+/);
+  let day = 0, month = 0;
+
+  for (const part of parts) {
+    const num = parseInt(part.replace(/[^0-9]/g, ""));
+    if (!isNaN(num) && num > 0 && num <= 31) day = num;
+    for (const [monthName, monthIdx] of Object.entries(monthMap)) {
+      if (part.includes(monthName)) month = monthIdx;
+    }
+  }
+
+  const year = new Date().getFullYear();
+  return new Date(year, month, day);
+}
+
+// ─── UTILITY: Filter events by date ────────────────────────────────────────────
+function filterEventsByDate(allEvents: any[], pastEvents: any[]) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const upcoming = allEvents.filter((e) => {
+    const eventDate = parseEventDate(e.date);
+    return eventDate >= today;
+  });
+
+  const past = pastEvents.filter((e) => {
+    const eventDate = parseEventDate(e.date);
+    return eventDate < today;
+  });
+
+  // Add any upcoming events that have passed to past events
+  const movedToPast = allEvents.filter((e) => {
+    const eventDate = parseEventDate(e.date);
+    return eventDate < today;
+  });
+
+  return {
+    upcoming,
+    past: [...past, ...movedToPast],
+  };
+}
+
 export default function EventsPage() {
   const [lang, setLang] = useState<Lang>("en");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -574,6 +634,10 @@ export default function EventsPage() {
   });
 
   const t = translations[lang];
+  const { upcoming: filteredUpcoming, past: filteredPast } = filterEventsByDate(
+    t.upcoming.events,
+    t.past?.events || []
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -756,7 +820,7 @@ export default function EventsPage() {
                 </div>
 
                 <div className="flex flex-col gap-6">
-                  {t.upcoming.events.map((event, i) => (
+                  {filteredUpcoming.map((event, i) => (
                   <div
                     key={i}
                     className="border border-gray-100 rounded-xl p-6 hover:border-[#c9a84c]/30 hover:shadow-md transition-all duration-300"
@@ -818,7 +882,7 @@ export default function EventsPage() {
                   </div>
 
                   <div className="flex flex-col gap-6">
-                    {t.past.events.map((event, i) => (
+                    {filteredPast.map((event, i) => (
                       <div
                         key={i}
                         className="border border-gray-100 rounded-xl p-6 hover:border-[#c9a84c]/30 hover:shadow-md transition-all duration-300 opacity-75"

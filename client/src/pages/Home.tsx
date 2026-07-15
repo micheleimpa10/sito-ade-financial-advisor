@@ -1021,7 +1021,7 @@ export default function HomePage() {
       price: "CHF 9.90",
       regularPrice: "CHF 14.90",
       badge: "NEW",
-      cover: "/manus-storage/cover_01_Moving_to_Switzerland_512a9fd1.png",
+      cover: "/manus-storage/cover_01_Moving_to_Switzerland_9339ca57.png",
       name: lang === "it" ? "Trasferirsi in Svizzera 2026 — Guida Completa"
         : lang === "fr" ? "S'installer en Suisse 2026 — Guide Complet"
         : lang === "de" ? "Umzug in die Schweiz 2026 — Vollständiger Ratgeber"
@@ -1036,7 +1036,7 @@ export default function HomePage() {
       price: "CHF 17.90",
       regularPrice: "CHF 22.90",
       badge: null,
-      cover: "/manus-storage/cover_02_Financial_Agenda_Couples_fc1aa658.png",
+      cover: "/manus-storage/cover_02_Financial_Agenda_Couples_181b946f.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Coppia"
         : lang === "fr" ? "Agenda Financier 2026 — Couple"
         : lang === "de" ? "Finanzagenda 2026 — Paar"
@@ -1051,7 +1051,7 @@ export default function HomePage() {
       price: "CHF 12.90",
       regularPrice: "CHF 16.90",
       badge: null,
-      cover: "/manus-storage/cover_03_Financial_Agenda_Single_aa27413b.png",
+      cover: "/manus-storage/cover_03_Financial_Agenda_Single_8b6138cb.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Single"
         : lang === "fr" ? "Agenda Financier 2026 — Célibataire"
         : lang === "de" ? "Finanzagenda 2026 — Einzelperson"
@@ -1066,7 +1066,7 @@ export default function HomePage() {
       price: "CHF 24.90",
       regularPrice: "CHF 29.90",
       badge: lang === "it" ? "PIÙ VENDUTO" : lang === "fr" ? "BEST-SELLER" : lang === "de" ? "BESTSELLER" : "BEST SELLER",
-      cover: "/manus-storage/cover_04_BudgetManager_Personal_2749627b.png",
+      cover: "/manus-storage/cover_04_BudgetManager_Personal_97ec02da.png",
       name: lang === "it" ? "BudgetManager Pro — Personale"
         : lang === "fr" ? "BudgetManager Pro — Personnel"
         : lang === "de" ? "BudgetManager Pro — Persönlich"
@@ -1081,7 +1081,7 @@ export default function HomePage() {
       price: "CHF 34.90",
       regularPrice: "CHF 39.90",
       badge: null,
-      cover: "/manus-storage/cover_05_BudgetManager_Family_9f2389a1.png",
+      cover: "/manus-storage/cover_05_BudgetManager_Family_7c4a2531.png",
       name: lang === "it" ? "BudgetManager Pro — Famiglia"
         : lang === "fr" ? "BudgetManager Pro — Famille"
         : lang === "de" ? "BudgetManager Pro — Familie"

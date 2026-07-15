@@ -20,6 +20,7 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { useCart, type Lang } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { Link, useLocation } from "wouter";
+import { GalleryCarousel } from "@/components/GalleryCarousel";
 import {
   ShieldCheck,
   HeartPulse,
@@ -1478,50 +1479,9 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          {/* ─── TRUST PHOTO GALLERY ───────────────────────────────────────────────── */}
+          {/* ─── TRUST PHOTO GALLERY CAROUSEL ───────────────────────────────────────────────── */}
           <Reveal delay={200} className="mt-16">
-            {/* Row A: wide (2/3) + portrait (1/3) */}
-            <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="col-span-2 overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={PHOTO_SOFA_CONSULT} alt="Adelaide Manta consulting a client" className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 30%' }} />
-              </div>
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={PHOTO_REDSOFA_CONSULT} alt="Adelaide Manta in a consultation" className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 40%' }} />
-              </div>
-            </div>
-            {/* Row B: 3 equal */}
-            <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={PHOTO_WORKING_DESK} alt="Adelaide Manta at her desk" className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 35%' }} />
-              </div>
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={CONSULTATION_ALPS} alt="Adelaide Manta consulting in the Alps" className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 45%' }} />
-              </div>
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={SERVICES_BG} alt="Adelaide Manta with a client" className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 30%' }} />
-              </div>
-            </div>
-            {/* Row C: portrait (1/3) + wide (2/3) */}
-            <div className="grid grid-cols-3 gap-4 mb-4">
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={PHOTO_ZURICH_TERRACE} alt="Adelaide Manta in Zurich" className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 40%' }} />
-              </div>
-              <div className="col-span-2 overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={PHOTO_CAFE_MEETING} alt="Adelaide Manta with a client at a café" className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 35%' }} />
-              </div>
-            </div>
-            {/* Row D: 3 equal */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={PHOTO_OUTDOOR_MEETING} alt="Adelaide Manta meeting a client outdoors" className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 45%' }} />
-              </div>
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={PHOTO_PHONE_CALL} alt="Adelaide Manta on a call" className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 40%' }} />
-              </div>
-              <div className="overflow-hidden rounded-2xl shadow-md border border-white/10 group">
-                <img src={HERO_BG} alt="Adelaide Manta at work" className="w-full h-60 object-cover group-hover:scale-105 transition-transform duration-700" style={{ objectPosition: 'center 35%' }} />
-              </div>
-            </div>
+            <GalleryCarousel />
           </Reveal>
         </div>
       </section>

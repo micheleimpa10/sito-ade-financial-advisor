@@ -44,7 +44,7 @@ const translations = {
       title: "UPCOMING EVENTS",
       events: [
         {
-          date: "June 7th",
+          date: "July 22nd",
           category: "Wellness & Health",
           title: "Outdoor Wellness Talk & Complementary Medicine Session",
           desc: "An open-air event with a certified Swiss practitioner, addressing complementary treatments and microcirculation techniques. This session aims to offer clarity on integrating these services into Swiss health insurance.",
@@ -54,7 +54,7 @@ const translations = {
           location: "Zurich, Switzerland",
         },
         {
-          date: "July 4th",
+          date: "August 10th",
           category: "Movement & Community",
           title: "Pilates & Social Gathering",
           desc: "A one-hour Pilates class followed by a social gathering. This event combines movement with insights into wellness professionals eligible for Swiss supplementary insurance reimbursement.",
@@ -138,7 +138,7 @@ const translations = {
       title: "PROSSIMI EVENTI",
       events: [
         {
-          date: "7 Giugno",
+          date: "22 Luglio",
           category: "Benessere & Salute",
           title: "Talk all'Aperto sul Benessere e Medicina Complementare",
           desc: "Un evento all'aperto con un professionista svizzero certificato, dedicato ai trattamenti complementari e alle tecniche di microcircolazione. Questa sessione mira a offrire chiarezza sull'integrazione di questi servizi nell'assicurazione sanitaria svizzera.",
@@ -148,7 +148,7 @@ const translations = {
           location: "Zurigo, Svizzera",
         },
         {
-          date: "4 Luglio",
+          date: "10 Agosto",
           category: "Movimento & Comunità",
           title: "Pilates & Incontro Sociale",
           desc: "Un'ora di Pilates seguita da un incontro sociale. Questo evento unisce il movimento con approfondimenti sui professionisti del benessere idonei al rimborso dell'assicurazione complementare svizzera.",
@@ -232,7 +232,7 @@ const translations = {
       title: "PROCHAINS ÉVÉNEMENTS",
       events: [
         {
-          date: "7 Juin",
+          date: "22 Juillet",
           category: "Bien-être & Santé",
           title: "Conférence Bien-être en Plein Air & Médecine Complémentaire",
           desc: "Un événement en plein air avec un praticien suisse certifié, abordant les traitements complémentaires et les techniques de microcirculation. Cette session vise à clarifier l'intégration de ces services dans l'assurance maladie suisse.",
@@ -242,7 +242,7 @@ const translations = {
           location: "Zurich, Suisse",
         },
         {
-          date: "4 Juillet",
+          date: "10 Août",
           category: "Mouvement & Communauté",
           title: "Pilates & Rassemblement Social",
           desc: "Une heure de Pilates suivie d'un rassemblement social. Cet événement combine le mouvement avec des informations sur les professionnels du bien-être éligibles au remboursement de l'assurance complémentaire suisse.",
@@ -326,23 +326,23 @@ const translations = {
       title: "BEVORSTEHENDE VERANSTALTUNGEN",
       events: [
         {
-          date: "7. Juni",
+          date: "22. Juli",
           category: "Wellness & Gesundheit",
-          title: "Outdoor-Wellness-Vortrag & Komplementärmedizin-Session",
-          desc: "Eine Freiluftveranstaltung mit einem zertifizierten Schweizer Praktiker, der komplementäre Behandlungen und Mikrozirkulationstechniken vorstellt. Diese Session soll Klarheit über die Integration dieser Leistungen in die Schweizer Krankenversicherung schaffen.",
-          theme: "Komplementärpflege, Prävention und Versicherungsverständnis.",
+          title: "Outdoor-Wellness-Gespräch & Komplementärmedizin-Sitzung",
+          desc: "Eine Outdoor-Veranstaltung mit einem zertifizierten Schweizer Praktiker, der sich mit komplementären Behandlungen und Mikrozirkulationstechniken befasst. Diese Sitzung zielt darauf ab, Klarheit über die Integration dieser Dienstleistungen in die Schweizer Krankenversicherung zu schaffen.",
+          theme: "Komplementäre Pflege, Prävention und Versicherungsverständnis.",
           activities:
-            "Offene Diskussion, Einblicke des Praktikers und praktische Orientierung zu Schweizer Deckungsoptionen.",
+            "Offene Diskussion, Einblicke des Praktikers und praktische Anleitung zu Schweizer Deckungsoptionen.",
           location: "Zürich, Schweiz",
         },
         {
-          date: "4. Juli",
+          date: "10. August",
           category: "Bewegung & Gemeinschaft",
-          title: "Pilates & Gesellschaftliches Treffen",
-          desc: "Eine Stunde Pilates gefolgt von einem gesellschaftlichen Treffen. Diese Veranstaltung verbindet Bewegung mit Einblicken in Wellness-Fachleute, die für die Rückerstattung durch die Schweizer Zusatzversicherung in Frage kommen.",
-          theme: "Wellness, Mobilität und vertrauensvolle professionelle Verbindungen.",
+          title: "Pilates & Soziales Treffen",
+          desc: "Eine einstündige Pilates-Klasse gefolgt von einem sozialen Treffen. Diese Veranstaltung verbindet Bewegung mit Einblicken in Wellnessprofis, die für die Schweizer Zusatzversicherung erstattet werden können.",
+          theme: "Wellness, Mobilität und vertrauensvolle berufliche Verbindungen.",
           activities:
-            "Pilates-Praxis, informelles Networking und Orientierung zu erstattungsfähigen Wellness-Leistungen.",
+            "Pilates-Praxis, informelles Networking und Anleitung zu erstattungsfähigen Wellnessdienstleistungen.",
           location: "Genf, Schweiz",
         },
       ],

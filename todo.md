@@ -1,49 +1,45 @@
 # Adelaide Manta TODO
 
-## Replica da GitHub
-- [x] Copiare struttura client (pages, components, assets)
-- [x] Copiare struttura server (routers, database helpers, webhook)
-- [x] Copiare configurazione Tailwind e stili CSS
-- [x] Copiare file di configurazione (vite, drizzle, tsconfig)
-- [x] Copiare package.json dependencies e scripts
-- [x] Build locale completato con successo
+## Stripe Payment Integration
 
-## Pagine e Componenti
-- [x] Home.tsx - Landing page multi-lingua con hero, servizi, shop
-- [x] PaymentSuccess.tsx - Pagina di conferma pagamento
-- [x] Orders.tsx - Storico ordini utente
-- [x] PrivacyPolicy.tsx - Pagina Privacy Policy
-- [x] Terms.tsx - Pagina Termini di Servizio
-- [x] Events.tsx - Sezione eventi/appuntamenti
-- [x] ComponentShowcase.tsx - Showcase componenti
+- [x] Install stripe npm package
+- [x] Add orders table to database schema
+- [x] Create server/products.ts with product/price definitions
+- [x] Create server/routers/stripe.ts with checkout session and order history procedures
+- [x] Register Stripe webhook endpoint at /api/stripe/webhook
+- [x] Wire stripe router into appRouter
+- [x] Create client/src/pages/PaymentSuccess.tsx
+- [x] Create client/src/pages/Orders.tsx (payment history)
+- [x] Update Home.tsx shop section to use Stripe checkout
+- [x] Register new routes in App.tsx
+- [x] Write vitest tests for stripe router
+- [x] Add My Orders link to footer
 
-## Funzionalità Stripe
-- [x] Integrare Stripe Checkout nel shop
-- [x] Configurare webhook /api/stripe/webhook
-- [x] Registrare ordini nel database TiDB
-- [x] Testare flusso pagamento end-to-end
+## Cart & Upsell System
 
-## Database e Autenticazione
-- [x] Verificare schema users e orders su TiDB
-- [x] Configurare Manus OAuth
-- [x] Testare login/logout
-- [x] Verificare protezione pagine autenticate
+- [x] CartContext with global cart state, bundle suggestion logic
+- [x] CartDrawer component with bundle upgrade UI
+- [x] Add to Cart button on every product card (with "In Cart" state toggle)
+- [x] Multi-item Stripe checkout via createCartCheckout procedure
+- [x] Post-purchase upsell with 20% discount shown after every purchase
+- [x] Automatic bundle upgrade suggestion when 2 compatible items are in cart
+- [x] CartProvider + CartDrawer wired into App.tsx
 
-## Stile e Design
-- [x] Configurare palette Swiss Minimalism (navy/crema/oro)
-- [x] Implementare tipografia serif + sans-serif
-- [x] Layout asimmetrico ed elegante
-- [x] Hover effects e card reveals
-- [x] Polaroid-style photo frames
+## Email + Copy + Cart Icon
 
-## Multi-lingua
-- [x] Implementare supporto IT, EN, FR, DE
-- [x] Configurare language switcher
-- [x] Tradurre contenuti principali
+- [x] Resend thank-you email after Stripe purchase (with download link)
+- [x] Rewrite all 7 product descriptions with conversion-focused copy
+- [x] Cart icon with badge in the navbar
 
-## Configurazione Finale
-- [x] Verificare variabili d'ambiente (DATABASE_URL, STRIPE_*)
-- [x] Testare build locale
-- [x] Salvare checkpoint
-- [x] Configurare visibilità pubblica
-- [x] Pubblicare sito
+## License Keys & Multilingual Email
+
+- [x] Add licenses table to drizzle schema and run db:push
+- [x] Generate unique BM-XXXX-XXXX-XXXX-XXXX key per purchase in webhook
+- [x] Translate thank-you email into EN, IT, FR, DE with language detection
+- [x] Show license key on PaymentSuccess page
+- [x] Show license key on Orders page
+- [x] Pass current UI language to createCheckout and createCartCheckout so multilingual emails work end-to-end
+
+## Cart UX Fix
+
+- [x] Fix cart bundle suggestion: addItem no longer auto-opens drawer, toast confirmation shown instead, user can add multiple items before opening cart manually

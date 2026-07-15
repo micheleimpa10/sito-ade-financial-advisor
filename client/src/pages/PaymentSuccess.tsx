@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "wouter";
-import { CheckCircle2, Download, ArrowLeft, Loader2, ShoppingBag, X } from "lucide-react";
+import { CheckCircle2, Download, ArrowLeft, Loader2, ShoppingBag, X, Sparkles, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
 // All download paths keyed by productKey
 const DOWNLOAD_PATHS: Record<string, string> = {
-  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_21676289.zip",
-  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_0faeb8a5.zip",
-  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_cba36e60.zip",
-  "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_da8b77b4.zip",
-  "budget-manager-family": "/manus-storage/05_BudgetManager_Family_ed9ff527.zip",
-  "single-bundle": "/manus-storage/06_Single_Bundle_b7398080.zip",
-  "family-bundle": "/manus-storage/07_Family_Bundle_8dd57fd2.zip",
+  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_bc6ea1e4.zip",
+  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_2b1157ed.zip",
+  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_52388b82.zip",
+  "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_93051c50.zip",
+  "budget-manager-family": "/manus-storage/05_BudgetManager_Family_9d8db1bc.zip",
+  "single-bundle": "/manus-storage/06_Single_Bundle_47a2cadd.zip",
+  "family-bundle": "/manus-storage/07_Family_Bundle_bf86d0cc.zip",
 };
 
 function getDownloadLabel(productKey: string): string | null {
@@ -24,20 +24,153 @@ function getDownloadLabel(productKey: string): string | null {
   return "Download Your Guide";
 }
 
-// Upsell: shown only when user bought the moving guide
-function UpsellOffer({ onDismiss }: { onDismiss: () => void }) {
-  const createCheckout = trpc.stripe.createCheckout.useMutation({
+// Upsell product definitions — shown after each product purchase at 20% off
+// Key = purchased product, value = array of upsell offers
+const UPSELL_MAP: Record<string, Array<{
+  productKey: string;
+  name: string;
+  desc: string;
+  originalPrice: string;
+  discountedPrice: string;
+  discountPct: number;
+}>> = {
+  "moving-guide": [
+    {
+      productKey: "financial-agenda-single",
+      name: "Financial Agenda 2026 — Single",
+      desc: "Plan every day of your new Swiss life. 365 interactive pages.",
+      originalPrice: "CHF 12.90",
+      discountedPrice: "CHF 10.32",
+      discountPct: 20,
+    },
+    {
+      productKey: "budget-manager-personal",
+      name: "BudgetManager Pro — Personal",
+      desc: "Track every franc against Swiss benchmarks. Built for expats.",
+      originalPrice: "CHF 24.90",
+      discountedPrice: "CHF 19.92",
+      discountPct: 20,
+    },
+  ],
+  "financial-agenda-single": [
+    {
+      productKey: "budget-manager-personal",
+      name: "BudgetManager Pro — Personal",
+      desc: "Complete your toolkit: plan with the Agenda, track with BudgetManager.",
+      originalPrice: "CHF 24.90",
+      discountedPrice: "CHF 19.92",
+      discountPct: 20,
+    },
+    {
+      productKey: "moving-guide",
+      name: "Moving to Switzerland 2026 — Guide",
+      desc: "31 pages of verified 2026 data. Everything you need to settle in.",
+      originalPrice: "CHF 9.90",
+      discountedPrice: "CHF 7.92",
+      discountPct: 20,
+    },
+  ],
+  "financial-agenda-couples": [
+    {
+      productKey: "budget-manager-family",
+      name: "BudgetManager Pro — Family",
+      desc: "Complete your household toolkit: plan together, track together.",
+      originalPrice: "CHF 34.90",
+      discountedPrice: "CHF 27.92",
+      discountPct: 20,
+    },
+    {
+      productKey: "moving-guide",
+      name: "Moving to Switzerland 2026 — Guide",
+      desc: "31 pages of verified 2026 data for your Swiss relocation.",
+      originalPrice: "CHF 9.90",
+      discountedPrice: "CHF 7.92",
+      discountPct: 20,
+    },
+  ],
+  "budget-manager-personal": [
+    {
+      productKey: "financial-agenda-single",
+      name: "Financial Agenda 2026 — Single",
+      desc: "Plan your year, then track it with BudgetManager. The perfect pair.",
+      originalPrice: "CHF 12.90",
+      discountedPrice: "CHF 10.32",
+      discountPct: 20,
+    },
+    {
+      productKey: "moving-guide",
+      name: "Moving to Switzerland 2026 — Guide",
+      desc: "New to Switzerland? This guide answers every financial question.",
+      originalPrice: "CHF 9.90",
+      discountedPrice: "CHF 7.92",
+      discountPct: 20,
+    },
+  ],
+  "budget-manager-family": [
+    {
+      productKey: "financial-agenda-couples",
+      name: "Financial Agenda 2026 — Couples",
+      desc: "Plan your household year together. The perfect companion.",
+      originalPrice: "CHF 17.90",
+      discountedPrice: "CHF 14.32",
+      discountPct: 20,
+    },
+    {
+      productKey: "moving-guide",
+      name: "Moving to Switzerland 2026 — Guide",
+      desc: "New to Switzerland? This guide answers every financial question.",
+      originalPrice: "CHF 9.90",
+      discountedPrice: "CHF 7.92",
+      discountPct: 20,
+    },
+  ],
+  "single-bundle": [
+    {
+      productKey: "moving-guide",
+      name: "Moving to Switzerland 2026 — Guide",
+      desc: "Complete your Swiss toolkit with the relocation guide.",
+      originalPrice: "CHF 9.90",
+      discountedPrice: "CHF 7.92",
+      discountPct: 20,
+    },
+  ],
+  "family-bundle": [
+    {
+      productKey: "moving-guide",
+      name: "Moving to Switzerland 2026 — Guide",
+      desc: "Complete your family's Swiss toolkit with the relocation guide.",
+      originalPrice: "CHF 9.90",
+      discountedPrice: "CHF 7.92",
+      discountPct: 20,
+    },
+  ],
+};
+
+function UpsellOffer({
+  purchasedProductKey,
+  onDismiss,
+}: {
+  purchasedProductKey: string;
+  onDismiss: () => void;
+}) {
+  const offers = UPSELL_MAP[purchasedProductKey] ?? [];
+  if (offers.length === 0) return null;
+
+  const createCartCheckout = trpc.stripe.createCartCheckout.useMutation({
     onSuccess: (data) => {
       toast.info("Redirecting to checkout…");
-      window.open(data.url || "", "_blank");
+      window.open(data.url ?? undefined, "_blank");
     },
     onError: (err) => {
       toast.error(err.message || "Could not start checkout. Please try again.");
     },
   });
 
-  const handleUpsell = (productKey: string) => {
-    createCheckout.mutate({ productKey, origin: window.location.origin });
+  const handleUpsell = (productKey: string, discountPct: number) => {
+    createCartCheckout.mutate({
+      items: [{ productKey, discountPct }],
+      origin: window.location.origin,
+    });
   };
 
   return (
@@ -54,72 +187,114 @@ function UpsellOffer({ onDismiss }: { onDismiss: () => void }) {
         <X className="h-4 w-4" />
       </button>
 
-      <p className="text-[#c9a84c] text-[10px] font-black uppercase tracking-widest mb-1">
-        🎉 Welcome to Switzerland! One more thing…
-      </p>
+      <div className="flex items-center gap-1.5 mb-1">
+        <Sparkles className="h-3.5 w-3.5 text-[#c9a84c]" />
+        <p className="text-[#c9a84c] text-[10px] font-black uppercase tracking-widest">
+          Exclusive offer — 20% off, only on this page
+        </p>
+      </div>
       <h3
         className="text-lg font-bold text-white mb-2 leading-snug"
         style={{ fontFamily: "'Playfair Display', serif" }}
       >
-        Take control of your money from day one.
+        Complete your Swiss financial toolkit.
       </h3>
       <p className="text-white/55 text-xs mb-4 leading-relaxed">
-        You just got the relocation guide. Now add the tools to plan every day and track every franc
-        against Swiss benchmarks — at a special price, only on this page.
+        As a thank-you for your purchase, get these products at 20% off — available only right now.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {/* Single Bundle upsell */}
-        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-          <p className="text-white text-sm font-bold mb-0.5">Single Money Bundle</p>
-          <p className="text-white/50 text-xs mb-3">
-            Financial Agenda Single + BudgetManager Pro Personal
-          </p>
-          <div className="flex items-center justify-between">
-            <div>
-              <span className="text-[#c9a84c] font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
-                CHF 24.90
-              </span>
-              <span className="ml-1.5 text-white/30 line-through text-xs">CHF 29.90</span>
+        {offers.map((offer) => (
+          <div key={offer.productKey} className="bg-white/5 rounded-xl p-4 border border-white/10">
+            <p className="text-white text-sm font-bold mb-0.5 leading-snug">{offer.name}</p>
+            <p className="text-white/50 text-xs mb-3 leading-relaxed">{offer.desc}</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <span
+                  className="text-[#c9a84c] font-bold text-lg"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  {offer.discountedPrice}
+                </span>
+                <span className="ml-1.5 text-white/30 line-through text-xs">
+                  {offer.originalPrice}
+                </span>
+              </div>
+              <button
+                onClick={() => handleUpsell(offer.productKey, offer.discountPct)}
+                disabled={createCartCheckout.isPending}
+                className="flex items-center gap-1.5 bg-[#c9a84c] text-[#1a2744] px-3 py-1.5 text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all rounded-lg disabled:opacity-60"
+              >
+                {createCartCheckout.isPending ? (
+                  <Loader2 className="h-3 w-3 animate-spin" />
+                ) : (
+                  <>
+                    <ShoppingBag className="h-3 w-3" />
+                    Add
+                  </>
+                )}
+              </button>
             </div>
-            <button
-              onClick={() => handleUpsell("single-bundle")}
-              disabled={createCheckout.isPending}
-              className="flex items-center gap-1.5 bg-[#c9a84c] text-[#1a2744] px-3 py-1.5 text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all rounded-lg disabled:opacity-60"
-            >
-              <ShoppingBag className="h-3 w-3" />
-              Add
-            </button>
           </div>
-        </div>
-
-        {/* Family Bundle upsell */}
-        <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-          <p className="text-white text-sm font-bold mb-0.5">Family Money Bundle</p>
-          <p className="text-white/50 text-xs mb-3">
-            Financial Agenda Couples + BudgetManager Pro Family
-          </p>
-          <div className="flex items-center justify-between">
-            <div>
-              <span className="text-[#c9a84c] font-bold text-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
-                CHF 33.90
-              </span>
-              <span className="ml-1.5 text-white/30 line-through text-xs">CHF 39.90</span>
-            </div>
-            <button
-              onClick={() => handleUpsell("family-bundle")}
-              disabled={createCheckout.isPending}
-              className="flex items-center gap-1.5 bg-[#c9a84c] text-[#1a2744] px-3 py-1.5 text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all rounded-lg disabled:opacity-60"
-            >
-              <ShoppingBag className="h-3 w-3" />
-              Add
-            </button>
-          </div>
-        </div>
+        ))}
       </div>
 
       <p className="text-white/25 text-[10px] text-center mt-3">
-        Special offer — only shown after your guide purchase.
+        This offer expires when you leave this page.
+      </p>
+    </div>
+  );
+}
+
+/** License key display box with copy-to-clipboard */
+function LicenseKeyBox({ licenseKey }: { licenseKey: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(licenseKey);
+      setCopied(true);
+      toast.success("License key copied to clipboard!");
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      toast.error("Could not copy. Please select and copy manually.");
+    }
+  };
+
+  return (
+    <div className="w-full border border-[#c9a84c] rounded-xl p-5 bg-[#f8f5f0]">
+      {/* Header */}
+      <div className="flex items-center gap-2 mb-3">
+        <div className="w-2 h-2 rounded-full bg-[#c9a84c]" />
+        <p className="text-[11px] font-black uppercase tracking-widest text-[#c9a84c]">
+          Your License Key
+        </p>
+      </div>
+
+      {/* Key display + copy button */}
+      <div className="flex items-center gap-3">
+        <code
+          className="flex-1 text-[#1a2744] font-mono font-bold text-lg tracking-widest select-all bg-white border border-[#1a2744]/10 rounded-lg px-4 py-3 text-center"
+          style={{ letterSpacing: "0.15em" }}
+        >
+          {licenseKey}
+        </code>
+        <button
+          onClick={handleCopy}
+          className="flex-shrink-0 flex items-center gap-1.5 bg-[#1a2744] text-white px-3 py-3 rounded-lg hover:bg-[#c9a84c] hover:text-[#1a2744] transition-all"
+          title="Copy license key"
+        >
+          {copied ? (
+            <Check className="h-4 w-4" />
+          ) : (
+            <Copy className="h-4 w-4" />
+          )}
+        </button>
+      </div>
+
+      <p className="text-[#1a2744]/50 text-xs mt-3 text-center leading-relaxed">
+        Keep this key safe — you will need it to activate BudgetManager Pro.
+        It has also been sent to your email.
       </p>
     </div>
   );
@@ -135,6 +310,20 @@ export default function PaymentSuccess() {
     { enabled: !!sessionId, retry: 2 }
   );
 
+  // Fetch license key for any product that requires one (BudgetManager + bundles)
+  const requiresLicenseKey =
+    (data?.productKey?.includes("budget-manager") ||
+      data?.productKey?.includes("bundle")) ??
+    false;
+  const { data: licenseData, isLoading: licenseLoading } = trpc.stripe.getLicenseBySession.useQuery(
+    { sessionId },
+    {
+      enabled: !!sessionId && requiresLicenseKey && data?.status === "paid",
+      retry: 3,
+      retryDelay: 2000, // webhook may take a moment to process
+    }
+  );
+
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -143,8 +332,11 @@ export default function PaymentSuccess() {
   const downloadPath = data?.productKey ? DOWNLOAD_PATHS[data.productKey] : null;
   const downloadLabel = data?.productKey ? getDownloadLabel(data.productKey) : null;
 
-  // Show upsell only when the purchased product is the moving guide
-  const showUpsell = !upsellDismissed && data?.productKey === "moving-guide";
+  // Show upsell for every product except bundles (bundles already contain multiple items)
+  const showUpsell =
+    !upsellDismissed &&
+    !!data?.productKey &&
+    data.status === "paid";
 
   return (
     <div
@@ -208,6 +400,33 @@ export default function PaymentSuccess() {
                 .
               </p>
 
+              {/* License key — shown for BudgetManager and bundle products */}
+              {requiresLicenseKey && (
+                <div className="w-full">
+                  {licenseLoading ? (
+                    <div className="w-full border border-[#c9a84c]/40 rounded-xl p-5 bg-[#f8f5f0] flex items-center justify-center gap-2 text-[#1a2744]/50 text-sm">
+                      <Loader2 className="h-4 w-4 animate-spin text-[#c9a84c]" />
+                      Generating your license key…
+                    </div>
+                  ) : licenseData?.licenseKey ? (
+                    <LicenseKeyBox licenseKey={licenseData.licenseKey} />
+                  ) : (
+                    <div className="w-full border border-[#c9a84c]/40 rounded-xl p-5 bg-[#f8f5f0] text-center">
+                      <p className="text-[#1a2744]/60 text-sm">
+                        Your license key is being generated. Please check your email shortly, or{" "}
+                        <button
+                          onClick={() => window.location.reload()}
+                          className="text-[#c9a84c] underline hover:no-underline"
+                        >
+                          refresh this page
+                        </button>
+                        .
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {downloadPath && (
                 <a
                   href={downloadPath}
@@ -243,8 +462,13 @@ export default function PaymentSuccess() {
           )}
         </div>
 
-        {/* Upsell offer — shown only after guide purchase */}
-        {showUpsell && <UpsellOffer onDismiss={() => setUpsellDismissed(true)} />}
+        {/* Upsell offer — shown after every successful purchase */}
+        {showUpsell && data?.productKey && (
+          <UpsellOffer
+            purchasedProductKey={data.productKey}
+            onDismiss={() => setUpsellDismissed(true)}
+          />
+        )}
       </div>
 
       {/* Branding */}

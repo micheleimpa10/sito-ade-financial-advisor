@@ -1,11 +1,12 @@
 import type { Express, Request, Response } from "express";
 import express from "express";
 import Stripe from "stripe";
+import { randomBytes } from "crypto";
 import { getDb } from "./db";
-import { orders } from "../drizzle/schema";
-import { eq } from "drizzle-orm";
+import { orders, licenses } from "../drizzle/schema";
 import { notifyOwner } from "./_core/notification";
 import { getProduct } from "./products";
+import { sendPurchaseConfirmationEmail } from "./email";
 
 export function registerStripeWebhook(app: Express) {
   // MUST use express.raw BEFORE express.json for webhook signature verification
@@ -15,7 +16,7 @@ export function registerStripeWebhook(app: Express) {
     async (req: Request, res: Response) => {
       const sig = req.headers["stripe-signature"] as string;
       const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
-      const stripeKey = process.env.STRIPE_SECRET_KEY || process.env.VITE_STRIPE_SECRET_KEY;
+      const stripeKey = process.env.STRIPE_SECRET_KEY;
 
       if (!stripeKey) {
         console.error("[Webhook] STRIPE_SECRET_KEY not configured");
@@ -23,7 +24,7 @@ export function registerStripeWebhook(app: Express) {
         return;
       }
 
-      const stripe = new Stripe(stripeKey, { apiVersion: "2024-06-20" as any });
+      const stripe = new Stripe(stripeKey, { apiVersion: "2026-06-24.dahlia" });
 
       let event: Stripe.Event;
 
@@ -65,6 +66,27 @@ export function registerStripeWebhook(app: Express) {
   );
 }
 
+/**
+ * Generate a unique license key in the format BM-XXXX-XXXX-XXXX-XXXX
+ * Uses cryptographically random bytes for uniqueness.
+ */
+function generateLicenseKey(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no ambiguous chars (0/O, 1/I)
+  const segment = () =>
+    Array.from({ length: 4 }, () => chars[randomBytes(1)[0] % chars.length]).join("");
+  return `BM-${segment()}-${segment()}-${segment()}-${segment()}`;
+}
+
+/**
+ * Detect the customer's preferred language from Stripe session metadata.
+ * Falls back to "en" if not set or unrecognised.
+ */
+function detectLanguage(session: Stripe.Checkout.Session): string {
+  const lang = session.metadata?.language ?? session.locale ?? "en";
+  if (["it", "fr", "de"].includes(lang)) return lang;
+  return "en";
+}
+
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const productKey = session.metadata?.product_key;
   // userId is optional — guests have no account
@@ -82,12 +104,22 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
+  const product = getProduct(productKey);
+  const customerEmail =
+    session.customer_details?.email ??
+    session.metadata?.customer_email ??
+    null;
+  const customerName =
+    session.customer_details?.name ??
+    session.metadata?.customer_name ??
+    undefined;
+  const language = detectLanguage(session);
+
   // Upsert order to handle duplicate webhook deliveries gracefully
   try {
-    await db
+    const result = await db
       .insert(orders)
       .values({
-        // userId is null for guest purchases
         userId: userId,
         stripeSessionId: session.id,
         stripePaymentIntentId:
@@ -111,20 +143,74 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 
     console.log(`[Webhook] Order recorded — user: ${userId ?? "guest"}, product: ${productKey}`);
 
-    // Notify owner of new purchase
+    // ── Generate license key for BudgetManager products ───────────────────────
+    let licenseKey: string | undefined;
+
+    if (product?.requiresLicenseKey) {
+      try {
+        const tier = productKey.includes("family") ? "family" : "personal";
+        const orderId = (result as any).insertId ?? 0;
+        licenseKey = generateLicenseKey();
+
+        await db.insert(licenses).values({
+          licenseKey,
+          orderId,
+          productKey,
+          tier,
+          customerEmail: customerEmail ?? undefined,
+        }).onDuplicateKeyUpdate({
+          // If duplicate (retry), keep existing key — do not overwrite
+          set: { productKey },
+        });
+
+        console.log(`[Webhook] License key generated: ${licenseKey} for order ${orderId}`);
+      } catch (licErr) {
+        console.warn("[Webhook] License key generation failed:", licErr);
+        licenseKey = undefined;
+      }
+    }
+
+    // ── Send thank-you email to customer ──────────────────────────────────────
     try {
-      const product = getProduct(productKey);
+      if (customerEmail && product) {
+        const siteOrigin = (() => {
+          try {
+            return new URL(session.success_url ?? "").origin;
+          } catch {
+            return "https://adelaidemanta-financialadvisor.ch";
+          }
+        })();
+        const downloadUrl = `${siteOrigin}/payment-success?session_id=${session.id}`;
+
+        await sendPurchaseConfirmationEmail({
+          customerEmail,
+          customerName,
+          productName: product.name,
+          productShortName: product.shortName,
+          downloadUrl,
+          licenseKey,
+          amountPaid: session.amount_total ?? product.amount,
+          currency: session.currency ?? product.currency,
+          language,
+        });
+      }
+    } catch (emailErr) {
+      // Email failure must never block order processing
+      console.warn("[Webhook] Thank-you email failed:", emailErr);
+    }
+
+    // ── Notify owner of new purchase ──────────────────────────────────────────
+    try {
       const productName = product?.shortName ?? productKey;
-      const amount = session.amount_total != null
-        ? `CHF ${(session.amount_total / 100).toFixed(2)}`
-        : "unknown amount";
-      const customerEmail = session.metadata?.customer_email ?? session.customer_email ?? "unknown";
+      const amount =
+        session.amount_total != null
+          ? `CHF ${(session.amount_total / 100).toFixed(2)}`
+          : "unknown amount";
       await notifyOwner({
         title: `New purchase: ${productName}`,
-        content: `${customerEmail} purchased **${productName}** for ${amount}.\n\nStripe session: ${session.id}`,
+        content: `${customerEmail ?? "unknown"} purchased **${productName}** for ${amount}.${licenseKey ? `\n\nLicense key: \`${licenseKey}\`` : ""}\n\nStripe session: ${session.id}`,
       });
     } catch (notifyErr) {
-      // Notification failure must not block order processing
       console.warn("[Webhook] Owner notification failed:", notifyErr);
     }
   } catch (err) {

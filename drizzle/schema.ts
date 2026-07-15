@@ -51,3 +51,26 @@ export const orders = mysqlTable("orders", {
 
 export type Order = typeof orders.$inferSelect;
 export type InsertOrder = typeof orders.$inferInsert;
+
+/**
+ * Licenses table — stores unique license keys generated for BudgetManager purchases.
+ * Each order that requires a license key gets exactly one entry here.
+ */
+export const licenses = mysqlTable("licenses", {
+  id: int("id").autoincrement().primaryKey(),
+  /** The unique license key shown to the customer, e.g. BM-XXXX-XXXX-XXXX-XXXX */
+  licenseKey: varchar("licenseKey", { length: 64 }).notNull().unique(),
+  /** Foreign key to the order that generated this license */
+  orderId: int("orderId").notNull(),
+  /** Product key from products.ts, e.g. 'budget-manager-personal' */
+  productKey: varchar("productKey", { length: 64 }).notNull(),
+  /** Tier: personal or family */
+  tier: mysqlEnum("tier", ["personal", "family"]).notNull(),
+  /** Customer email for display and support */
+  customerEmail: varchar("customerEmail", { length: 320 }),
+  /** Whether the license is active (1 = active, 0 = revoked) */
+  isActive: int("isActive").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+export type License = typeof licenses.$inferSelect;
+export type InsertLicense = typeof licenses.$inferInsert;

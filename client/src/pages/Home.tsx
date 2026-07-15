@@ -17,6 +17,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { useCart, type Lang } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { Link, useLocation } from "wouter";
 import {
@@ -897,23 +898,21 @@ const translations = {
 };
 
 // ─── TYPES ─────────────────────────────────────────────────────────────────────
-type Lang = "en" | "it" | "fr" | "de";
-
 // ─── IMAGES ────────────────────────────────────────────────────────────────────
-const HERO_BG = "/manus-storage/services-phone_41f4df46.png";
-const ABOUT_PORTRAIT = "/manus-storage/adelaide-card_033900ff.png";
-const SERVICES_BG = "/manus-storage/consultation-cafe_39d1ab16.jpg";
-const PHOTO_OUTDOOR_MEETING = "/manus-storage/photo-outdoor-meeting_772c0dda.jpg";
-const PHOTO_VIDEO_CALL = "/manus-storage/photo-video-call_5024c6c2.jpg";
-const PHOTO_CAFE_MEETING = "/manus-storage/photo-cafe-meeting_25801736.jpg";
-const PHOTO_PHONE_CALL = "/manus-storage/photo-phone-call_4c525178.jpg";
-const PHOTO_ZURICH_TERRACE = "/manus-storage/photo-zurich-terrace_a0453460.jpg";
-const PHOTO_CITY_PHONE = "/manus-storage/photo-city-phone_44726a3b.jpg";
-const CONSULTATION_ALPS = "/manus-storage/consultation-alps_a995ed64.png";
-const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_4ea68f2b.jpg";
-const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_874fbe50.jpg";
-const PHOTO_WORKING_DESK = "/manus-storage/working-desk_581f53aa.webp";
-const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_f87114e8.png";
+const HERO_BG = "/manus-storage/services-phone_ca517372.png";
+const ABOUT_PORTRAIT = "/manus-storage/adelaide-card_298df3df.png";
+const SERVICES_BG = "/manus-storage/consultation-cafe_d43a3ac4.png";
+const PHOTO_OUTDOOR_MEETING = "/manus-storage/photo-outdoor-meeting_0504b478.jpg";
+const PHOTO_VIDEO_CALL = "/manus-storage/photo-video-call_e59f5d26.jpg";
+const PHOTO_CAFE_MEETING = "/manus-storage/photo-cafe-meeting_37b0033a.jpg";
+const PHOTO_PHONE_CALL = "/manus-storage/photo-phone-call_7c557d43.jpg";
+const PHOTO_ZURICH_TERRACE = "/manus-storage/photo-zurich-terrace_4311734f.jpg";
+const PHOTO_CITY_PHONE = "/manus-storage/photo-city-phone_3eb73536.jpg";
+const CONSULTATION_ALPS = "/manus-storage/consultation-alps_5eeca1a1.png";
+const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_75fdf55b.jpg";
+const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_d233a35a.jpg";
+const PHOTO_WORKING_DESK = "/manus-storage/working-desk_8aa59a79.webp";
+const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_0386804d.png";
 
 // ─── SERVICE ICONS ─────────────────────────────────────────────────────────────
 const SERVICE_ICONS = [
@@ -978,7 +977,7 @@ function Reveal({
 
 // ─── MAIN COMPONENT ────────────────────────────────────────────────────────────
 export default function HomePage() {
-  const [lang, setLang] = useState<Lang>("en");
+  const [lang, setLocalLang] = useState<Lang>("en");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -1000,8 +999,20 @@ export default function HomePage() {
 
   const handleBuyNow = useCallback((productKey: string) => {
     // No login required — Stripe collects the customer email at checkout
-    createCheckout.mutate({ productKey, origin: window.location.origin });
-  }, [createCheckout]);
+    // Pass the current UI language so the thank-you email is sent in the right language
+    createCheckout.mutate({ productKey, origin: window.location.origin, language: lang });
+  }, [createCheckout, lang]);
+
+  // ─── CART ───────────────────────────────────────────────────────────────────
+  const { addItem, isInCart, openCart, items: cartItems, setLang: setCartLang } = useCart();
+  const totalItems = cartItems.length;
+
+  // Keep CartContext lang in sync with local lang state
+  // so CartDrawer can pass the right language to the cart checkout
+  const setLang = useCallback((l: Lang) => {
+    setLocalLang(l);
+    setCartLang(l);
+  }, [setCartLang]);
 
   // ─── SHOP PRODUCTS ─────────────────────────────────────────────────────────
   const SHOP_PRODUCTS = [
@@ -1010,7 +1021,7 @@ export default function HomePage() {
       price: "CHF 9.90",
       regularPrice: "CHF 14.90",
       badge: "NEW",
-      cover: "/manus-storage/cover_01_Moving_to_Switzerland_f1d5f222.png",
+      cover: "/manus-storage/cover_01_Moving_to_Switzerland_0e4a6a19.png",
       name: lang === "it" ? "Trasferirsi in Svizzera 2026 — Guida Completa"
         : lang === "fr" ? "S'installer en Suisse 2026 — Guide Complet"
         : lang === "de" ? "Umzug in die Schweiz 2026 — Vollständiger Ratgeber"
@@ -1025,7 +1036,7 @@ export default function HomePage() {
       price: "CHF 17.90",
       regularPrice: "CHF 22.90",
       badge: null,
-      cover: "/manus-storage/cover_02_Financial_Agenda_Couples_c50f960c.png",
+      cover: "/manus-storage/cover_02_Financial_Agenda_Couples_ee1c3b93.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Coppia"
         : lang === "fr" ? "Agenda Financier 2026 — Couple"
         : lang === "de" ? "Finanzagenda 2026 — Paar"
@@ -1040,7 +1051,7 @@ export default function HomePage() {
       price: "CHF 12.90",
       regularPrice: "CHF 16.90",
       badge: null,
-      cover: "/manus-storage/cover_03_Financial_Agenda_Single_baec1672.png",
+      cover: "/manus-storage/cover_03_Financial_Agenda_Single_01df94da.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Single"
         : lang === "fr" ? "Agenda Financier 2026 — Célibataire"
         : lang === "de" ? "Finanzagenda 2026 — Einzelperson"
@@ -1055,7 +1066,7 @@ export default function HomePage() {
       price: "CHF 24.90",
       regularPrice: "CHF 29.90",
       badge: lang === "it" ? "PIÙ VENDUTO" : lang === "fr" ? "BEST-SELLER" : lang === "de" ? "BESTSELLER" : "BEST SELLER",
-      cover: "/manus-storage/cover_04_BudgetManager_Personal_c13c53e5.png",
+      cover: "/manus-storage/cover_04_BudgetManager_Personal_4b269c0e.png",
       name: lang === "it" ? "BudgetManager Pro — Personale"
         : lang === "fr" ? "BudgetManager Pro — Personnel"
         : lang === "de" ? "BudgetManager Pro — Persönlich"
@@ -1070,7 +1081,7 @@ export default function HomePage() {
       price: "CHF 34.90",
       regularPrice: "CHF 39.90",
       badge: null,
-      cover: "/manus-storage/cover_05_BudgetManager_Family_5ea6d13c.png",
+      cover: "/manus-storage/cover_05_BudgetManager_Family_6468fbcc.png",
       name: lang === "it" ? "BudgetManager Pro — Famiglia"
         : lang === "fr" ? "BudgetManager Pro — Famille"
         : lang === "de" ? "BudgetManager Pro — Familie"
@@ -1177,6 +1188,21 @@ export default function HomePage() {
             >
               <Instagram className="h-4 w-4" />
             </a>
+            {/* Cart icon — desktop */}
+            <button
+              onClick={openCart}
+              className={`relative transition-colors ${
+                scrolled ? "text-[#1a2744] hover:text-[#c9a84c]" : "text-white hover:text-[#c9a84c]"
+              }`}
+              aria-label="Open cart"
+            >
+              <ShoppingCart className="h-5 w-5" />
+              {totalItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-[#c9a84c] text-[#1a2744] text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                  {totalItems}
+                </span>
+              )}
+            </button>
             <a
               href="#book"
               className="bg-[#1a2744] text-white px-5 py-2 text-xs font-bold uppercase tracking-widest hover:bg-[#c9a84c] hover:text-[#1a2744] transition-all rounded-sm shadow-md"
@@ -1184,7 +1210,21 @@ export default function HomePage() {
               {t.nav.cta}
             </a>
           </div>
-
+          {/* Mobile cart icon */}
+          <button
+            onClick={openCart}
+            className={`lg:hidden relative transition-colors ${
+              scrolled ? "text-[#1a2744] hover:text-[#c9a84c]" : "text-white hover:text-[#c9a84c]"
+            }`}
+            aria-label="Open cart"
+          >
+            <ShoppingCart className="h-5 w-5" />
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#c9a84c] text-[#1a2744] text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">
+                {totalItems}
+              </span>
+            )}
+          </button>
           {/* Mobile toggle */}
           <button
             className={`lg:hidden transition-colors ${
@@ -1836,25 +1876,59 @@ export default function HomePage() {
                     <p className="text-[#1a2744]/55 text-sm leading-relaxed mb-5 flex-1">
                       {product.desc}
                     </p>
-                    <div className="flex items-center justify-between mt-auto">
-                      <div>
-                        <span className="text-2xl font-bold text-[#c9a84c]" style={{ fontFamily: "'Playfair Display', serif" }}>
-                          {product.price}
-                        </span>
-                        {product.regularPrice && (
-                          <span className="ml-2 text-sm text-[#1a2744]/35 line-through">{product.regularPrice}</span>
-                        )}
+                    <div className="mt-auto">
+                      <div className="flex items-center justify-between mb-3">
+                        <div>
+                          <span className="text-2xl font-bold text-[#c9a84c]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                            {product.price}
+                          </span>
+                          {product.regularPrice && (
+                            <span className="ml-2 text-sm text-[#1a2744]/35 line-through">{product.regularPrice}</span>
+                          )}
+                        </div>
                       </div>
-                      <button
-                        onClick={() => handleBuyNow(product.key)}
-                        disabled={createCheckout.isPending}
-                        className="flex items-center gap-2 bg-[#1a2744] text-white px-4 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#c9a84c] hover:text-[#1a2744] transition-all rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
-                        <ShoppingCart className="h-3.5 w-3.5" />
-                        {createCheckout.isPending
-                          ? (lang === "it" ? "…" : lang === "fr" ? "…" : "…")
-                          : t.shop.buyNow}
-                      </button>
+                      <div className="flex gap-2">
+                        {isInCart(product.key) ? (
+                          <button
+                            onClick={openCart}
+                            className="flex-1 flex items-center justify-center gap-1.5 bg-green-600 text-white px-3 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-green-700 transition-all rounded-lg"
+                          >
+                            <ShoppingCart className="h-3.5 w-3.5" />
+                            {lang === "it" ? "Nel Carrello" : lang === "fr" ? "Dans le Panier" : lang === "de" ? "Im Warenkorb" : "In Cart"}
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              addItem({
+                                key: product.key,
+                                name: product.name,
+                                price: Math.round(parseFloat(product.price.replace("CHF ", "")) * 100),
+                                displayPrice: product.price,
+                                cover: product.cover,
+                              });
+                              toast.success(
+                                lang === "it" ? `"${product.name}" aggiunto al carrello` :
+                                lang === "fr" ? `"${product.name}" ajouté au panier` :
+                                lang === "de" ? `"${product.name}" zum Warenkorb hinzugefügt` :
+                                `"${product.name}" added to cart`,
+                                { duration: 2500 }
+                              );
+                            }}
+                            className="flex-1 flex items-center justify-center gap-1.5 border border-[#1a2744] text-[#1a2744] px-3 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#1a2744] hover:text-white transition-all rounded-lg"
+                          >
+                            <ShoppingBag className="h-3.5 w-3.5" />
+                            {t.shop.addToCart}
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleBuyNow(product.key)}
+                          disabled={createCheckout.isPending}
+                          className="flex-1 flex items-center justify-center gap-1.5 bg-[#1a2744] text-white px-3 py-2.5 text-xs font-bold uppercase tracking-widest hover:bg-[#c9a84c] hover:text-[#1a2744] transition-all rounded-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
+                          <ShoppingCart className="h-3.5 w-3.5" />
+                          {createCheckout.isPending ? "…" : t.shop.buyNow}
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1870,7 +1944,7 @@ export default function HomePage() {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c9a84c] via-[#e8c97a] to-[#c9a84c]" />
                 <div className="flex items-start gap-4 mb-5">
                   <div className="hidden sm:block flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden shadow-md">
-                    <img src="/manus-storage/cover_06_Single_Bundle_a66e0e5d.png" alt="Single Money Bundle" className="w-full h-full object-cover" />
+                    <img src="/manus-storage/cover_06_Single_Bundle_a61512fd.png" alt="Single Money Bundle" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <div className="inline-flex items-center gap-1.5 bg-[#c9a84c] text-[#1a2744] text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-2">
@@ -1924,7 +1998,7 @@ export default function HomePage() {
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c9a84c] via-[#e8c97a] to-[#c9a84c]" />
                 <div className="flex items-start gap-4 mb-5">
                   <div className="hidden sm:block flex-shrink-0 w-24 h-16 rounded-lg overflow-hidden shadow-md">
-                    <img src="/manus-storage/cover_07_Family_Bundle_531b9444.png" alt="Family Money Bundle" className="w-full h-full object-cover" />
+                    <img src="/manus-storage/cover_07_Family_Bundle_2ad0181c.png" alt="Family Money Bundle" className="w-full h-full object-cover" />
                   </div>
                   <div>
                     <div className="inline-flex items-center gap-1.5 bg-[#c9a84c] text-[#1a2744] text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full mb-2">

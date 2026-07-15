@@ -1,11 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, ShoppingBag, Download, Loader2, Package } from "lucide-react";
+import { ArrowLeft, ShoppingBag, Download, Loader2, Package, Copy, Check, Key } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
+import { toast } from "sonner";
 
 const DOWNLOAD_PATHS: Record<string, string> = {
   "moving-guide": "/manus-storage/01_Moving_to_Switzerland_bc6ea1e4.zip",
@@ -35,6 +36,42 @@ function statusBadge(status: string | null | undefined) {
     <Badge variant="outline" className="text-[#1a2744]/50">
       {status ?? "Unknown"}
     </Badge>
+  );
+}
+
+/** Inline license key display with copy button */
+function LicenseKeyInline({ licenseKey }: { licenseKey: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(licenseKey);
+      setCopied(true);
+      toast.success("License key copied!");
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      toast.error("Could not copy. Please select and copy manually.");
+    }
+  };
+
+  return (
+    <div className="mt-3 flex items-center gap-2 bg-[#f8f5f0] border border-[#c9a84c]/40 rounded-lg px-3 py-2">
+      <Key className="h-3.5 w-3.5 text-[#c9a84c] flex-shrink-0" />
+      <code className="flex-1 text-[#1a2744] font-mono text-xs font-bold tracking-wider select-all truncate">
+        {licenseKey}
+      </code>
+      <button
+        onClick={handleCopy}
+        className="flex-shrink-0 text-[#1a2744]/40 hover:text-[#c9a84c] transition-colors"
+        title="Copy license key"
+      >
+        {copied ? (
+          <Check className="h-3.5 w-3.5 text-green-500" />
+        ) : (
+          <Copy className="h-3.5 w-3.5" />
+        )}
+      </button>
+    </div>
   );
 }
 
@@ -147,47 +184,55 @@ export default function OrdersPage() {
           <div className="space-y-4">
             {orders.map((order) => {
               const downloadPath = DOWNLOAD_PATHS[order.productKey];
+              const haslicenseKey = !!order.licenseKey;
               return (
                 <div
                   key={order.id}
-                  className="bg-white rounded-2xl border border-[#1a2744]/5 shadow-sm p-6 flex flex-col sm:flex-row sm:items-center gap-5"
+                  className="bg-white rounded-2xl border border-[#1a2744]/5 shadow-sm p-6"
                 >
-                  {/* Icon */}
-                  <div className="w-12 h-12 rounded-xl bg-[#1a2744]/5 flex items-center justify-center flex-shrink-0">
-                    <Package className="h-6 w-6 text-[#1a2744]" />
-                  </div>
-
-                  {/* Details */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <h3 className="font-semibold text-[#1a2744] truncate">
-                        {order.product?.name ?? order.productKey}
-                      </h3>
-                      {statusBadge(order.paymentStatus)}
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+                    {/* Icon */}
+                    <div className="w-12 h-12 rounded-xl bg-[#1a2744]/5 flex items-center justify-center flex-shrink-0">
+                      <Package className="h-6 w-6 text-[#1a2744]" />
                     </div>
-                    <p className="text-[#1a2744]/50 text-sm">
-                      {new Date(order.createdAt).toLocaleDateString("en-CH", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
-                    <p className="text-[#c9a84c] font-bold mt-1">
-                      {formatAmount(order.amountTotal, order.currency)}
-                    </p>
+
+                    {/* Details */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h3 className="font-semibold text-[#1a2744] truncate">
+                          {order.product?.name ?? order.productKey}
+                        </h3>
+                        {statusBadge(order.paymentStatus)}
+                      </div>
+                      <p className="text-[#1a2744]/50 text-sm">
+                        {new Date(order.createdAt).toLocaleDateString("en-CH", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </p>
+                      <p className="text-[#c9a84c] font-bold mt-1">
+                        {formatAmount(order.amountTotal, order.currency)}
+                      </p>
+                    </div>
+
+                    {/* Download button */}
+                    {downloadPath && order.paymentStatus === "paid" && (
+                      <a
+                        href={downloadPath}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-[#c9a84c] text-[#1a2744] px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:bg-[#1a2744] hover:text-white transition-all rounded-xl flex-shrink-0"
+                      >
+                        <Download className="h-4 w-4" />
+                        Download
+                      </a>
+                    )}
                   </div>
 
-                  {/* Download button */}
-                  {downloadPath && order.paymentStatus === "paid" && (
-                    <a
-                      href={downloadPath}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-[#c9a84c] text-[#1a2744] px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:bg-[#1a2744] hover:text-white transition-all rounded-xl flex-shrink-0"
-                    >
-                      <Download className="h-4 w-4" />
-                      Download
-                    </a>
+                  {/* License key — shown for BudgetManager orders */}
+                  {haslicenseKey && order.paymentStatus === "paid" && (
+                    <LicenseKeyInline licenseKey={order.licenseKey!} />
                   )}
                 </div>
               );

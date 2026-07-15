@@ -619,7 +619,11 @@ function filterEventsByDate(allEvents: any[], pastEvents: any[]) {
   };
 }
 
-export default function EventsPage() {
+export default function Events() {
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [lang, setLang] = useState<Lang>("en");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);

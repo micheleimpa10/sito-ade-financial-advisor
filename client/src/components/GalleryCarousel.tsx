@@ -3,52 +3,52 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const GALLERY_IMAGES = [
   {
-    src: "/manus-storage/photo_sofa_consult_1a2b3c4d.png",
+    src: "/manus-storage/consultation-sofa_5d10909b.jpg",
     alt: "Adelaide Manta consulting a client",
     position: "center 30%"
   },
   {
-    src: "/manus-storage/photo_redsofa_consult_2b3c4d5e.png",
+    src: "/manus-storage/consultation-redsofa_7d10391a.jpg",
     alt: "Adelaide Manta in a consultation",
     position: "center 40%"
   },
   {
-    src: "/manus-storage/photo_working_desk_3c4d5e6f.png",
+    src: "/manus-storage/working-desk_ebdc9f86.webp",
     alt: "Adelaide Manta at her desk",
     position: "center 35%"
   },
   {
-    src: "/manus-storage/consultation_alps_4d5e6f7g.png",
+    src: "/manus-storage/consultation-alps_42619a86.png",
     alt: "Adelaide Manta consulting in the Alps",
     position: "center 45%"
   },
   {
-    src: "/manus-storage/services_bg_5e6f7g8h.png",
+    src: "/manus-storage/consultation-cafe_26ad27a5.png",
     alt: "Adelaide Manta with a client",
     position: "center 30%"
   },
   {
-    src: "/manus-storage/photo_zurich_terrace_6f7g8h9i.png",
+    src: "/manus-storage/photo-zurich-terrace_2c3e9ead.jpg",
     alt: "Adelaide Manta in Zurich",
     position: "center 40%"
   },
   {
-    src: "/manus-storage/photo_cafe_meeting_7g8h9i0j.png",
-    alt: "Adelaide Manta with a client at a café",
+    src: "/manus-storage/photo-cafe-meeting_777984eb.jpg",
+    alt: "Adelaide Manta with a client at a cafe",
     position: "center 35%"
   },
   {
-    src: "/manus-storage/photo_outdoor_meeting_8h9i0j1k.png",
+    src: "/manus-storage/photo-outdoor-meeting_1333fbfb.jpg",
     alt: "Adelaide Manta meeting a client outdoors",
     position: "center 45%"
   },
   {
-    src: "/manus-storage/photo_phone_call_9i0j1k2l.png",
+    src: "/manus-storage/photo-phone-call_ad4e596b.jpg",
     alt: "Adelaide Manta on a call",
     position: "center 40%"
   },
   {
-    src: "/manus-storage/hero_bg_0j1k2l3m.png",
+    src: "/manus-storage/services-phone_5451249b.png",
     alt: "Adelaide Manta at work",
     position: "center 35%"
   },

@@ -89,7 +89,7 @@ export function GalleryCarousel() {
   return (
     <div className="relative w-full">
       {/* Main carousel container */}
-      <div className="relative w-full rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-[#1a2744] flex items-center justify-center">
+      <div className="relative rounded-2xl overflow-hidden shadow-lg border border-white/10 bg-[#1a2744] flex items-center justify-center" style={{ width: 'fit-content', margin: '0 auto' }}>
         {/* Image */}
         <div className="relative bg-[#1a2744] flex items-center justify-center">
           <img

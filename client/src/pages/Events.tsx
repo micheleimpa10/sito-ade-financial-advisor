@@ -71,16 +71,6 @@ const translations = {
       title: "PAST EVENTS",
       events: [
         {
-          date: "May 15th",
-          category: "Financial Planning",
-          title: "Swiss Tax Optimization Workshop",
-          desc: "An in-depth workshop on optimizing tax strategies for high-net-worth individuals in Switzerland. Covered cantonal differences, deductions, and planning strategies.",
-          theme: "Tax efficiency, wealth preservation, and strategic planning.",
-          activities:
-            "Interactive workshop, Q&A session, and personalized consultation insights.",
-          location: "Bern, Switzerland",
-        },
-        {
           date: "April 20th",
           category: "Wellness & Community",
           title: "Spring Wellness Retreat",
@@ -89,6 +79,16 @@ const translations = {
           activities:
             "Yoga session, meditation, wellness talks, and networking aperitivo.",
           location: "Lugano, Switzerland",
+        },
+        {
+          date: "May 15th",
+          category: "Financial Planning",
+          title: "Swiss Tax Optimization Workshop",
+          desc: "An in-depth workshop on optimizing tax strategies for high-net-worth individuals in Switzerland. Covered cantonal differences, deductions, and planning strategies.",
+          theme: "Tax efficiency, wealth preservation, and strategic planning.",
+          activities:
+            "Interactive workshop, Q&A session, and personalized consultation insights.",
+          location: "Bern, Switzerland",
         },
       ],
     },
@@ -190,16 +190,6 @@ const translations = {
       title: "EVENTI PASSATI",
       events: [
         {
-          date: "15 Maggio",
-          category: "Pianificazione Finanziaria",
-          title: "Workshop di Ottimizzazione Fiscale Svizzera",
-          desc: "Un workshop approfondito su strategie fiscali ottimizzate per individui ad alto patrimonio netto in Svizzera. Coperte differenze cantonali, detrazioni e strategie di pianificazione.",
-          theme: "Efficienza fiscale, preservazione della ricchezza e pianificazione strategica.",
-          activities:
-            "Workshop interattivo, sessione Q&A e approfondimenti di consulenza personalizzata.",
-          location: "Berna, Svizzera",
-        },
-        {
           date: "20 Aprile",
           category: "Benessere & Comunità",
           title: "Ritiro Benessere Primaverile",
@@ -208,6 +198,16 @@ const translations = {
           activities:
             "Sessione di yoga, meditazione, talk sul benessere e aperitivo di networking.",
           location: "Lugano, Svizzera",
+        },
+        {
+          date: "15 Maggio",
+          category: "Pianificazione Finanziaria",
+          title: "Workshop di Ottimizzazione Fiscale Svizzera",
+          desc: "Un workshop approfondito su strategie fiscali ottimizzate per individui ad alto patrimonio netto in Svizzera. Coperte differenze cantonali, detrazioni e strategie di pianificazione.",
+          theme: "Efficienza fiscale, preservazione della ricchezza e pianificazione strategica.",
+          activities:
+            "Workshop interattivo, sessione Q&A e approfondimenti di consulenza personalizzata.",
+          location: "Berna, Svizzera",
         },
       ],
     },
@@ -309,16 +309,6 @@ const translations = {
       title: "ÉVÉNEMENTS PASSÉS",
       events: [
         {
-          date: "15 Mai",
-          category: "Planification Financière",
-          title: "Atelier d'Optimisation Fiscale Suisse",
-          desc: "Un atelier approfondi sur les stratégies fiscales optimisées pour les particuliers fortunés en Suisse. Couvrait les différences cantonales, les déductions et les stratégies de planification.",
-          theme: "Efficacité fiscale, préservation de la richesse et planification stratégique.",
-          activities:
-            "Atelier interactif, session Q&A et aperçus de consultation personnalisée.",
-          location: "Berne, Suisse",
-        },
-        {
           date: "20 Avril",
           category: "Bien-être & Communauté",
           title: "Retraite Bien-être Printanière",
@@ -327,6 +317,16 @@ const translations = {
           activities:
             "Séance de yoga, méditation, talks bien-être et apéritif de réseautage.",
           location: "Lugano, Suisse",
+        },
+        {
+          date: "15 Mai",
+          category: "Planification Financière",
+          title: "Atelier d'Optimisation Fiscale Suisse",
+          desc: "Un atelier approfondi sur les stratégies fiscales optimisées pour les particuliers fortunés en Suisse. Couvrait les différences cantonales, les déductions et les stratégies de planification.",
+          theme: "Efficacité fiscale, préservation de la richesse et planification stratégique.",
+          activities:
+            "Atelier interactif, session Q&A et aperçus de consultation personnalisée.",
+          location: "Berne, Suisse",
         },
       ],
     },
@@ -428,16 +428,6 @@ const translations = {
       title: "VERGANGENE VERANSTALTUNGEN",
       events: [
         {
-          date: "15. Mai",
-          category: "Finanzplanung",
-          title: "Schweizer Steueroptimierungs-Workshop",
-          desc: "Ein umfassender Workshop zu optimierten Steuerstrategien für vermögende Privatpersonen in der Schweiz. Behandelte kantonale Unterschiede, Abzüge und Planungsstrategien.",
-          theme: "Steuereffizienz, Vermögensschutz und strategische Planung.",
-          activities:
-            "Interaktiver Workshop, Fragerunde und Einblicke in personalisierte Beratung.",
-          location: "Bern, Schweiz",
-        },
-        {
           date: "20. April",
           category: "Wellness & Gemeinschaft",
           title: "Frühlings-Wellness-Retreat",
@@ -446,6 +436,16 @@ const translations = {
           activities:
             "Yoga-Sitzung, Meditation, Wellness-Talks und Networking-Aperitif.",
           location: "Lugano, Schweiz",
+        },
+        {
+          date: "15. Mai",
+          category: "Finanzplanung",
+          title: "Schweizer Steueroptimierungs-Workshop",
+          desc: "Ein umfassender Workshop zu optimierten Steuerstrategien für vermögende Privatpersonen in der Schweiz. Behandelte kantonale Unterschiede, Abzüge und Planungsstrategien.",
+          theme: "Steuereffizienz, Vermögensschutz und strategische Planung.",
+          activities:
+            "Interaktiver Workshop, Fragerunde und Einblicke in personalisierte Beratung.",
+          location: "Bern, Schweiz",
         },
       ],
     },

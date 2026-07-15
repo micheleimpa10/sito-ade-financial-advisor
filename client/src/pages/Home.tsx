@@ -912,7 +912,7 @@ const CONSULTATION_ALPS = "/manus-storage/consultation-alps_42619a86.png";
 const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_5d10909b.jpg";
 const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_7d10391a.jpg";
 const PHOTO_WORKING_DESK = "/manus-storage/working-desk_ebdc9f86.webp";
-const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_b99c4547.png";
+const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_950fb421.png";
 
 // ─── SERVICE ICONS ─────────────────────────────────────────────────────────────
 const SERVICE_ICONS = [

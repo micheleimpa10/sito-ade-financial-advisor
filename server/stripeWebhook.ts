@@ -9,6 +9,23 @@ import { getProduct } from "./products";
 import { sendPurchaseConfirmationEmail } from "./email";
 
 export function registerStripeWebhook(app: Express) {
+  // TEST ENDPOINT: Simulate webhook for development
+  app.post(
+    "/api/stripe/webhook/test",
+    express.json(),
+    async (req: Request, res: Response) => {
+      console.log("[Webhook TEST] Simulating checkout.session.completed event");
+      const session = req.body as Stripe.Checkout.Session;
+      try {
+        await handleCheckoutCompleted(session);
+        res.json({ success: true, message: "Test webhook processed" });
+      } catch (err) {
+        console.error("[Webhook TEST] Error:", err);
+        res.status(500).json({ error: "Test webhook failed", details: String(err) });
+      }
+    }
+  );
+
   // MUST use express.raw BEFORE express.json for webhook signature verification
   app.post(
     "/api/stripe/webhook",
@@ -116,24 +133,24 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     const result = await db
       .insert(orders)
       .values({
-        userId: userId,
+        userId: userId ?? undefined,
         stripeSessionId: session.id,
         stripePaymentIntentId:
           typeof session.payment_intent === "string"
             ? session.payment_intent
-            : (session.payment_intent?.id ?? null),
+            : (session.payment_intent?.id ?? undefined),
         productKey,
-        amountTotal: session.amount_total,
-        currency: session.currency,
-        paymentStatus: session.payment_status,
+        amountTotal: session.amount_total ?? 0,
+        currency: session.currency ?? "chf",
+        paymentStatus: session.payment_status ?? "unpaid",
       })
       .onDuplicateKeyUpdate({
         set: {
           stripePaymentIntentId:
             typeof session.payment_intent === "string"
               ? session.payment_intent
-              : (session.payment_intent?.id ?? null),
-          paymentStatus: session.payment_status,
+              : (session.payment_intent?.id ?? undefined),
+          paymentStatus: session.payment_status ?? "unpaid",
         },
       });
 

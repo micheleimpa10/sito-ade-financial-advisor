@@ -41,19 +41,15 @@ export function registerStripeWebhook(app: Express) {
         return;
       }
 
-      // CRITICAL: test events must return verified:true for webhook verification to pass
-      if (event.id.startsWith("evt_test_")) {
-        console.log("[Webhook] Test event detected, returning verification response");
-        res.json({ verified: true });
-        return;
-      }
-
       console.log(`[Webhook] Received event: ${event.type} (${event.id})`);
 
       try {
         if (event.type === "checkout.session.completed") {
           const session = event.data.object as Stripe.Checkout.Session;
+          console.log("[Webhook] Processing checkout.session.completed:", session.id);
           await handleCheckoutCompleted(session);
+        } else {
+          console.log("[Webhook] Event type not handled:", event.type);
         }
       } catch (err) {
         console.error("[Webhook] Error processing event:", err);

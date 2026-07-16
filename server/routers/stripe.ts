@@ -247,6 +247,35 @@ export const stripeRouter = router({
       return { url: session.url };
     }),
 
+  /**
+   * Validate a license key against the database.
+   * Used by the HTML files to check if a license is valid.
+   */
+  validateLicense: publicProcedure
+    .input(z.object({ key: z.string(), product: z.string().optional() }))
+    .query(async ({ input }) => {
+      const db = await getDb();
+      if (!db) return { valid: false };
+
+      // Look up the license in the database
+      const licenseRows = await db
+        .select()
+        .from(licenses)
+        .where(eq(licenses.licenseKey, input.key))
+        .limit(1);
+
+      if (licenseRows.length === 0) return { valid: false };
+
+      const license = licenseRows[0];
+      // If product is specified, verify it matches
+      if (input.product) {
+        const expectedTier = input.product === 'family' ? 'family' : 'personal';
+        if (license.tier !== expectedTier) return { valid: false };
+      }
+
+      return { valid: true };
+    }),
+
   /** List all available products (public) */
   products: publicProcedure.query(() => {
     return Object.values(PRODUCTS);

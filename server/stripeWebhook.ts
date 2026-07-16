@@ -159,6 +159,8 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     // ── Generate license key for BudgetManager products ───────────────────────
     let licenseKey: string | undefined;
 
+    console.log(`[Webhook] Product key: ${productKey}, Product found: ${!!product}, Requires license: ${product?.requiresLicenseKey}`);
+    
     if (product?.requiresLicenseKey) {
       try {
         const tier = productKey.includes("family") ? "family" : "personal";

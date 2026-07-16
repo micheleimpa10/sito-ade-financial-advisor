@@ -36,6 +36,47 @@ async function startServer() {
   // Register Stripe webhook BEFORE express.json() so raw body is available for signature verification
   registerStripeWebhook(app);
 
+  // License validation endpoint (REST API for license.js)
+  app.get("/api/validate-license", async (req, res) => {
+    try {
+      const { key, product } = req.query;
+      if (!key || typeof key !== "string") {
+        return res.status(400).json({ valid: false, error: "Missing license key" });
+      }
+      
+      const db = await (await import("../db")).getDb();
+      if (!db) {
+        return res.status(500).json({ valid: false, error: "Database unavailable" });
+      }
+      
+      const { licenses } = await import("../../drizzle/schema");
+      const { eq } = await import("drizzle-orm");
+      
+      const licenseRows = await db
+        .select()
+        .from(licenses)
+        .where(eq(licenses.licenseKey, key))
+        .limit(1);
+      
+      if (licenseRows.length === 0) {
+        return res.json({ valid: false });
+      }
+      
+      const license = licenseRows[0];
+      if (product) {
+        const expectedTier = product === "family" ? "family" : "personal";
+        if (license.tier !== expectedTier) {
+          return res.json({ valid: false });
+        }
+      }
+      
+      return res.json({ valid: true });
+    } catch (error) {
+      console.error("License validation error:", error);
+      return res.status(500).json({ valid: false, error: "Validation failed" });
+    }
+  });
+
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));

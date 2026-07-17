@@ -1838,7 +1838,7 @@ export default function HomePage() {
             {/* WhatsApp */}
             <Reveal delay={100}>
               <a
-                href="https://wa.me/41000000000"
+                href="https://wa.me/41767889513"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-[#c9a84c]/40 transition-all text-center"

@@ -1518,18 +1518,7 @@ export default function HomePage() {
 
           {/* ─── TRUST PHOTO GALLERY CAROUSEL ───────────────────────────────────────────────── */}
           <Reveal delay={200} className="mt-16">
-            <GalleryCarousel images={[
-              { src: PHOTO_SOFA_CONSULT, alt: "Adelaide Manta consulting a client", aspectClass: "aspect-[4/5]" },
-              { src: CONSULTATION_ALPS, alt: "Adelaide Manta consulting in the Alps", aspectClass: "aspect-[3/4]" },
-              { src: PHOTO_ZURICH_TERRACE, alt: "Adelaide Manta in Zurich", aspectClass: "aspect-[4/3]" },
-              { src: PHOTO_WORKING_DESK, alt: "Adelaide Manta at her desk", aspectClass: "aspect-[4/3]" },
-              { src: PHOTO_CAFE_MEETING, alt: "Adelaide Manta with a client at a café", aspectClass: "aspect-[4/5]" },
-              { src: PHOTO_REDSOFA_CONSULT, alt: "Adelaide Manta in a consultation", aspectClass: "aspect-[3/4]" },
-              { src: PHOTO_OUTDOOR_MEETING, alt: "Adelaide Manta meeting a client outdoors", aspectClass: "aspect-[4/3]" },
-              { src: SERVICES_BG, alt: "Adelaide Manta with a client", aspectClass: "aspect-[4/5]" },
-              { src: PHOTO_PHONE_CALL, alt: "Adelaide Manta on a call", aspectClass: "aspect-[3/4]" },
-              { src: HERO_BG, alt: "Adelaide Manta at work", aspectClass: "aspect-[4/3]" },
-            ]} />
+            <GalleryCarousel />
           </Reveal>
         </div>
       </section>

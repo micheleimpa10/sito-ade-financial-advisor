@@ -915,6 +915,51 @@ const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_7d10391a.jpg"
 const PHOTO_WORKING_DESK = "/manus-storage/working-desk_ebdc9f86.webp";
 const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_950fb421.png";
 
+// ─── HERO SLIDESHOW ───────────────────────────────────────────────────────────
+const HERO_SLIDES = [
+  ADELAIDE_CIRCLE,
+  PHOTO_SOFA_CONSULT,
+  PHOTO_OUTDOOR_MEETING,
+  PHOTO_CAFE_MEETING,
+  PHOTO_ZURICH_TERRACE,
+  PHOTO_CITY_PHONE,
+];
+
+function HeroSlideshow() {
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    // Change photo every 6 seconds; crossfade takes 1.5 s (CSS transition below)
+    const timer = setInterval(() => setIdx(i => (i + 1) % HERO_SLIDES.length), 6000);
+    return () => clearInterval(timer);
+  }, []);
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      {HERO_SLIDES.map((src, i) => (
+        <div
+          key={src}
+          className="absolute inset-0"
+          style={{
+            opacity: i === idx ? 1 : 0,
+            transition: 'opacity 1.5s ease-in-out',
+            // Ken Burns: active slide slowly zooms in, inactive slides stay at base scale
+            transform: i === idx ? 'scale(1.08)' : 'scale(1.0)',
+            transitionProperty: 'opacity, transform',
+            transitionDuration: '1.5s, 7s',
+            transitionTimingFunction: 'ease-in-out, ease-in-out',
+          }}
+        >
+          <img
+            src={src}
+            alt="Adelaide Manta"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+            style={{ filter: 'blur(3px)' }}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── SERVICE ICONS ─────────────────────────────────────────────────────────────
 const SERVICE_ICONS = [
   HeartPulse,
@@ -1283,41 +1328,33 @@ export default function HomePage() {
         )}
       </header>
 
-      {/* ─── TRUST INTRO BANNER ──────────────────────────────────────────────── */}
-      <section className="relative bg-[#1a2744] overflow-hidden">
-        <div className="flex flex-col lg:flex-row min-h-[85vh] lg:min-h-[92vh]">
-          {/* Left: Adelaide's "I'm your financial advisor" portrait — full bleed */}
-          <div className="relative lg:w-[42%] h-[55vw] lg:h-auto flex-shrink-0">
-            <img
-              src={ADELAIDE_CIRCLE}
-              alt="Adelaide Manta — Your Financial Advisor"
-              className="w-full h-full object-cover object-top"
-              style={{ objectPosition: 'center top' }}
-            />
-            {/* Subtle right-side fade into navy */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#1a2744]/60 hidden lg:block" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1a2744]/70 via-transparent to-transparent lg:hidden" />
-            {/* FINMA badge — bottom-left of portrait */}
-            <div className="absolute bottom-6 left-6 bg-[#1a2744]/90 border border-[#c9a84c] rounded-full px-4 py-2 flex items-center gap-2 shadow-xl backdrop-blur-sm">
-              <div className="w-5 h-5 rounded-full bg-[#c9a84c] flex items-center justify-center flex-shrink-0">
-                <svg width="10" height="9" viewBox="0 0 10 9" fill="none">
-                  <path d="M1.5 4.5L4 7L8.5 1.5" stroke="#1a2744" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <span className="text-[#c9a84c] text-[11px] font-black uppercase tracking-widest">FINMA &amp; BX Certified</span>
-            </div>
-          </div>
+      {/* ─── HERO — Adelaide photo full-screen background + text overlay bottom-left ── */}
+      <section className="relative bg-[#1a2744] overflow-hidden" style={{ minHeight: '100vh' }}>
+        {/* Auto-rotating crossfade slideshow background */}
+        <HeroSlideshow />
+        {/* Gradient overlay: dark on left/bottom for text readability, lighter on right */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(to right, rgba(26,39,68,0.82) 0%, rgba(26,39,68,0.55) 55%, rgba(26,39,68,0.20) 100%)',
+          }}
+        />
+        {/* Bottom fade for smooth transition */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32"
+          style={{ background: 'linear-gradient(to bottom, transparent, rgba(26,39,68,0.7))' }}
+        />
 
-          {/* Right: headline, subtitle, CTA */}
-          <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 py-16 lg:py-0">
-            <div className="w-12 h-0.5 bg-[#c9a84c] mb-8" />
+        {/* Text content — bottom-left aligned, matching reference site */}
+        <div className="relative z-10 flex flex-col justify-end h-full" style={{ minHeight: '100vh' }}>
+          <div className="px-8 md:px-16 lg:px-24 pb-20 max-w-2xl">
             <h1
-              className="text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white leading-tight mb-5"
               style={{ fontFamily: "'Playfair Display', serif", fontWeight: 500 }}
             >
               {t.hero.title}
             </h1>
-            <p className="text-lg md:text-xl text-white/80 mb-10 leading-relaxed max-w-lg font-light">
+            <p className="text-base md:text-lg text-white/80 mb-8 leading-relaxed font-light max-w-lg">
               {t.hero.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -1337,8 +1374,8 @@ export default function HomePage() {
                 @adelaide_manta
               </a>
             </div>
-            {/* Trust signals row */}
-            <div className="mt-12 flex flex-wrap gap-6">
+            {/* Trust signals */}
+            <div className="mt-8 flex flex-wrap gap-6">
               <div className="flex items-center gap-2 text-white/50 text-xs uppercase tracking-widest">
                 <div className="w-1 h-4 bg-[#c9a84c]" />
                 Switzerland
@@ -1481,7 +1518,18 @@ export default function HomePage() {
 
           {/* ─── TRUST PHOTO GALLERY CAROUSEL ───────────────────────────────────────────────── */}
           <Reveal delay={200} className="mt-16">
-            <GalleryCarousel />
+            <GalleryCarousel images={[
+              { src: PHOTO_SOFA_CONSULT, alt: "Adelaide Manta consulting a client", aspectClass: "aspect-[4/5]" },
+              { src: CONSULTATION_ALPS, alt: "Adelaide Manta consulting in the Alps", aspectClass: "aspect-[3/4]" },
+              { src: PHOTO_ZURICH_TERRACE, alt: "Adelaide Manta in Zurich", aspectClass: "aspect-[4/3]" },
+              { src: PHOTO_WORKING_DESK, alt: "Adelaide Manta at her desk", aspectClass: "aspect-[4/3]" },
+              { src: PHOTO_CAFE_MEETING, alt: "Adelaide Manta with a client at a café", aspectClass: "aspect-[4/5]" },
+              { src: PHOTO_REDSOFA_CONSULT, alt: "Adelaide Manta in a consultation", aspectClass: "aspect-[3/4]" },
+              { src: PHOTO_OUTDOOR_MEETING, alt: "Adelaide Manta meeting a client outdoors", aspectClass: "aspect-[4/3]" },
+              { src: SERVICES_BG, alt: "Adelaide Manta with a client", aspectClass: "aspect-[4/5]" },
+              { src: PHOTO_PHONE_CALL, alt: "Adelaide Manta on a call", aspectClass: "aspect-[3/4]" },
+              { src: HERO_BG, alt: "Adelaide Manta at work", aspectClass: "aspect-[4/3]" },
+            ]} />
           </Reveal>
         </div>
       </section>
@@ -1833,9 +1881,15 @@ export default function HomePage() {
                     <h3 className="text-base font-bold text-[#1a2744] mb-2 leading-snug" style={{ fontFamily: "'Playfair Display', serif" }}>
                       {product.name}
                     </h3>
-                    <p className="text-[#1a2744]/55 text-sm leading-relaxed mb-5 flex-1">
+                    <p className="text-[#1a2744]/55 text-sm leading-relaxed mb-3 flex-1">
                       {product.desc}
                     </p>
+                    <Link
+                      href={`/shop/${product.key}`}
+                      className="inline-flex items-center gap-1 text-[#c9a84c] text-xs font-semibold hover:underline mb-4"
+                    >
+                      {lang === "it" ? "Scopri di più →" : lang === "fr" ? "En savoir plus →" : lang === "de" ? "Mehr erfahren →" : "More info →"}
+                    </Link>
                     <div className="mt-auto">
                       <div className="flex items-center justify-between mb-3">
                         <div>

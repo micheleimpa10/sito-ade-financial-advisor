@@ -9,13 +9,13 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 
 const DOWNLOAD_PATHS: Record<string, string> = {
-  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_bc6ea1e4.zip",
-  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_2b1157ed.zip",
-  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_52388b82.zip",
-  "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_93051c50.zip",
-  "budget-manager-family": "/manus-storage/05_BudgetManager_Family_9d8db1bc.zip",
-  "single-bundle": "/manus-storage/06_Single_Bundle_47a2cadd.zip",
-  "family-bundle": "/manus-storage/07_Family_Bundle_bf86d0cc.zip",
+  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_a9ec67d4.zip",
+  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_a51e7a1d.zip",
+  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_e39b6d60.zip",
+  "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_5c0c7588.zip",
+  "budget-manager-family": "/manus-storage/05_BudgetManager_Family_13219ee0.zip",
+  "single-bundle": "/manus-storage/06_Single_Bundle_7ae2122c.zip",
+  "family-bundle": "/manus-storage/07_Family_Bundle_4a491cd9.zip",
 };
 
 function formatAmount(amount: number | null | undefined, currency: string | null | undefined) {

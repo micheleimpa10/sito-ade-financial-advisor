@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
@@ -9,6 +10,15 @@ import { registerStripeWebhook } from "../stripeWebhook";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+
+// CORS policy for the license validation endpoint:
+// The HTML product files are opened locally (file://) by customers,
+// so we must allow cross-origin requests from any origin for this specific route.
+const licenseCors = cors({
+  origin: true, // reflect request origin (allows file:// and any domain)
+  methods: ["GET", "OPTIONS"],
+  allowedHeaders: ["Accept", "Content-Type"],
+});
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -37,7 +47,9 @@ async function startServer() {
   registerStripeWebhook(app);
 
   // License validation endpoint (REST API for license.js)
-  app.get("/api/validate-license", async (req, res) => {
+  // CORS is explicitly enabled here so customers can call this from locally-opened HTML files.
+  app.options("/api/validate-license", licenseCors);
+  app.get("/api/validate-license", licenseCors, async (req, res) => {
     try {
       const { key, product } = req.query;
       if (!key || typeof key !== "string") {

@@ -20,7 +20,6 @@ import { useAuth } from "@/_core/hooks/useAuth";
 import { useCart, type Lang } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { Link, useLocation } from "wouter";
-import { GalleryCarousel } from "@/components/GalleryCarousel";
 import {
   ShieldCheck,
   HeartPulse,
@@ -1516,9 +1515,37 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          {/* ─── TRUST PHOTO GALLERY CAROUSEL ───────────────────────────────────────────────── */}
+          {/* ─── TRUST PHOTO GRID ───────────────────────────────────────────────── */}
           <Reveal delay={200} className="mt-16">
-            <GalleryCarousel />
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {[
+                { src: PHOTO_SOFA_CONSULT, alt: "Adelaide Manta consulting a client" },
+                { src: CONSULTATION_ALPS, alt: "Adelaide Manta consulting in the Alps" },
+                { src: PHOTO_ZURICH_TERRACE, alt: "Adelaide Manta in Zurich" },
+                { src: PHOTO_WORKING_DESK, alt: "Adelaide Manta at her desk" },
+                { src: PHOTO_CAFE_MEETING, alt: "Adelaide Manta with a client at a café" },
+                { src: PHOTO_REDSOFA_CONSULT, alt: "Adelaide Manta in a consultation" },
+                { src: PHOTO_OUTDOOR_MEETING, alt: "Adelaide Manta meeting a client outdoors" },
+                { src: SERVICES_BG, alt: "Adelaide Manta with a client" },
+                { src: PHOTO_PHONE_CALL, alt: "Adelaide Manta on a call" },
+                { src: HERO_BG, alt: "Adelaide Manta at work" },
+                { src: PHOTO_VIDEO_CALL, alt: "Adelaide Manta on a video call" },
+                { src: PHOTO_CITY_PHONE, alt: "Adelaide Manta in the city" },
+              ].map((photo, i) => (
+                <div
+                  key={i}
+                  className="overflow-hidden rounded-lg bg-[#1a2744]/30"
+                >
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                    style={{ aspectRatio: "1 / 1" }}
+                  />
+                </div>
+              ))}
+            </div>
           </Reveal>
         </div>
       </section>

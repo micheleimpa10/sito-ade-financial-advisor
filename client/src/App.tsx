@@ -12,6 +12,7 @@ import PrivacyPolicyPage from "./pages/PrivacyPolicy";
 import TermsPage from "./pages/Terms";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import OrdersPage from "./pages/Orders";
+import ProductDetailPage from "./pages/ProductDetail";
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -23,6 +24,7 @@ function Router() {
       <Route path={"/terms"} component={TermsPage} />
       <Route path={"/payment-success"} component={PaymentSuccess} />
       <Route path={"/orders"} component={OrdersPage} />
+      <Route path={"/shop/:productKey"} component={ProductDetailPage} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

@@ -2004,7 +2004,7 @@ export default function HomePage() {
             {/* Calendly */}
             <Reveal>
               <a
-                href="https://calendly.com/ademanta13/30min"
+                href="https://calendly.com/adelaidemanta"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-[#c9a84c]/40 transition-all text-center"

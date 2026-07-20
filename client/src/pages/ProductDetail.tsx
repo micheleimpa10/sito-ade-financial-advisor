@@ -5,76 +5,76 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { useState, useCallback } from "react";
 
-// ─── SCREENSHOT URLS (from Manus Storage - same as other site images) ───────────────────────────
+// ─── SCREENSHOT URLS (from this project's storage) ───────────────────────────
 const SCREENSHOTS = {
   "moving-guide": [
-    "/manus-storage/moving_guide_p1_bd2c786e_89e1afad.png",
-    "/manus-storage/moving_guide_p2_77053f2c_c1b33304.png",
-    "/manus-storage/moving_guide_p3_0e5fd0e2_4db1fd21.png",
+    "/manus-storage/moving_guide_p1_bd2c786e.png",
+    "/manus-storage/moving_guide_p2_77053f2c.png",
+    "/manus-storage/moving_guide_p3_0e5fd0e2.png",
   ],
   "financial-agenda-single": [
-    "/manus-storage/agenda_single_cover_418e25e8_a556a09e.webp",
-    "/manus-storage/agenda_single_january_56b529ac_abe90f8b.webp",
-    "/manus-storage/agenda_single_budget_8dec2796_e8418ddc.webp",
-    "/manus-storage/agenda_single_annual_8cb0b56f_118ce822.webp",
-    "/manus-storage/agenda_single_habits_b572db15_4a57823c.webp",
-    "/manus-storage/agenda_single_tips_5c18d01d_16463f9d.webp",
+    "/manus-storage/agenda_single_cover_418e25e8.webp",
+    "/manus-storage/agenda_single_january_56b529ac.webp",
+    "/manus-storage/agenda_single_budget_8dec2796.webp",
+    "/manus-storage/agenda_single_annual_8cb0b56f.webp",
+    "/manus-storage/agenda_single_habits_b572db15.webp",
+    "/manus-storage/agenda_single_tips_5c18d01d.webp",
   ],
   // Legacy key alias (keep for backward compatibility)
   "agenda-single": [
-    "/manus-storage/agenda_single_cover_418e25e8_a556a09e.webp",
-    "/manus-storage/agenda_single_january_56b529ac_abe90f8b.webp",
-    "/manus-storage/agenda_single_budget_8dec2796_e8418ddc.webp",
-    "/manus-storage/agenda_single_annual_8cb0b56f_118ce822.webp",
-    "/manus-storage/agenda_single_habits_b572db15_4a57823c.webp",
-    "/manus-storage/agenda_single_tips_5c18d01d_16463f9d.webp",
+    "/manus-storage/agenda_single_cover_418e25e8.webp",
+    "/manus-storage/agenda_single_january_56b529ac.webp",
+    "/manus-storage/agenda_single_budget_8dec2796.webp",
+    "/manus-storage/agenda_single_annual_8cb0b56f.webp",
+    "/manus-storage/agenda_single_habits_b572db15.webp",
+    "/manus-storage/agenda_single_tips_5c18d01d.webp",
   ],
   "financial-agenda-couples": [
-    "/manus-storage/agenda_couples_cover_d676894d_c8085801.webp",
-    "/manus-storage/agenda_couples_january_f6b7a1fc_c85de39b.webp",
-    "/manus-storage/agenda_couples_split_071ea927_ed9f368f.webp",
+    "/manus-storage/agenda_couples_cover_d676894d.webp",
+    "/manus-storage/agenda_couples_january_f6b7a1fc.webp",
+    "/manus-storage/agenda_couples_split_071ea927.webp",
   ],
   // Legacy key alias
   "agenda-couples": [
-    "/manus-storage/agenda_couples_cover_d676894d_c8085801.webp",
-    "/manus-storage/agenda_couples_january_f6b7a1fc_c85de39b.webp",
-    "/manus-storage/agenda_couples_split_071ea927_ed9f368f.webp",
+    "/manus-storage/agenda_couples_cover_d676894d.webp",
+    "/manus-storage/agenda_couples_january_f6b7a1fc.webp",
+    "/manus-storage/agenda_couples_split_071ea927.webp",
   ],
   "budget-manager-personal": [
-    "/manus-storage/bm_personal_dashboard_4fd8e26b_1a80c006.webp",
-    "/manus-storage/bm_personal_populated_bf28bb52_146d8033.webp",
-    "/manus-storage/bm_personal_charts_0a4f04e3_f11094bc.webp",
+    "/manus-storage/bm_personal_dashboard_4fd8e26b.webp",
+    "/manus-storage/bm_personal_populated_bf28bb52.webp",
+    "/manus-storage/bm_personal_charts_0a4f04e3.webp",
   ],
   // Legacy key alias
   "budget-personal": [
-    "/manus-storage/bm_personal_dashboard_4fd8e26b_1a80c006.webp",
-    "/manus-storage/bm_personal_populated_bf28bb52_146d8033.webp",
-    "/manus-storage/bm_personal_charts_0a4f04e3_f11094bc.webp",
+    "/manus-storage/bm_personal_dashboard_4fd8e26b.webp",
+    "/manus-storage/bm_personal_populated_bf28bb52.webp",
+    "/manus-storage/bm_personal_charts_0a4f04e3.webp",
   ],
   "budget-manager-family": [
-    "/manus-storage/bm_family_dashboard_784df8f1_0e7b1f30.webp",
-    "/manus-storage/bm_family_populated_5f345063_fb20eb58.webp",
-    "/manus-storage/bm_family_charts_e697f1b0_30ce1d20.webp",
+    "/manus-storage/bm_family_dashboard_784df8f1.webp",
+    "/manus-storage/bm_family_populated_5f345063.webp",
+    "/manus-storage/bm_family_charts_e697f1b0.webp",
   ],
   // Legacy key alias
   "budget-family": [
-    "/manus-storage/bm_family_dashboard_784df8f1_0e7b1f30.webp",
-    "/manus-storage/bm_family_populated_5f345063_fb20eb58.webp",
-    "/manus-storage/bm_family_charts_e697f1b0_30ce1d20.webp",
+    "/manus-storage/bm_family_dashboard_784df8f1.webp",
+    "/manus-storage/bm_family_populated_5f345063.webp",
+    "/manus-storage/bm_family_charts_e697f1b0.webp",
   ],
   "single-bundle": [
-    "/manus-storage/agenda_single_cover_418e25e8_a556a09e.webp",
-    "/manus-storage/agenda_single_january_56b529ac_abe90f8b.webp",
-    "/manus-storage/bm_personal_dashboard_4fd8e26b_1a80c006.webp",
-    "/manus-storage/bm_personal_populated_bf28bb52_146d8033.webp",
-    "/manus-storage/bm_personal_charts_0a4f04e3_f11094bc.webp",
+    "/manus-storage/agenda_single_cover_418e25e8.webp",
+    "/manus-storage/agenda_single_january_56b529ac.webp",
+    "/manus-storage/bm_personal_dashboard_4fd8e26b.webp",
+    "/manus-storage/bm_personal_populated_bf28bb52.webp",
+    "/manus-storage/bm_personal_charts_0a4f04e3.webp",
   ],
   "family-bundle": [
-    "/manus-storage/agenda_couples_cover_d676894d_c8085801.webp",
-    "/manus-storage/agenda_couples_january_f6b7a1fc_c85de39b.webp",
-    "/manus-storage/bm_family_dashboard_784df8f1_0e7b1f30.webp",
-    "/manus-storage/bm_family_populated_5f345063_fb20eb58.webp",
-    "/manus-storage/bm_family_charts_e697f1b0_30ce1d20.webp",
+    "/manus-storage/agenda_couples_cover_d676894d.webp",
+    "/manus-storage/agenda_couples_january_f6b7a1fc.webp",
+    "/manus-storage/bm_family_dashboard_784df8f1.webp",
+    "/manus-storage/bm_family_populated_5f345063.webp",
+    "/manus-storage/bm_family_charts_e697f1b0.webp",
   ],
 };
 

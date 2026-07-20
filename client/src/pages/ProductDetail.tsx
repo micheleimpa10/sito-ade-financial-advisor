@@ -97,19 +97,19 @@ const COVERS: Record<string, string> = {
 
 // ─── PRICES ───────────────────────────────────────────────────────────────────
 const PRICES: Record<string, { price: string; regular?: string; amount: number }> = {
-  "moving-guide":             { price: "CHF 9.90",  amount: 990 },
+  "moving-guide":             { price: "CHF 19.90", amount: 1990 },
   // New canonical keys
-  "financial-agenda-single":  { price: "CHF 14.90", amount: 1490 },
-  "financial-agenda-couples": { price: "CHF 19.90", amount: 1990 },
+  "financial-agenda-single":  { price: "CHF 19.90", amount: 1990 },
+  "financial-agenda-couples": { price: "CHF 24.90", amount: 2490 },
   "budget-manager-personal":  { price: "CHF 29.90", amount: 2990 },
   "budget-manager-family":    { price: "CHF 34.90", amount: 3490 },
   // Legacy key aliases
-  "agenda-single":   { price: "CHF 14.90", amount: 1490 },
-  "agenda-couples":  { price: "CHF 19.90", amount: 1990 },
+  "agenda-single":   { price: "CHF 19.90", amount: 1990 },
+  "agenda-couples":  { price: "CHF 24.90", amount: 2490 },
   "budget-personal": { price: "CHF 29.90", amount: 2990 },
   "budget-family":   { price: "CHF 34.90", amount: 3490 },
-  "single-bundle":   { price: "CHF 29.90", regular: "CHF 37.80", amount: 2990 },
-  "family-bundle":   { price: "CHF 39.90", regular: "CHF 52.80", amount: 3990 },
+  "single-bundle":   { price: "CHF 39.90", regular: "CHF 48.80", amount: 3990 },
+  "family-bundle":   { price: "CHF 49.90", regular: "CHF 59.80", amount: 4990 },
 };
 
 // ─── CONTENT ──────────────────────────────────────────────────────────────────
@@ -1077,6 +1077,10 @@ const CONTENT: Record<string, Record<Lang, ProductContent>> = {
     },
   },
 };
+
+// ─── KEY ALIASES (canonical keys → same content as legacy keys) ──────────────
+CONTENT["financial-agenda-single"] = CONTENT["agenda-single"];
+CONTENT["financial-agenda-couples"] = CONTENT["agenda-couples"];
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function ProductDetail() {

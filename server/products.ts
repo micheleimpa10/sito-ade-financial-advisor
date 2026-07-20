@@ -32,8 +32,8 @@ export const PRODUCTS: Record<string, Product> = {
   // ─── 1. Moving to Switzerland Guide ─────────────────────────────────────────
   "moving-guide": {
     key: "moving-guide",
-    amount: 990, // CHF 9.90 (launch)
-    regularAmount: 1490, // CHF 14.90 (regular)
+    amount: 1990, // CHF 19.90
+    regularAmount: 1990, // CHF 19.90 (regular)
     currency: "chf",
     name: "Moving to Switzerland 2026 — The Complete Professional Relocation Guide",
     shortName: "Moving to Switzerland 2026",
@@ -48,16 +48,16 @@ export const PRODUCTS: Record<string, Product> = {
       "City profiles: Zurich, Geneva, Bern, Lausanne, Basel — costs, lifestyle, commute",
     ],
     requiresLicenseKey: false,
-    downloadPath: "/manus-storage/01_Moving_to_Switzerland_178ee849.zip",
-    coverImage: "/manus-storage/cover_01_moving_guide_a405895d.png",
+    downloadPath: "/manus-storage/01_Moving_to_Switzerland_final_ca5a83cd.zip",
+    coverImage: "/manus-storage/cover_01_moving_guide_v4_b598291a.png",
     category: "guide",
   },
 
   // ─── 2. Financial Agenda — Couples ──────────────────────────────────────────
   "financial-agenda-couples": {
     key: "financial-agenda-couples",
-    amount: 1790, // CHF 17.90 (launch)
-    regularAmount: 2290, // CHF 22.90 (regular)
+    amount: 2490, // CHF 24.90
+    regularAmount: 2490, // CHF 24.90 (regular)
     currency: "chf",
     name: "Your Financial Agenda 2026 — Couples Edition | Interactive Budget Planner",
     shortName: "Financial Agenda — Couples",
@@ -72,7 +72,7 @@ export const PRODUCTS: Record<string, Product> = {
       "100% offline, installs as an app on any phone. No subscription. Yours forever.",
     ],
     requiresLicenseKey: false,
-    downloadPath: "/manus-storage/02_Financial_Agenda_Couples_fc46dbc6.zip",
+    downloadPath: "/manus-storage/02_Financial_Agenda_Couples_a51e7a1d.zip",
     coverImage: "/manus-storage/cover_02_agenda_couples_2b96edd1.png",
     category: "agenda",
   },
@@ -80,8 +80,8 @@ export const PRODUCTS: Record<string, Product> = {
   // ─── 3. Financial Agenda — Single ───────────────────────────────────────────
   "financial-agenda-single": {
     key: "financial-agenda-single",
-    amount: 1290, // CHF 12.90 (launch)
-    regularAmount: 1690, // CHF 16.90 (regular)
+    amount: 1990, // CHF 19.90
+    regularAmount: 1990, // CHF 19.90 (regular)
     currency: "chf",
     name: "Your Financial Agenda 2026 — Single Edition | Interactive Budget Planner",
     shortName: "Financial Agenda — Single",
@@ -96,7 +96,7 @@ export const PRODUCTS: Record<string, Product> = {
       "100% private — no cloud, no account, no subscription. Yours forever.",
     ],
     requiresLicenseKey: false,
-    downloadPath: "/manus-storage/03_Financial_Agenda_Single_307875aa.zip",
+    downloadPath: "/manus-storage/03_Financial_Agenda_Single_e39b6d60.zip",
     coverImage: "/manus-storage/cover_03_agenda_single_5f95d98d.png",
     category: "agenda",
   },
@@ -104,7 +104,7 @@ export const PRODUCTS: Record<string, Product> = {
   // ─── 4. BudgetManager Pro — Personal ────────────────────────────────────────
   "budget-manager-personal": {
     key: "budget-manager-personal",
-    amount: 2490, // CHF 24.90 (launch)
+    amount: 2990, // CHF 29.90
     regularAmount: 2990, // CHF 29.90 (regular)
     currency: "chf",
     name: "BudgetManager Pro — Smart Budget Planner for Switzerland (Personal)",
@@ -122,7 +122,7 @@ export const PRODUCTS: Record<string, Product> = {
     badge: "BEST SELLER",
     requiresLicenseKey: true,
     licenseKeyTier: "personal",
-    downloadPath: "/manus-storage/04_BudgetManager_Personal_f35a8f85.zip",
+    downloadPath: "/manus-storage/04_BudgetManager_Personal_9f9fa002.zip", // REPLACED
     coverImage: "/manus-storage/cover_04_budget_personal_d21e2676.png",
     category: "budget",
   },
@@ -130,8 +130,8 @@ export const PRODUCTS: Record<string, Product> = {
   // ─── 5. BudgetManager Pro — Family ──────────────────────────────────────────
   "budget-manager-family": {
     key: "budget-manager-family",
-    amount: 3490, // CHF 34.90 (launch)
-    regularAmount: 3990, // CHF 39.90 (regular)
+    amount: 3490, // CHF 34.90
+    regularAmount: 3490, // CHF 34.90 (regular)
     currency: "chf",
     name: "BudgetManager Pro — Family & Couple Budget Planner for Switzerland",
     shortName: "BudgetManager Pro — Family",
@@ -147,7 +147,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     requiresLicenseKey: true,
     licenseKeyTier: "family",
-    downloadPath: "/manus-storage/05_BudgetManager_Family_49e73fe6.zip",
+    downloadPath: "/manus-storage/05_BudgetManager_Family_7254d82f.zip", // REPLACED
     coverImage: "/manus-storage/cover_05_budget_family_b9cb2af0.png",
     category: "budget",
   },
@@ -155,8 +155,8 @@ export const PRODUCTS: Record<string, Product> = {
   // ─── 6. Single Money Bundle ──────────────────────────────────────────────────
   "single-bundle": {
     key: "single-bundle",
-    amount: 2990, // CHF 29.90 (launch, value CHF 37.80 → ~21% saving)
-    regularAmount: 3780, // CHF 37.80 (individual value)
+    amount: 3990, // CHF 39.90
+    regularAmount: 3990, // CHF 39.90 (regular)
     currency: "chf",
     name: "Single Money Bundle 2026 — Financial Agenda + BudgetManager Pro (Switzerland)",
     shortName: "Single Money Bundle",
@@ -173,7 +173,7 @@ export const PRODUCTS: Record<string, Product> = {
     badge: "BUNDLE — SAVE 21%",
     requiresLicenseKey: true,
     licenseKeyTier: "personal",
-    downloadPath: "/manus-storage/06_Single_Bundle_fe194510.zip",
+    downloadPath: "/manus-storage/06_Single_Bundle_1623b4b4.zip", // REPLACED
     coverImage: "/manus-storage/cover_06_single_bundle_0aadc427.png",
     category: "bundle",
   },
@@ -181,8 +181,8 @@ export const PRODUCTS: Record<string, Product> = {
   // ─── 7. Family Money Bundle ──────────────────────────────────────────────────
   "family-bundle": {
     key: "family-bundle",
-    amount: 3990, // CHF 39.90 (launch, value CHF 52.80 → ~24% saving)
-    regularAmount: 5280, // CHF 52.80 (individual value)
+    amount: 4990, // CHF 49.90
+    regularAmount: 4990, // CHF 49.90 (regular)
     currency: "chf",
     name: "Family Money Bundle 2026 — Financial Agenda Couples + BudgetManager Family (Switzerland)",
     shortName: "Family Money Bundle",
@@ -199,7 +199,7 @@ export const PRODUCTS: Record<string, Product> = {
     badge: "BUNDLE — SAVE 24%",
     requiresLicenseKey: true,
     licenseKeyTier: "family",
-    downloadPath: "/manus-storage/07_Family_Bundle_2f0d5327.zip",
+    downloadPath: "/manus-storage/07_Family_Bundle_274c06b1.zip", // REPLACED
     coverImage: "/manus-storage/cover_07_family_bundle_72494c46.png",
     category: "bundle",
   },

@@ -5,76 +5,76 @@ import { toast } from "sonner";
 import { trpc } from "@/lib/trpc";
 import { useState, useCallback } from "react";
 
-// ─── SCREENSHOT URLS (from this project's storage) ───────────────────────────
+// ─── SCREENSHOT URLS (from Manus Storage - same as other site images) ───────────────────────────
 const SCREENSHOTS = {
   "moving-guide": [
-    "https://via.placeholder.com/600x400?text=Moving+Guide+1",
-    "https://via.placeholder.com/600x400?text=Moving+Guide+2",
-    "https://via.placeholder.com/600x400?text=Moving+Guide+3",
+    "/manus-storage/moving_guide_p1_bd2c786e_89e1afad.png",
+    "/manus-storage/moving_guide_p2_77053f2c_c1b33304.png",
+    "/manus-storage/moving_guide_p3_0e5fd0e2_4db1fd21.png",
   ],
   "financial-agenda-single": [
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Cover",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+January",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Budget",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Annual",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Habits",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Tips",
+    "/manus-storage/agenda_single_cover_418e25e8_a556a09e.webp",
+    "/manus-storage/agenda_single_january_56b529ac_abe90f8b.webp",
+    "/manus-storage/agenda_single_budget_8dec2796_e8418ddc.webp",
+    "/manus-storage/agenda_single_annual_8cb0b56f_118ce822.webp",
+    "/manus-storage/agenda_single_habits_b572db15_4a57823c.webp",
+    "/manus-storage/agenda_single_tips_5c18d01d_16463f9d.webp",
   ],
   // Legacy key alias (keep for backward compatibility)
   "agenda-single": [
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Cover",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+January",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Budget",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Annual",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Habits",
-    "https://via.placeholder.com/600x400?text=Agenda+Single+Tips",
+    "/manus-storage/agenda_single_cover_418e25e8_a556a09e.webp",
+    "/manus-storage/agenda_single_january_56b529ac_abe90f8b.webp",
+    "/manus-storage/agenda_single_budget_8dec2796_e8418ddc.webp",
+    "/manus-storage/agenda_single_annual_8cb0b56f_118ce822.webp",
+    "/manus-storage/agenda_single_habits_b572db15_4a57823c.webp",
+    "/manus-storage/agenda_single_tips_5c18d01d_16463f9d.webp",
   ],
   "financial-agenda-couples": [
-    "https://via.placeholder.com/600x400?text=Agenda+Couples+Cover",
-    "https://via.placeholder.com/600x400?text=Agenda+Couples+January",
-    "https://via.placeholder.com/600x400?text=Agenda+Couples+Split",
+    "/manus-storage/agenda_couples_cover_d676894d_c8085801.webp",
+    "/manus-storage/agenda_couples_january_f6b7a1fc_c85de39b.webp",
+    "/manus-storage/agenda_couples_split_071ea927_ed9f368f.webp",
   ],
   // Legacy key alias
   "agenda-couples": [
-    "https://via.placeholder.com/600x400?text=Agenda+Couples+Cover",
-    "https://via.placeholder.com/600x400?text=Agenda+Couples+January",
-    "https://via.placeholder.com/600x400?text=Agenda+Couples+Split",
+    "/manus-storage/agenda_couples_cover_d676894d_c8085801.webp",
+    "/manus-storage/agenda_couples_january_f6b7a1fc_c85de39b.webp",
+    "/manus-storage/agenda_couples_split_071ea927_ed9f368f.webp",
   ],
   "budget-manager-personal": [
-    "https://via.placeholder.com/600x400?text=BM+Personal+Dashboard",
-    "https://via.placeholder.com/600x400?text=BM+Personal+Populated",
-    "https://via.placeholder.com/600x400?text=BM+Personal+Charts",
+    "/manus-storage/bm_personal_dashboard_4fd8e26b_1a80c006.webp",
+    "/manus-storage/bm_personal_populated_bf28bb52_146d8033.webp",
+    "/manus-storage/bm_personal_charts_0a4f04e3_f11094bc.webp",
   ],
   // Legacy key alias
   "budget-personal": [
-    "https://via.placeholder.com/600x400?text=BM+Personal+Dashboard",
-    "https://via.placeholder.com/600x400?text=BM+Personal+Populated",
-    "https://via.placeholder.com/600x400?text=BM+Personal+Charts",
+    "/manus-storage/bm_personal_dashboard_4fd8e26b_1a80c006.webp",
+    "/manus-storage/bm_personal_populated_bf28bb52_146d8033.webp",
+    "/manus-storage/bm_personal_charts_0a4f04e3_f11094bc.webp",
   ],
   "budget-manager-family": [
-    "https://via.placeholder.com/600x400?text=BM+Family+Dashboard",
-    "https://via.placeholder.com/600x400?text=BM+Family+Populated",
-    "https://via.placeholder.com/600x400?text=BM+Family+Charts",
+    "/manus-storage/bm_family_dashboard_784df8f1_0e7b1f30.webp",
+    "/manus-storage/bm_family_populated_5f345063_fb20eb58.webp",
+    "/manus-storage/bm_family_charts_e697f1b0_30ce1d20.webp",
   ],
   // Legacy key alias
   "budget-family": [
-    "https://via.placeholder.com/600x400?text=BM+Family+Dashboard",
-    "https://via.placeholder.com/600x400?text=BM+Family+Populated",
-    "https://via.placeholder.com/600x400?text=BM+Family+Charts",
+    "/manus-storage/bm_family_dashboard_784df8f1_0e7b1f30.webp",
+    "/manus-storage/bm_family_populated_5f345063_fb20eb58.webp",
+    "/manus-storage/bm_family_charts_e697f1b0_30ce1d20.webp",
   ],
   "single-bundle": [
-    "https://via.placeholder.com/600x400?text=Single+Bundle+1",
-    "https://via.placeholder.com/600x400?text=Single+Bundle+2",
-    "https://via.placeholder.com/600x400?text=Single+Bundle+3",
-    "https://via.placeholder.com/600x400?text=Single+Bundle+4",
-    "https://via.placeholder.com/600x400?text=Single+Bundle+5",
+    "/manus-storage/agenda_single_cover_418e25e8_a556a09e.webp",
+    "/manus-storage/agenda_single_january_56b529ac_abe90f8b.webp",
+    "/manus-storage/bm_personal_dashboard_4fd8e26b_1a80c006.webp",
+    "/manus-storage/bm_personal_populated_bf28bb52_146d8033.webp",
+    "/manus-storage/bm_personal_charts_0a4f04e3_f11094bc.webp",
   ],
   "family-bundle": [
-    "https://via.placeholder.com/600x400?text=Family+Bundle+1",
-    "https://via.placeholder.com/600x400?text=Family+Bundle+2",
-    "https://via.placeholder.com/600x400?text=Family+Bundle+3",
-    "https://via.placeholder.com/600x400?text=Family+Bundle+4",
-    "https://via.placeholder.com/600x400?text=Family+Bundle+5",
+    "/manus-storage/agenda_couples_cover_d676894d_c8085801.webp",
+    "/manus-storage/agenda_couples_january_f6b7a1fc_c85de39b.webp",
+    "/manus-storage/bm_family_dashboard_784df8f1_0e7b1f30.webp",
+    "/manus-storage/bm_family_populated_5f345063_fb20eb58.webp",
+    "/manus-storage/bm_family_charts_e697f1b0_30ce1d20.webp",
   ],
 };
 

@@ -122,10 +122,11 @@ const translations = {
         price: "Free",
         desc: "",
         features: [
-          "Free initial consultation with full explanation of my services",
-          "Optimization of your insurance coverages",
-          "Access to different investment opportunities",
-          "Focus on client's requests and needs, no full personal financial analysis",
+          "Introductory consultation to get to know each other",
+          "Overview of my services and how I work",
+          "Assessment of your current financial situation",
+          "Insurance review and optimisation — at no cost to you",
+          "No commitment required",
         ],
         cta: "Book a Free Consultation",
       },
@@ -134,15 +135,46 @@ const translations = {
         price: "CHF 295",
         desc: "one-time fee",
         features: [
-          "Everything included in basic plan",
-          "Tailored financial plan based on your personal situation",
-          "Insurance optimization with personalised options",
-          "Pension planning (1st, 2nd and 3rd pillars)",
-          "Investment strategy & tax efficiency",
+          "Full personalised financial plan",
+          "Insurance analysis with tailored proposals",
+          "In-depth pension planning (1st, 2nd and 3rd pillar)",
+          "Investment strategy and tax efficiency",
+          "Budget and emergency fund setup",
           "Physical binder and app to keep everything under control",
         ],
         cta: "Get Premium Plan",
         badge: "Recommended",
+      },
+      relocation: {
+        name: "Switzerland Relocation Support",
+        price: "CHF 295",
+        desc: "one-time fee",
+        subtitle: "Your first 90 days, done right.",
+        features: [
+          "Onboarding call before or after arrival",
+          "Swiss health insurance system explained",
+          "Residence permits and admin procedures",
+          "Employment contract and payslip breakdown",
+          "Swiss taxation and deductions overview",
+          "Support via WhatsApp/email for 90 days",
+        ],
+        cta: "Book Relocation Support",
+        badge: "For Expats",
+      },
+      mortgage: {
+        name: "Home Purchase & Mortgage Planning",
+        price: "CHF 495",
+        desc: "one-time fee",
+        subtitle: "Buying a property in Switzerland? Let's do it right.",
+        features: [
+          "Affordability and purchasing capacity assessment",
+          "Budget strategy and amortization planning",
+          "Pension assets available for property purchase",
+          "Mortgage options and interest rate comparison",
+          "Property evaluation and search guidance",
+          "Long-term financial sustainability review",
+        ],
+        cta: "Book Mortgage Planning",
       },
     },
     booking: {
@@ -334,10 +366,11 @@ const translations = {
         price: "Gratuito",
         desc: "",
         features: [
-          "Consulenza iniziale gratuita con spiegazione completa dei miei servizi",
-          "Ottimizzazione delle coperture assicurative",
-          "Accesso a diverse opportunità di investimento",
-          "Focus sulle richieste e necessità del cliente, senza analisi finanziaria personale completa",
+          "Consulenza introduttiva per conoscerci",
+          "Panoramica dei miei servizi e del mio metodo di lavoro",
+          "Valutazione della tua situazione finanziaria attuale",
+          "Revisione e ottimizzazione assicurativa — senza costi per te",
+          "Nessun impegno richiesto",
         ],
         cta: "Prenota una Consulenza Gratuita",
       },
@@ -346,15 +379,46 @@ const translations = {
         price: "CHF 295",
         desc: "tariffa una tantum",
         features: [
-          "Tutto incluso nel piano base",
-          "Piano finanziario su misura basato sulla tua situazione personale",
-          "Ottimizzazione assicurativa con opzioni personalizzate",
-          "Pianificazione pensionistica (1°, 2° e 3° pilastro)",
+          "Piano finanziario personalizzato completo",
+          "Analisi assicurativa con proposte su misura",
+          "Pianificazione pensionistica approfondita (1°, 2° e 3° pilastro)",
           "Strategia di investimento ed efficienza fiscale",
+          "Impostazione budget e fondo di emergenza",
           "Raccoglitore fisico e app per tenere tutto sotto controllo",
         ],
         cta: "Ottieni Piano Premium",
         badge: "Consigliato",
+      },
+      relocation: {
+        name: "Supporto Trasferimento in Svizzera",
+        price: "CHF 295",
+        desc: "tariffa una tantum",
+        subtitle: "I tuoi primi 90 giorni, fatti bene.",
+        features: [
+          "Chiamata di onboarding prima o dopo l'arrivo",
+          "Sistema sanitario svizzero spiegato",
+          "Permessi di soggiorno e procedure amministrative",
+          "Analisi del contratto di lavoro e della busta paga",
+          "Panoramica fiscale svizzera e deduzioni",
+          "Supporto via WhatsApp/email per 90 giorni",
+        ],
+        cta: "Prenota Supporto Trasferimento",
+        badge: "Per Expat",
+      },
+      mortgage: {
+        name: "Acquisto Casa & Pianificazione Mutuo",
+        price: "CHF 495",
+        desc: "tariffa una tantum",
+        subtitle: "Comprare casa in Svizzera? Facciamolo nel modo giusto.",
+        features: [
+          "Valutazione della capacità d'acquisto e accessibilità",
+          "Strategia di budget e pianificazione dell'ammortamento",
+          "Utilizzo del patrimonio pensionistico per l'acquisto",
+          "Confronto opzioni mutuo e tassi d'interesse",
+          "Valutazione immobiliare e guida alla ricerca",
+          "Revisione della sostenibilità finanziaria a lungo termine",
+        ],
+        cta: "Prenota Pianificazione Mutuo",
       },
     },
     booking: {
@@ -546,10 +610,11 @@ const translations = {
         price: "Gratuit",
         desc: "",
         features: [
-          "Consultation initiale gratuite avec explication complète de mes services",
-          "Optimisation de vos couvertures d'assurance",
-          "Accès à différentes opportunités d'investissement",
-          "Focus sur les demandes et besoins du client, sans analyse financière personnelle complète",
+          "Consultation introductive pour faire connaissance",
+          "Aperçu de mes services et de ma façon de travailler",
+          "Bilan de votre situation financière actuelle",
+          "Révision et optimisation des assurances — sans frais pour vous",
+          "Aucun engagement requis",
         ],
         cta: "Réserver une Consultation Gratuite",
       },
@@ -558,15 +623,46 @@ const translations = {
         price: "CHF 295",
         desc: "frais uniques",
         features: [
-          "Tout ce qui est inclus dans le plan de base",
-          "Plan financier personnalisé basé sur votre situation personnelle",
-          "Optimisation des assurances avec des options personnalisées",
-          "Planification de la retraite (1er, 2e et 3e piliers)",
+          "Plan financier personnalisé complet",
+          "Analyse des assurances avec propositions sur mesure",
+          "Planification de la retraite approfondie (1er, 2e et 3e pilier)",
           "Stratégie d'investissement et efficacité fiscale",
+          "Mise en place du budget et du fonds d'urgence",
           "Classeur physique et application pour tout garder sous contrôle",
         ],
         cta: "Obtenir le Plan Premium",
         badge: "Recommandé",
+      },
+      relocation: {
+        name: "Soutien à la Relocalisation en Suisse",
+        price: "CHF 295",
+        desc: "frais uniques",
+        subtitle: "Vos 90 premiers jours, bien faits.",
+        features: [
+          "Appel d'intégration avant ou après l'arrivée",
+          "Système de santé suisse expliqué",
+          "Permis de séjour et procédures administratives",
+          "Analyse du contrat de travail et de la fiche de paie",
+          "Aperçu de la fiscalité suisse et des déductions",
+          "Soutien via WhatsApp/email pendant 90 jours",
+        ],
+        cta: "Réserver le Soutien Relocalisation",
+        badge: "Pour Expatriés",
+      },
+      mortgage: {
+        name: "Achat Immobilier & Planification Hypothèque",
+        price: "CHF 495",
+        desc: "frais uniques",
+        subtitle: "Acheter un bien en Suisse ? Faisons-le correctement.",
+        features: [
+          "Bilan de capacité d'achat et d'accessibilité",
+          "Stratégie budgétaire et planification de l'amortissement",
+          "Actifs de retraite disponibles pour l'achat immobilier",
+          "Comparaison des options hypothécaires et des taux",
+          "Évaluation immobilière et guide de recherche",
+          "Révision de la durabilité financière à long terme",
+        ],
+        cta: "Réserver la Planification Hypothèque",
       },
     },
     booking: {
@@ -759,10 +855,11 @@ const translations = {
         price: "Kostenlos",
         desc: "",
         features: [
-          "Kostenlose Erstberatung mit vollständiger Erklärung meiner Dienstleistungen",
-          "Optimierung Ihrer Versicherungsdeckungen",
-          "Zugang zu verschiedenen Anlagemöglichkeiten",
-          "Fokus auf Kundenwünsche und -bedürfnisse, keine vollständige persönliche Finanzanalyse",
+          "Einführungsgespräch zum gegenseitigen Kennenlernen",
+          "Überblick über meine Dienstleistungen und Arbeitsweise",
+          "Beurteilung Ihrer aktuellen finanziellen Situation",
+          "Versicherungsprüfung und -optimierung — kostenlos für Sie",
+          "Keine Verpflichtung erforderlich",
         ],
         cta: "Kostenlose Beratung Buchen",
       },
@@ -771,15 +868,46 @@ const translations = {
         price: "CHF 295",
         desc: "einmalige Gebühr",
         features: [
-          "Alles im Basisplan enthalten",
-          "Massgeschneiderter Finanzplan basierend auf Ihrer persönlichen Situation",
-          "Versicherungsoptimierung mit personalisierten Optionen",
-          "Rentenplanung (1., 2. und 3. Säule)",
+          "Vollständiger personalisierter Finanzplan",
+          "Versicherungsanalyse mit maßgeschneiderten Vorschlägen",
+          "Eingehende Rentenplanung (1., 2. und 3. Säule)",
           "Anlagestrategie und Steuereffizienz",
+          "Budget- und Notfallfondsaufbau",
           "Physischer Ordner und App, um alles unter Kontrolle zu behalten",
         ],
         cta: "Premium Plan Erhalten",
         badge: "Empfohlen",
+      },
+      relocation: {
+        name: "Unterstützung beim Umzug in die Schweiz",
+        price: "CHF 295",
+        desc: "einmalige Gebühr",
+        subtitle: "Ihre ersten 90 Tage, richtig gemacht.",
+        features: [
+          "Onboarding-Gespräch vor oder nach der Ankunft",
+          "Schweizer Krankenversicherungssystem erklärt",
+          "Aufenthaltsbewilligungen und Verwaltungsverfahren",
+          "Analyse des Arbeitsvertrags und der Lohnabrechnung",
+          "Überblick über Schweizer Steuern und Abzüge",
+          "Unterstützung per WhatsApp/E-Mail für 90 Tage",
+        ],
+        cta: "Umzugsunterstützung Buchen",
+        badge: "Für Expats",
+      },
+      mortgage: {
+        name: "Hauskauf & Hypothekenplanung",
+        price: "CHF 495",
+        desc: "einmalige Gebühr",
+        subtitle: "Immobilienkauf in der Schweiz? Machen wir es richtig.",
+        features: [
+          "Beurteilung der Kauffähigkeit und Erschwinglichkeit",
+          "Budgetstrategie und Amortisationsplanung",
+          "Pensionsvermögen für den Immobilienkauf verfügbar",
+          "Hypothekenoptionen und Zinsvergleich",
+          "Immobilienbewertung und Suchbegleitung",
+          "Überprüfung der langfristigen finanziellen Nachhaltigkeit",
+        ],
+        cta: "Hypothekenplanung Buchen",
       },
     },
     booking: {
@@ -1526,7 +1654,7 @@ export default function HomePage() {
                 { src: PHOTO_CAFE_MEETING, alt: "Adelaide Manta with a client at a café" },
                 { src: PHOTO_REDSOFA_CONSULT, alt: "Adelaide Manta in a consultation" },
                 { src: PHOTO_OUTDOOR_MEETING, alt: "Adelaide Manta meeting a client outdoors" },
-                { src: "/manus-storage/adelaide-circle_d6256717.png", alt: "Adelaide Manta - Your Financial Advisor" },
+                { src: SERVICES_BG, alt: "Adelaide Manta with a client" },
                 { src: PHOTO_PHONE_CALL, alt: "Adelaide Manta on a call" },
                 { src: HERO_BG, alt: "Adelaide Manta at work" },
                 { src: PHOTO_VIDEO_CALL, alt: "Adelaide Manta on a video call" },
@@ -1621,29 +1749,25 @@ export default function HomePage() {
             <p className="text-[#1a2744]/60 max-w-xl mx-auto">{t.plans.subtitle}</p>
           </Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {/* Basic Plan */}
             <Reveal>
               <div className="border border-gray-200 rounded-2xl p-8 h-full flex flex-col bg-white">
-                <div className="mb-8">
+                <div className="mb-6">
                   <h3 className="text-lg font-black text-[#1a2744] uppercase tracking-widest mb-3">
                     {t.plans.free.name}
                   </h3>
                   <div
-                    className="text-5xl font-bold text-[#c9a84c]"
+                    className="text-4xl font-bold text-[#c9a84c]"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     {t.plans.free.price}
                   </div>
                 </div>
-                <ul className="space-y-5 flex-1 mb-10">
+                <ul className="space-y-4 flex-1 mb-8">
                   {t.plans.free.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[#1a2744]/80 text-base leading-snug">
-                      <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 border-[#c9a84c] flex items-center justify-center">
-                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                          <path d="M1 4L3.5 6.5L9 1" stroke="#c9a84c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </span>
+                    <li key={i} className="flex items-start gap-3 text-[#1a2744]/80 text-sm leading-snug">
+                      <span className="flex-shrink-0 mt-0.5 text-[#c9a84c] font-bold">→</span>
                       {f}
                     </li>
                   ))}
@@ -1660,35 +1784,29 @@ export default function HomePage() {
             {/* Premium Plan */}
             <Reveal delay={100}>
               <div className="bg-[#1a2744] rounded-2xl p-8 h-full flex flex-col relative">
-                {/* Recommended badge — positioned outside top-right corner */}
                 <div className="absolute -top-4 right-6 bg-[#c9a84c] text-[#1a2744] text-xs font-black uppercase tracking-widest px-4 py-2 rounded-xl shadow-md">
                   {t.plans.premium.badge}
                 </div>
-                <div className="mb-8 mt-2">
+                <div className="mb-6 mt-2">
                   <h3 className="text-lg font-black text-white uppercase tracking-widest mb-3">
                     {t.plans.premium.name}
                   </h3>
                   <div
-                    className="text-5xl font-bold text-[#c9a84c]"
+                    className="text-4xl font-bold text-[#c9a84c]"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     {t.plans.premium.price}
                   </div>
                   <p className="text-white/50 text-sm mt-1">{t.plans.premium.desc}</p>
                 </div>
-                <ul className="space-y-5 flex-1 mb-10">
+                <ul className="space-y-4 flex-1 mb-8">
                   {t.plans.premium.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-white/85 text-base leading-snug">
-                      <span className="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full border-2 border-[#c9a84c] flex items-center justify-center">
-                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                          <path d="M1 4L3.5 6.5L9 1" stroke="#c9a84c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      </span>
+                    <li key={i} className="flex items-start gap-3 text-white/85 text-sm leading-snug">
+                      <span className="flex-shrink-0 mt-0.5 text-[#c9a84c] font-bold">→</span>
                       {f}
                     </li>
                   ))}
                 </ul>
-                {/* Premium Plan: invoice-only — no Stripe checkout */}
                 <a
                   href="#book"
                   className="block w-full text-center bg-[#c9a84c] text-[#1a2744] px-6 py-4 text-sm font-black uppercase tracking-widest hover:bg-white transition-all rounded-xl"
@@ -1701,6 +1819,75 @@ export default function HomePage() {
                    lang === "de" ? "Zahlung per offizieller Rechnung" :
                    "Payment by official invoice"}
                 </p>
+              </div>
+            </Reveal>
+
+            {/* Relocation Support */}
+            <Reveal delay={150}>
+              <div className="border border-[#c9a84c]/40 rounded-2xl p-8 h-full flex flex-col bg-white relative">
+                <div className="absolute -top-4 right-6 bg-[#1a2744] text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-xl shadow-md">
+                  {t.plans.relocation.badge}
+                </div>
+                <div className="mb-6 mt-2">
+                  <h3 className="text-lg font-black text-[#1a2744] uppercase tracking-widest mb-1 leading-tight">
+                    {t.plans.relocation.name}
+                  </h3>
+                  <p className="text-[#1a2744]/50 text-sm italic mb-3">{t.plans.relocation.subtitle}</p>
+                  <div
+                    className="text-4xl font-bold text-[#c9a84c]"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                  >
+                    {t.plans.relocation.price}
+                  </div>
+                  <p className="text-[#1a2744]/50 text-sm mt-1">{t.plans.relocation.desc}</p>
+                </div>
+                <ul className="space-y-4 flex-1 mb-8">
+                  {t.plans.relocation.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[#1a2744]/80 text-sm leading-snug">
+                      <span className="flex-shrink-0 mt-0.5 text-[#c9a84c] font-bold">→</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#book"
+                  className="block text-center bg-[#1a2744] text-white px-6 py-4 text-sm font-black uppercase tracking-widest hover:bg-[#c9a84c] hover:text-[#1a2744] transition-all rounded-xl"
+                >
+                  {t.plans.relocation.cta}
+                </a>
+              </div>
+            </Reveal>
+
+            {/* Home Purchase & Mortgage */}
+            <Reveal delay={200}>
+              <div className="border border-gray-200 rounded-2xl p-8 h-full flex flex-col bg-[#f8f5f0]">
+                <div className="mb-6">
+                  <h3 className="text-lg font-black text-[#1a2744] uppercase tracking-widest mb-1 leading-tight">
+                    {t.plans.mortgage.name}
+                  </h3>
+                  <p className="text-[#1a2744]/50 text-sm italic mb-3">{t.plans.mortgage.subtitle}</p>
+                  <div
+                    className="text-4xl font-bold text-[#c9a84c]"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                  >
+                    {t.plans.mortgage.price}
+                  </div>
+                  <p className="text-[#1a2744]/50 text-sm mt-1">{t.plans.mortgage.desc}</p>
+                </div>
+                <ul className="space-y-4 flex-1 mb-8">
+                  {t.plans.mortgage.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-3 text-[#1a2744]/80 text-sm leading-snug">
+                      <span className="flex-shrink-0 mt-0.5 text-[#c9a84c] font-bold">→</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="#book"
+                  className="block text-center bg-[#1a2744] text-white px-6 py-4 text-sm font-black uppercase tracking-widest hover:bg-[#c9a84c] hover:text-[#1a2744] transition-all rounded-xl"
+                >
+                  {t.plans.mortgage.cta}
+                </a>
               </div>
             </Reveal>
           </div>
@@ -1838,7 +2025,7 @@ export default function HomePage() {
             {/* WhatsApp */}
             <Reveal delay={100}>
               <a
-                href="https://wa.me/41767889513"
+                href="https://wa.me/41000000000"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-[#c9a84c]/40 transition-all text-center"

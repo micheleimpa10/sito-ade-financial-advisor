@@ -1191,8 +1191,8 @@ export default function HomePage() {
   const SHOP_PRODUCTS = [
     {
       key: "moving-guide",
-      price: "CHF 9.90",
-      regularPrice: "CHF 14.90",
+      price: "CHF 19.90",
+      regularPrice: "CHF 19.90",
       badge: "NEW",
       cover: "/manus-storage/cover_01_moving_guide_e2310553.png",
       name: lang === "it" ? "Trasferirsi in Svizzera 2026 — Guida Completa"
@@ -1206,8 +1206,8 @@ export default function HomePage() {
     },
     {
       key: "financial-agenda-couples",
-      price: "CHF 17.90",
-      regularPrice: "CHF 22.90",
+      price: "CHF 24.90",
+      regularPrice: "CHF 24.90",
       badge: null,
       cover: "/manus-storage/cover_02_agenda_couples_ac15af51.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Coppia"
@@ -1221,8 +1221,8 @@ export default function HomePage() {
     },
     {
       key: "financial-agenda-single",
-      price: "CHF 12.90",
-      regularPrice: "CHF 16.90",
+      price: "CHF 19.90",
+      regularPrice: "CHF 19.90",
       badge: null,
       cover: "/manus-storage/cover_03_agenda_single_e56a59cc.png",
       name: lang === "it" ? "Agenda Finanziaria 2026 — Single"
@@ -1236,7 +1236,7 @@ export default function HomePage() {
     },
     {
       key: "budget-manager-personal",
-      price: "CHF 24.90",
+      price: "CHF 29.90",
       regularPrice: "CHF 29.90",
       badge: lang === "it" ? "PIÙ VENDUTO" : lang === "fr" ? "BEST-SELLER" : lang === "de" ? "BESTSELLER" : "BEST SELLER",
       cover: "/manus-storage/cover_04_budget_personal_e8c7a1ae.png",
@@ -1252,7 +1252,7 @@ export default function HomePage() {
     {
       key: "budget-manager-family",
       price: "CHF 34.90",
-      regularPrice: "CHF 39.90",
+      regularPrice: "CHF 34.90",
       badge: null,
       cover: "/manus-storage/cover_05_budget_family_7bdf6a1b.png",
       name: lang === "it" ? "BudgetManager Pro — Famiglia"

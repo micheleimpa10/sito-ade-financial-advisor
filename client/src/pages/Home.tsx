@@ -1526,7 +1526,7 @@ export default function HomePage() {
                 { src: PHOTO_CAFE_MEETING, alt: "Adelaide Manta with a client at a café" },
                 { src: PHOTO_REDSOFA_CONSULT, alt: "Adelaide Manta in a consultation" },
                 { src: PHOTO_OUTDOOR_MEETING, alt: "Adelaide Manta meeting a client outdoors" },
-                { src: SERVICES_BG, alt: "Adelaide Manta with a client" },
+                { src: "/manus-storage/adelaide-circle_d6256717.png", alt: "Adelaide Manta - Your Financial Advisor" },
                 { src: PHOTO_PHONE_CALL, alt: "Adelaide Manta on a call" },
                 { src: HERO_BG, alt: "Adelaide Manta at work" },
                 { src: PHOTO_VIDEO_CALL, alt: "Adelaide Manta on a video call" },

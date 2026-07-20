@@ -122,7 +122,7 @@ export const PRODUCTS: Record<string, Product> = {
     badge: "BEST SELLER",
     requiresLicenseKey: true,
     licenseKeyTier: "personal",
-    downloadPath: "/manus-storage/04_BudgetManager_Personal_9f9fa002.zip", // REPLACED
+    downloadPath: "/manus-storage/04_BudgetManager_Personal_077cc961.zip", // REPLACED
     coverImage: "/manus-storage/cover_04_budget_personal_d21e2676.png",
     category: "budget",
   },
@@ -147,7 +147,7 @@ export const PRODUCTS: Record<string, Product> = {
     ],
     requiresLicenseKey: true,
     licenseKeyTier: "family",
-    downloadPath: "/manus-storage/05_BudgetManager_Family_7254d82f.zip", // REPLACED
+    downloadPath: "/manus-storage/05_BudgetManager_Family_3285160b.zip", // REPLACED
     coverImage: "/manus-storage/cover_05_budget_family_b9cb2af0.png",
     category: "budget",
   },
@@ -173,7 +173,7 @@ export const PRODUCTS: Record<string, Product> = {
     badge: "BUNDLE — SAVE 21%",
     requiresLicenseKey: true,
     licenseKeyTier: "personal",
-    downloadPath: "/manus-storage/06_Single_Bundle_1623b4b4.zip", // REPLACED
+    downloadPath: "/manus-storage/06_Single_Bundle_1a77dff2.zip", // REPLACED
     coverImage: "/manus-storage/cover_06_single_bundle_0aadc427.png",
     category: "bundle",
   },
@@ -199,7 +199,7 @@ export const PRODUCTS: Record<string, Product> = {
     badge: "BUNDLE — SAVE 24%",
     requiresLicenseKey: true,
     licenseKeyTier: "family",
-    downloadPath: "/manus-storage/07_Family_Bundle_274c06b1.zip", // REPLACED
+    downloadPath: "/manus-storage/07_Family_Bundle_20630567.zip", // REPLACED
     coverImage: "/manus-storage/cover_07_family_bundle_72494c46.png",
     category: "bundle",
   },

@@ -1313,6 +1313,142 @@ export default function ProductDetail() {
                 </p>
               </div>
             )}
+
+            {/* FAQ/Guide Section for License Activation */}
+            {isBundleOrLicensed && (
+              <div className="mt-12 border-t border-[#1a2744]/10 pt-8">
+                <h3
+                  className="text-xl font-bold text-[#1a2744] mb-6"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  {lang === "it"
+                    ? "Come attivare la tua licenza"
+                    : lang === "fr"
+                    ? "Comment activer votre licence"
+                    : lang === "de"
+                    ? "So aktivieren Sie Ihre Lizenz"
+                    : "How to Activate Your License"}
+                </h3>
+
+                <div className="space-y-4">
+                  {/* Step 1 */}
+                  <div className="bg-white rounded-xl p-4 border border-[#1a2744]/10">
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#c9a84c] text-white flex items-center justify-center text-xs font-bold">
+                        1
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[#1a2744] text-sm">
+                          {lang === "it"
+                            ? "Scarica il file ZIP"
+                            : lang === "fr"
+                            ? "Télécharger le fichier ZIP"
+                            : lang === "de"
+                            ? "ZIP-Datei herunterladen"
+                            : "Download the ZIP file"}
+                        </p>
+                        <p className="text-[#1a2744]/60 text-xs mt-1">
+                          {lang === "it"
+                            ? "Dopo il pagamento, scarica il file ZIP dalla pagina di conferma o dal tuo email."
+                            : lang === "fr"
+                            ? "Après le paiement, téléchargez le fichier ZIP depuis la page de confirmation ou votre e-mail."
+                            : lang === "de"
+                            ? "Nach der Zahlung laden Sie die ZIP-Datei von der Bestätigungsseite oder Ihrer E-Mail herunter."
+                            : "After payment, download the ZIP file from the confirmation page or your email."}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="bg-white rounded-xl p-4 border border-[#1a2744]/10">
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#c9a84c] text-white flex items-center justify-center text-xs font-bold">
+                        2
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[#1a2744] text-sm">
+                          {lang === "it"
+                            ? "Estrai il file ZIP"
+                            : lang === "fr"
+                            ? "Extraire le fichier ZIP"
+                            : lang === "de"
+                            ? "ZIP-Datei extrahieren"
+                            : "Extract the ZIP file"}
+                        </p>
+                        <p className="text-[#1a2744]/60 text-xs mt-1">
+                          {lang === "it"
+                            ? "Decomprimere il file ZIP nella cartella desiderata."
+                            : lang === "fr"
+                            ? "Décompressez le fichier ZIP dans le dossier souhaité."
+                            : lang === "de"
+                            ? "Entpacken Sie die ZIP-Datei in den gewünschten Ordner."
+                            : "Unzip the file to your desired folder."}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="bg-white rounded-xl p-4 border border-[#1a2744]/10">
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#c9a84c] text-white flex items-center justify-center text-xs font-bold">
+                        3
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[#1a2744] text-sm">
+                          {lang === "it"
+                            ? "Apri il file HTML"
+                            : lang === "fr"
+                            ? "Ouvrir le fichier HTML"
+                            : lang === "de"
+                            ? "HTML-Datei öffnen"
+                            : "Open the HTML file"}
+                        </p>
+                        <p className="text-[#1a2744]/60 text-xs mt-1">
+                          {lang === "it"
+                            ? "Apri il file index.html in un browser web."
+                            : lang === "fr"
+                            ? "Ouvrez le fichier index.html dans un navigateur Web."
+                            : lang === "de"
+                            ? "Öffnen Sie die Datei index.html in einem Webbrowser."
+                            : "Open the index.html file in your web browser."}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 4 */}
+                  <div className="bg-white rounded-xl p-4 border border-[#1a2744]/10">
+                    <div className="flex gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#c9a84c] text-white flex items-center justify-center text-xs font-bold">
+                        4
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[#1a2744] text-sm">
+                          {lang === "it"
+                            ? "Inserisci la tua chiave di licenza"
+                            : lang === "fr"
+                            ? "Entrez votre clé de licence"
+                            : lang === "de"
+                            ? "Geben Sie Ihren Lizenzschlüssel ein"
+                            : "Enter your license key"}
+                        </p>
+                        <p className="text-[#1a2744]/60 text-xs mt-1">
+                          {lang === "it"
+                            ? "Copia la chiave dal tuo email e incollala nel campo di attivazione. Formato: BM-XXXX-XXXX-XXXX-XXXX"
+                            : lang === "fr"
+                            ? "Copiez la clé de votre e-mail et collez-la dans le champ d'activation. Format: BM-XXXX-XXXX-XXXX-XXXX"
+                            : lang === "de"
+                            ? "Kopieren Sie den Schlüssel aus Ihrer E-Mail und fügen Sie ihn in das Aktivierungsfeld ein. Format: BM-XXXX-XXXX-XXXX-XXXX"
+                            : "Copy the key from your email and paste it in the activation field. Format: BM-XXXX-XXXX-XXXX-XXXX"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

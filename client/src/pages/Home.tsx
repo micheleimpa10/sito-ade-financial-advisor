@@ -1040,7 +1040,7 @@ const CONSULTATION_ALPS = "/manus-storage/consultation-alps_42619a86.png";
 const PHOTO_SOFA_CONSULT = "/manus-storage/consultation-sofa_5d10909b.jpg";
 const PHOTO_REDSOFA_CONSULT = "/manus-storage/consultation-redsofa_7d10391a.jpg";
 const PHOTO_WORKING_DESK = "/manus-storage/working-desk_ebdc9f86.webp";
-const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_950fb421.png";
+const ADELAIDE_CIRCLE = "/manus-storage/adelaide-circle_27bf6b64.png";
 
 // ─── HERO SLIDESHOW ───────────────────────────────────────────────────────────
 const HERO_SLIDES = [
@@ -1651,7 +1651,7 @@ export default function HomePage() {
                 { src: CONSULTATION_ALPS, alt: "Adelaide Manta consulting in the Alps" },
                 { src: PHOTO_ZURICH_TERRACE, alt: "Adelaide Manta in Zurich" },
                 { src: PHOTO_WORKING_DESK, alt: "Adelaide Manta at her desk" },
-                { src: PHOTO_CAFE_MEETING, alt: "Adelaide Manta with a client at a café" },
+                { src: ADELAIDE_CIRCLE, alt: "Adelaide Manta - Your Financial Advisor" },
                 { src: PHOTO_REDSOFA_CONSULT, alt: "Adelaide Manta in a consultation" },
                 { src: PHOTO_OUTDOOR_MEETING, alt: "Adelaide Manta meeting a client outdoors" },
                 { src: SERVICES_BG, alt: "Adelaide Manta with a client" },

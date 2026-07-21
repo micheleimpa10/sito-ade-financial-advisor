@@ -329,8 +329,31 @@ export default function PaymentSuccess() {
     window.scrollTo(0, 0);
   }, []);
 
+  // Save license key to localStorage when it becomes available
+  useEffect(() => {
+    if (licenseData?.licenseKey && data?.productKey) {
+      const tier = data.productKey.includes("family") ? "family" : "personal";
+      const storageKey = tier === "family" ? "sbpf-license" : "sbp-license";
+      localStorage.setItem(storageKey, licenseData.licenseKey);
+      console.log(`[PaymentSuccess] License saved to localStorage: ${storageKey}`);
+    }
+  }, [licenseData?.licenseKey, data?.productKey]);
+
   const downloadPath = data?.productKey ? DOWNLOAD_PATHS[data.productKey] : null;
   const downloadLabel = data?.productKey ? getDownloadLabel(data.productKey) : null;
+
+  // Update download path for BudgetManager products to use v2 with license.js
+  const finalDownloadPath = (() => {
+    if (!data?.productKey) return downloadPath;
+    // Use v2 files that require license validation
+    const v2Paths: Record<string, string> = {
+      "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_v2_e4c7fdce.zip",
+      "budget-manager-family": "/manus-storage/05_BudgetManager_Family_v2_a065d0d1.zip",
+      "single-bundle": "/manus-storage/06_Single_Bundle_v2_4834cc20.zip",
+      "family-bundle": "/manus-storage/07_Family_Bundle_v2_3830bf65.zip",
+    };
+    return v2Paths[data.productKey] || downloadPath;
+  })();
 
   // Show upsell for every product except bundles (bundles already contain multiple items)
   const showUpsell =
@@ -427,9 +450,9 @@ export default function PaymentSuccess() {
                 </div>
               )}
 
-              {downloadPath && (
+              {finalDownloadPath && (
                 <a
-                  href={downloadPath}
+                  href={finalDownloadPath}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-[#c9a84c] text-[#1a2744] py-3.5 px-6 text-sm font-bold uppercase tracking-widest hover:bg-[#1a2744] hover:text-white transition-all rounded-xl shadow-md"

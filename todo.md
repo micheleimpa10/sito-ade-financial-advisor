@@ -68,3 +68,9 @@
 - [x] Added OPTIONS preflight handler for the validate-license route
 - [x] Verified endpoint returns valid:true for correct key/tier, valid:false for wrong tier, valid:false for unknown key
 - [x] Added vitest tests for license key format and validation logic (9 tests, all passing)
+
+## UI Fixes (July 21)
+
+- [x] About section: show image in full (object-contain) and move FINMA & BX badge outside image so it doesn't cover anything
+- [x] Home Purchase plan: make price text blue (#1a2744)
+- [x] FAQ: remove last sentence about Swiss clients being valuable for long-term plans (all 4 languages)

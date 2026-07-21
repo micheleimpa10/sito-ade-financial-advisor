@@ -259,7 +259,7 @@ const translations = {
         },
         {
           q: "Do you work with expats and international clients?",
-          a: "I work with everyone—Swiss residents and international clients alike. My services are comprehensive and tailored to all clients. I offer specialized support for expats navigating Swiss financial systems and relocation, as well as ad-hoc services designed specifically for expat needs. Swiss clients are particularly valued for their stability and long-term financial planning goals.",
+          a: "I work with everyone—Swiss residents and international clients alike. My services are comprehensive and tailored to all clients. I offer specialized support for expats navigating Swiss financial systems and relocation, as well as ad-hoc services designed specifically for expat needs.",
         },
         {
           q: "What areas of Switzerland do you serve?",
@@ -1538,11 +1538,12 @@ export default function HomePage() {
                   <img
                     src={ABOUT_PORTRAIT}
                     alt="Adelaide Manta"
-                    className="w-full object-cover"
-                    style={{ maxHeight: "520px", objectPosition: "top" }}
+                    className="w-full object-contain"
                   />
-                  {/* FINMA Badge */}
-                  <div className="absolute bottom-4 left-4 bg-[#1a2744] border border-[#c9a84c]/60 rounded-xl px-4 py-2.5 flex items-center gap-2.5 shadow-xl backdrop-blur-sm">
+                </div>
+                {/* FINMA Badge - below image */}
+                <div className="mt-4 flex items-center gap-2.5 relative z-10">
+                  <div className="bg-[#1a2744] border border-[#c9a84c]/60 rounded-xl px-4 py-2.5 flex items-center gap-2.5 shadow-xl">
                     <div className="w-7 h-7 rounded-full bg-[#c9a84c] flex items-center justify-center flex-shrink-0">
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path d="M2 7L5.5 10.5L12 3" stroke="#1a2744" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -1867,7 +1868,7 @@ export default function HomePage() {
                   </h3>
                   <p className="text-[#1a2744]/50 text-sm italic mb-3">{t.plans.mortgage.subtitle}</p>
                   <div
-                    className="text-4xl font-bold text-[#c9a84c]"
+                    className="text-4xl font-bold text-[#1a2744]"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     {t.plans.mortgage.price}

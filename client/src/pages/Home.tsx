@@ -259,7 +259,7 @@ const translations = {
         },
         {
           q: "Do you work with expats and international clients?",
-          a: "Yes, I specialize in supporting expats in Switzerland. I help with insurance optimization, pension planning (Third pillar 3a and 3b), investments, and also provide guidance on navigating the Swiss job market and lifestyle.",
+          a: "I work with everyone—Swiss residents and international clients alike. My services are comprehensive and tailored to all clients. I offer specialized support for expats navigating Swiss financial systems and relocation, as well as ad-hoc services designed specifically for expat needs. Swiss clients are particularly valued for their stability and long-term financial planning goals.",
         },
         {
           q: "What areas of Switzerland do you serve?",
@@ -1028,7 +1028,7 @@ const translations = {
 // ─── TYPES ─────────────────────────────────────────────────────────────────────
 // ─── IMAGES ────────────────────────────────────────────────────────────────────
 const HERO_BG = "/manus-storage/services-phone_5451249b.png";
-const ABOUT_PORTRAIT = "/manus-storage/adelaide-card_0d905b7a.png";
+const ABOUT_PORTRAIT = "/manus-storage/adelaide-card2_3c7c5aa1.png";
 const SERVICES_BG = "/manus-storage/consultation-cafe_26ad27a5.png";
 const PHOTO_OUTDOOR_MEETING = "/manus-storage/photo-outdoor-meeting_1333fbfb.jpg";
 const PHOTO_VIDEO_CALL = "/manus-storage/photo-video-call_b3d73909.jpg";
@@ -1308,7 +1308,7 @@ export default function HomePage() {
             }`}
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            Adelaide Manta
+            Adelaide Manta - Financial Advisor
           </a>
 
           {/* Desktop Nav */}
@@ -1824,34 +1824,34 @@ export default function HomePage() {
 
             {/* Relocation Support */}
             <Reveal delay={150}>
-              <div className="border border-[#c9a84c]/40 rounded-2xl p-8 h-full flex flex-col bg-white relative">
+              <div className="bg-[#c9a84c] rounded-2xl p-8 h-full flex flex-col relative">
                 <div className="absolute -top-4 right-6 bg-[#1a2744] text-white text-xs font-black uppercase tracking-widest px-4 py-2 rounded-xl shadow-md">
                   {t.plans.relocation.badge}
                 </div>
                 <div className="mb-6 mt-2">
-                  <h3 className="text-lg font-black text-[#1a2744] uppercase tracking-widest mb-1 leading-tight">
+                  <h3 className="text-lg font-black text-white uppercase tracking-widest mb-1 leading-tight">
                     {t.plans.relocation.name}
                   </h3>
-                  <p className="text-[#1a2744]/50 text-sm italic mb-3">{t.plans.relocation.subtitle}</p>
+                  <p className="text-white/70 text-sm italic mb-3">{t.plans.relocation.subtitle}</p>
                   <div
-                    className="text-4xl font-bold text-[#c9a84c]"
+                    className="text-4xl font-bold text-[#1a2744]"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     {t.plans.relocation.price}
                   </div>
-                  <p className="text-[#1a2744]/50 text-sm mt-1">{t.plans.relocation.desc}</p>
+                  <p className="text-white/70 text-sm mt-1">{t.plans.relocation.desc}</p>
                 </div>
                 <ul className="space-y-4 flex-1 mb-8">
                   {t.plans.relocation.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-3 text-[#1a2744]/80 text-sm leading-snug">
-                      <span className="flex-shrink-0 mt-0.5 text-[#c9a84c] font-bold">→</span>
+                    <li key={i} className="flex items-start gap-3 text-white/90 text-sm leading-snug">
+                      <span className="flex-shrink-0 mt-0.5 text-[#1a2744] font-bold">→</span>
                       {f}
                     </li>
                   ))}
                 </ul>
                 <a
                   href="#book"
-                  className="block text-center bg-[#1a2744] text-white px-6 py-4 text-sm font-black uppercase tracking-widest hover:bg-[#c9a84c] hover:text-[#1a2744] transition-all rounded-xl"
+                  className="block text-center bg-[#1a2744] text-white px-6 py-4 text-sm font-black uppercase tracking-widest hover:bg-white hover:text-[#c9a84c] transition-all rounded-xl"
                 >
                   {t.plans.relocation.cta}
                 </a>
@@ -1860,7 +1860,7 @@ export default function HomePage() {
 
             {/* Home Purchase & Mortgage */}
             <Reveal delay={200}>
-              <div className="border border-gray-200 rounded-2xl p-8 h-full flex flex-col bg-[#f8f5f0]">
+              <div className="border border-gray-200 rounded-2xl p-8 h-full flex flex-col bg-[#e8dcc8]">
                 <div className="mb-6">
                   <h3 className="text-lg font-black text-[#1a2744] uppercase tracking-widest mb-1 leading-tight">
                     {t.plans.mortgage.name}

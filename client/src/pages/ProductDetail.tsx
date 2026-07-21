@@ -16,18 +16,12 @@ const SCREENSHOTS = {
     "/manus-storage/agenda_single_cover_418e25e8_bce039b2.webp",
     "/manus-storage/agenda_single_january_56b529ac_a1970f56.webp",
     "/manus-storage/agenda_single_budget_8dec2796_edf3eb1f.webp",
-    "/manus-storage/agenda_single_annual_8cb0b56f_67243e17.webp",
-    "/manus-storage/agenda_single_habits_b572db15_2ec1ad4f.webp",
-    "/manus-storage/agenda_single_tips_5c18d01d_9f6ac864.webp",
   ],
   // Legacy key alias (keep for backward compatibility)
   "agenda-single": [
     "/manus-storage/agenda_single_cover_418e25e8_bce039b2.webp",
     "/manus-storage/agenda_single_january_56b529ac_a1970f56.webp",
     "/manus-storage/agenda_single_budget_8dec2796_edf3eb1f.webp",
-    "/manus-storage/agenda_single_annual_8cb0b56f_67243e17.webp",
-    "/manus-storage/agenda_single_habits_b572db15_2ec1ad4f.webp",
-    "/manus-storage/agenda_single_tips_5c18d01d_9f6ac864.webp",
   ],
   "financial-agenda-couples": [
     "/manus-storage/agenda_couples_cover_d676894d_5dc11017.webp",
@@ -65,6 +59,7 @@ const SCREENSHOTS = {
   "single-bundle": [
     "/manus-storage/agenda_single_cover_418e25e8_bce039b2.webp",
     "/manus-storage/agenda_single_january_56b529ac_a1970f56.webp",
+    "/manus-storage/agenda_single_budget_8dec2796_edf3eb1f.webp",
     "/manus-storage/bm_personal_dashboard_4fd8e26b_7777b612.webp",
     "/manus-storage/bm_personal_populated_bf28bb52_431b228c.webp",
     "/manus-storage/bm_personal_charts_0a4f04e3_a997d66c.webp",

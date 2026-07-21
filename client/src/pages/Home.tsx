@@ -60,7 +60,7 @@ const translations = {
     hero: {
       title: "Your Financial Future, Tailored in Switzerland",
       subtitle:
-        "Expert guidance for private individuals and corporate solutions. Navigating the Swiss financial landscape with clarity and confidence.",
+        "Expert guidance for individuals and businesses. Navigating the Swiss financial landscape with clarity and confidence.",
       cta: "BOOK A FREE CONSULTATION",
     },
     about: {

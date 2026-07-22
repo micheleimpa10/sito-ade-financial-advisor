@@ -48,7 +48,7 @@ export const PRODUCTS: Record<string, Product> = {
       "City profiles: Zurich, Geneva, Bern, Lausanne, Basel — costs, lifestyle, commute",
     ],
     requiresLicenseKey: false,
-    downloadPath: "/manus-storage/01_MovingtoSwitzerland_v3_5dfddb06.zip",
+    downloadPath: "/manus-storage/01_MovingtoSwitzerland_v3_clean_d3d78411.zip",
     coverImage: "/manus-storage/cover_01_moving_guide_v4_b598291a.png",
     category: "guide",
   },

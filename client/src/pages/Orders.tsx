@@ -9,7 +9,7 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 
 const DOWNLOAD_PATHS: Record<string, string> = {
-  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_dc41bf18.zip",
+  "moving-guide": "/manus-storage/01_MovingtoSwitzerland_v3_5dfddb06.zip",
   "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_3f80b1c5.zip",
   "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_b7235d06.zip",
   "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v2_2537098d.zip",

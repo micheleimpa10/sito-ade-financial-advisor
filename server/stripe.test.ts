@@ -54,12 +54,12 @@ describe("stripe.products", () => {
     }
   });
 
-  it("moving-guide has correct price of CHF 9.90 (990 cents)", async () => {
+  it("moving-guide has correct price of CHF 19.90 (1990 cents)", async () => {
     const caller = appRouter.createCaller(createPublicContext());
     const products = await caller.stripe.products();
     const guide = products.find((p) => p.key === "moving-guide");
     expect(guide).toBeDefined();
-    expect(guide?.amount).toBe(990);
+    expect(guide?.amount).toBe(1990);
     expect(guide?.currency).toBe("chf");
   });
 
@@ -80,21 +80,21 @@ describe("stripe.products", () => {
     }
   });
 
-  it("single-bundle has correct launch price of CHF 29.90 (2990 cents)", async () => {
+  it("single-bundle has correct launch price of CHF 39.90 (3990 cents)", async () => {
     const caller = appRouter.createCaller(createPublicContext());
     const products = await caller.stripe.products();
     const bundle = products.find((p) => p.key === "single-bundle");
     expect(bundle).toBeDefined();
-    expect(bundle?.amount).toBe(2990);
+    expect(bundle?.amount).toBe(3990);
     expect(bundle?.currency).toBe("chf");
   });
 
-  it("family-bundle has correct launch price of CHF 39.90 (3990 cents)", async () => {
+  it("family-bundle has correct launch price of CHF 49.90 (4990 cents)", async () => {
     const caller = appRouter.createCaller(createPublicContext());
     const products = await caller.stripe.products();
     const bundle = products.find((p) => p.key === "family-bundle");
     expect(bundle).toBeDefined();
-    expect(bundle?.amount).toBe(3990);
+    expect(bundle?.amount).toBe(4990);
     expect(bundle?.currency).toBe("chf");
   });
 

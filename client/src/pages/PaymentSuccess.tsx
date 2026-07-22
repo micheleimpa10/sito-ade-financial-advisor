@@ -7,13 +7,13 @@ import { toast } from "sonner";
 
 // All download paths keyed by productKey
 const DOWNLOAD_PATHS: Record<string, string> = {
-  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_a9ec67d4.zip",
-  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_a51e7a1d.zip",
-  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_e39b6d60.zip",
-  "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_d54d5d0e.zip",
-  "budget-manager-family": "/manus-storage/05_BudgetManager_Family_96909c61.zip",
-  "single-bundle": "/manus-storage/06_Single_Bundle_917ab7e5.zip",
-  "family-bundle": "/manus-storage/07_Family_Bundle_45dab881.zip",
+  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_dc41bf18.zip",
+  "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_3f80b1c5.zip",
+  "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_b7235d06.zip",
+  "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v2_2537098d.zip",
+  "budget-manager-family": "/manus-storage/05_Family_LIVE_v2_a629c260.zip",
+  "single-bundle": "/manus-storage/06_Bundle_LIVE_v2_3ff662fe.zip",
+  "family-bundle": "/manus-storage/07_Bundle_LIVE_v2_e6f29ec2.zip",
 };
 
 function getDownloadLabel(productKey: string): string | null {
@@ -342,18 +342,8 @@ export default function PaymentSuccess() {
   const downloadPath = data?.productKey ? DOWNLOAD_PATHS[data.productKey] : null;
   const downloadLabel = data?.productKey ? getDownloadLabel(data.productKey) : null;
 
-  // Update download path for BudgetManager products to use v2 with license.js
-  const finalDownloadPath = (() => {
-    if (!data?.productKey) return downloadPath;
-    // Use v2 files that require license validation
-    const v2Paths: Record<string, string> = {
-      "budget-manager-personal": "/manus-storage/04_BudgetManager_Personal_v2_e4c7fdce.zip",
-      "budget-manager-family": "/manus-storage/05_BudgetManager_Family_v2_a065d0d1.zip",
-      "single-bundle": "/manus-storage/06_Single_Bundle_v2_4834cc20.zip",
-      "family-bundle": "/manus-storage/07_Family_Bundle_v2_3830bf65.zip",
-    };
-    return v2Paths[data.productKey] || downloadPath;
-  })();
+  // All paths are now unified in DOWNLOAD_PATHS
+  const finalDownloadPath = downloadPath;
 
   // Show upsell for every product except bundles (bundles already contain multiple items)
   const showUpsell =

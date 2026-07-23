@@ -371,15 +371,30 @@ export default function PaymentSuccess() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Save license key to localStorage when it becomes available
+  // Save each license key to the correct localStorage slot.
+  // Uses licensesByProduct map so multi-product carts (e.g. agenda + budget-manager)
+  // save the budget-manager license under the right key regardless of product order.
   useEffect(() => {
-    if (licenseData?.licenseKey && data?.productKey) {
-      const tier = data.productKey.includes("family") ? "family" : "personal";
-      const storageKey = tier === "family" ? "sbpf-license" : "sbp-license";
-      localStorage.setItem(storageKey, licenseData.licenseKey);
-      console.log(`[PaymentSuccess] License saved to localStorage: ${storageKey}`);
+    const byProduct = (licenseData as any)?.licensesByProduct ?? {};
+    if (byProduct["budget-manager-personal"]) {
+      localStorage.setItem("sbp-license", byProduct["budget-manager-personal"]);
+      console.log("[PaymentSuccess] Personal BudgetManager license saved");
     }
-  }, [licenseData?.licenseKey, data?.productKey]);
+    if (byProduct["budget-manager-family"]) {
+      localStorage.setItem("sbpf-license", byProduct["budget-manager-family"]);
+      console.log("[PaymentSuccess] Family BudgetManager license saved");
+    }
+    // Fallback for single-product purchase
+    if (!byProduct["budget-manager-personal"] && !byProduct["budget-manager-family"] && licenseData?.licenseKey) {
+      const allKeys = data?.productKeys ?? (data?.productKey ? [data.productKey] : []);
+      const budgetKey = allKeys.find((k) => k.includes("budget-manager"));
+      if (budgetKey) {
+        const storageKey = budgetKey.includes("family") ? "sbpf-license" : "sbp-license";
+        localStorage.setItem(storageKey, licenseData.licenseKey);
+        console.log(`[PaymentSuccess] Fallback license saved: ${storageKey}`);
+      }
+    }
+  }, [licenseData, data?.productKeys, data?.productKey]);
 
   // Build download list for all purchased products
   const allProductKeys = data?.productKeys ?? (data?.productKey ? [data.productKey] : []);

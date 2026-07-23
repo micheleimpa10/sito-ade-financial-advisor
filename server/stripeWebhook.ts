@@ -208,75 +208,37 @@ export async function handleCheckoutCompleted(session: Stripe.Checkout.Session) 
         }
       }
 
-      // ── Send thank-you email for each product ─────────────────────────────────
-      // Only send one email for single-product sessions; for multi-product, send one combined email
-      // (handled below after the loop for multi-product sessions)
-      if (productKeys.length === 1) {
-        try {
-          if (customerEmail && product) {
-            const siteOrigin = (() => {
-              try {
-                return new URL(session.success_url ?? "").origin;
-              } catch {
-                return "https://adelaidemanta-financialadvisor.ch";
-              }
-            })();
-            const downloadUrl = `${siteOrigin}/payment-success?session_id=${session.id}`;
-
-            await sendPurchaseConfirmationEmail({
-              customerEmail,
-              customerName,
-              productName: product.name,
-              productShortName: product.shortName,
-              downloadUrl,
-              licenseKey,
-              amountPaid: session.amount_total ?? product.amount,
-              currency: session.currency ?? product.currency,
-              language,
-            });
-          }
-        } catch (emailErr) {
-          console.warn("[Webhook] Thank-you email failed:", emailErr);
+      // ── Send one thank-you email per product ──────────────────────────────
+      // Each product gets its own email so each license key is delivered separately.
+      try {
+        if (customerEmail && product) {
+          const siteOrigin = (() => {
+            try {
+              return new URL(session.success_url ?? "").origin;
+            } catch {
+              return "https://adelaidemanta-financialadvisor.ch";
+            }
+          })();
+          const downloadUrl = `${siteOrigin}/payment-success?session_id=${session.id}`;
+          const productAmount = productKeys.length > 1 ? amountPerProduct : (session.amount_total ?? product.amount);
+          await sendPurchaseConfirmationEmail({
+            customerEmail,
+            customerName,
+            productName: product.name,
+            productShortName: product.shortName,
+            downloadUrl,
+            licenseKey,
+            amountPaid: productAmount,
+            currency: session.currency ?? product.currency,
+            language,
+          });
         }
+      } catch (emailErr) {
+        console.warn(`[Webhook] Thank-you email failed for ${productKey}:`, emailErr);
       }
     } catch (err) {
       console.error(`[Webhook] Failed to record order for product ${productKey}:`, err);
       // Continue processing other products even if one fails
-    }
-  }
-
-  // ── For multi-product cart: send one combined email using the first product ──
-  if (productKeys.length > 1) {
-    try {
-      const firstProduct = getProduct(productKeys[0]);
-      if (customerEmail && firstProduct) {
-        const siteOrigin = (() => {
-          try {
-            return new URL(session.success_url ?? "").origin;
-          } catch {
-            return "https://adelaidemanta-financialadvisor.ch";
-          }
-        })();
-        const downloadUrl = `${siteOrigin}/payment-success?session_id=${session.id}`;
-        // Use a combined product name for the email subject
-        const combinedName = productKeys.length > 1
-          ? `${firstProduct.shortName ?? firstProduct.name} + ${productKeys.length - 1} more`
-          : (firstProduct.shortName ?? firstProduct.name);
-
-        await sendPurchaseConfirmationEmail({
-          customerEmail,
-          customerName,
-          productName: combinedName,
-          productShortName: combinedName,
-          downloadUrl,
-          licenseKey: allLicenseKeys[0], // first license key if any
-          amountPaid: session.amount_total ?? 0,
-          currency: session.currency ?? "chf",
-          language,
-        });
-      }
-    } catch (emailErr) {
-      console.warn("[Webhook] Combined thank-you email failed:", emailErr);
     }
   }
 

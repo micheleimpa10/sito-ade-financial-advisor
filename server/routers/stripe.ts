@@ -153,31 +153,35 @@ export const stripeRouter = router({
    */
   getLicenseBySession: publicProcedure
     .input(z.object({ sessionId: z.string() }))
-    .query(async ({ input }) => {
+    .query(async ({ input }): Promise<{ licenseKey: string | null; licensesByProduct: Record<string, string> }> => {
       const db = await getDb();
-      if (!db) return { licenseKey: null };
+      if (!db) return { licenseKey: null, licensesByProduct: {} };
 
-      // Look up the order for this session
+      // Look up ALL orders for this session (one per product in a cart)
       const orderRows = await db
         .select()
         .from(orders)
-        .where(eq(orders.stripeSessionId, input.sessionId))
-        .limit(1);
+        .where(eq(orders.stripeSessionId, input.sessionId));
 
-      if (orderRows.length === 0) return { licenseKey: null };
+      if (orderRows.length === 0) return { licenseKey: null, licensesByProduct: {} };
 
-      const order = orderRows[0];
-
-      // Look up the license for this order
+      // Look up licenses for all orders in this session
+      const orderIds = orderRows.map((o) => o.id);
       const licenseRows = await db
         .select()
         .from(licenses)
-        .where(eq(licenses.orderId, order.id))
-        .limit(1);
+        .where(inArray(licenses.orderId, orderIds));
 
-      if (licenseRows.length === 0) return { licenseKey: null };
+      if (licenseRows.length === 0) return { licenseKey: null, licensesByProduct: {} };
 
-      return { licenseKey: licenseRows[0].licenseKey };
+      // Build a map of productKey -> licenseKey for multi-product carts
+      const licensesByProduct: Record<string, string> = {};
+      for (const lic of licenseRows) {
+        licensesByProduct[lic.productKey] = lic.licenseKey;
+      }
+
+      // licenseKey = first license found (backward compat for single-product)
+      return { licenseKey: licenseRows[0].licenseKey, licensesByProduct };
     }),
 
   /**

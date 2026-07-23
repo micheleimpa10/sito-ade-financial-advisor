@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 // All download paths keyed by productKey
 const DOWNLOAD_PATHS: Record<string, string> = {
-  "moving-guide": "/manus-storage/01_MovingtoSwitzerland_v3_clean_d3d78411.zip",
+  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_Complete_Guide_2026_ea576a78.zip",
   "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_3f80b1c5.zip",
   "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_b7235d06.zip",
   "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v2_2537098d.zip",

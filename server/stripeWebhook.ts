@@ -60,6 +60,13 @@ export function registerStripeWebhook(app: Express) {
 
       console.log(`[Webhook] Received event: ${event.type} (${event.id})`);
 
+      // Test events: return verification response immediately
+      if (event.id.startsWith("evt_test_")) {
+        console.log("[Webhook] Test event detected, returning verification response");
+        res.json({ verified: true });
+        return;
+      }
+
       try {
         if (event.type === "checkout.session.completed") {
           const session = event.data.object as Stripe.Checkout.Session;
@@ -101,15 +108,21 @@ function detectLanguage(session: Stripe.Checkout.Session): string {
 }
 
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
-  const productKey = session.metadata?.product_key;
+  // Support both single-product (product_key) and multi-product cart (product_keys)
+  const productKeysRaw = session.metadata?.product_keys ?? session.metadata?.product_key ?? "";
+  const productKeys = productKeysRaw
+    .split(",")
+    .map((k) => k.trim())
+    .filter(Boolean);
+
+  if (productKeys.length === 0) {
+    console.warn("[Webhook] Missing product_key(s) in session metadata:", session.id);
+    return;
+  }
+
   // userId is optional — guests have no account
   const rawUserId = session.metadata?.user_id;
   const userId = rawUserId ? parseInt(rawUserId, 10) : null;
-
-  if (!productKey) {
-    console.warn("[Webhook] Missing product_key in session metadata:", session.id);
-    return;
-  }
 
   const db = await getDb();
   if (!db) {
@@ -117,7 +130,6 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     return;
   }
 
-  const product = getProduct(productKey);
   const customerEmail =
     session.customer_details?.email ??
     session.metadata?.customer_email ??
@@ -128,66 +140,116 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     undefined;
   const language = detectLanguage(session);
 
-  // Upsert order to handle duplicate webhook deliveries gracefully
-  try {
-    const result = await db
-      .insert(orders)
-      .values({
-        userId: userId ?? undefined,
-        stripeSessionId: session.id,
-        stripePaymentIntentId:
-          typeof session.payment_intent === "string"
-            ? session.payment_intent
-            : (session.payment_intent?.id ?? undefined),
-        productKey,
-        amountTotal: session.amount_total ?? 0,
-        currency: session.currency ?? "chf",
-        paymentStatus: session.payment_status ?? "unpaid",
-      })
-      .onDuplicateKeyUpdate({
-        set: {
+  // Amount per product: divide total evenly across all products
+  const amountPerProduct = session.amount_total != null
+    ? Math.round(session.amount_total / productKeys.length)
+    : 0;
+
+  // Collect all generated license keys for the owner notification
+  const allLicenseKeys: string[] = [];
+
+  // Process each product in the cart
+  for (const productKey of productKeys) {
+    const product = getProduct(productKey);
+
+    try {
+      // Upsert order — composite unique index (stripeSessionId, productKey) prevents duplicates
+      const result = await db
+        .insert(orders)
+        .values({
+          userId: userId ?? undefined,
+          stripeSessionId: session.id,
           stripePaymentIntentId:
             typeof session.payment_intent === "string"
               ? session.payment_intent
               : (session.payment_intent?.id ?? undefined),
-          paymentStatus: session.payment_status ?? "unpaid",
-        },
-      });
-
-    console.log(`[Webhook] Order recorded — user: ${userId ?? "guest"}, product: ${productKey}`);
-
-    // ── Generate license key for BudgetManager products ───────────────────────
-    let licenseKey: string | undefined;
-
-    console.log(`[Webhook] Product key: ${productKey}, Product found: ${!!product}, Requires license: ${product?.requiresLicenseKey}`);
-    
-    if (product?.requiresLicenseKey) {
-      try {
-        const tier = productKey.includes("family") ? "family" : "personal";
-        const orderId = (result as any).insertId ?? 0;
-        licenseKey = generateLicenseKey();
-
-        await db.insert(licenses).values({
-          licenseKey,
-          orderId,
           productKey,
-          tier,
-          customerEmail: customerEmail ?? undefined,
-        }).onDuplicateKeyUpdate({
-          // If duplicate (retry), keep existing key — do not overwrite
-          set: { productKey },
+          amountTotal: amountPerProduct,
+          currency: session.currency ?? "chf",
+          paymentStatus: session.payment_status ?? "unpaid",
+        })
+        .onDuplicateKeyUpdate({
+          set: {
+            stripePaymentIntentId:
+              typeof session.payment_intent === "string"
+                ? session.payment_intent
+                : (session.payment_intent?.id ?? undefined),
+            paymentStatus: session.payment_status ?? "unpaid",
+          },
         });
 
-        console.log(`[Webhook] License key generated: ${licenseKey} for order ${orderId}`);
-      } catch (licErr) {
-        console.warn("[Webhook] License key generation failed:", licErr);
-        licenseKey = undefined;
-      }
-    }
+      console.log(`[Webhook] Order recorded — user: ${userId ?? "guest"}, product: ${productKey}`);
 
-    // ── Send thank-you email to customer ──────────────────────────────────────
+      // ── Generate license key for BudgetManager products ───────────────────────
+      let licenseKey: string | undefined;
+
+      if (product?.requiresLicenseKey) {
+        try {
+          const tier = productKey.includes("family") ? "family" : "personal";
+          const orderId = (result as any).insertId ?? 0;
+          licenseKey = generateLicenseKey();
+
+          await db.insert(licenses).values({
+            licenseKey,
+            orderId,
+            productKey,
+            tier,
+            customerEmail: customerEmail ?? undefined,
+          }).onDuplicateKeyUpdate({
+            // If duplicate (retry), keep existing key — do not overwrite
+            set: { productKey },
+          });
+
+          allLicenseKeys.push(licenseKey);
+          console.log(`[Webhook] License key generated: ${licenseKey} for product ${productKey}`);
+        } catch (licErr) {
+          console.warn("[Webhook] License key generation failed:", licErr);
+          licenseKey = undefined;
+        }
+      }
+
+      // ── Send thank-you email for each product ─────────────────────────────────
+      // Only send one email for single-product sessions; for multi-product, send one combined email
+      // (handled below after the loop for multi-product sessions)
+      if (productKeys.length === 1) {
+        try {
+          if (customerEmail && product) {
+            const siteOrigin = (() => {
+              try {
+                return new URL(session.success_url ?? "").origin;
+              } catch {
+                return "https://adelaidemanta-financialadvisor.ch";
+              }
+            })();
+            const downloadUrl = `${siteOrigin}/payment-success?session_id=${session.id}`;
+
+            await sendPurchaseConfirmationEmail({
+              customerEmail,
+              customerName,
+              productName: product.name,
+              productShortName: product.shortName,
+              downloadUrl,
+              licenseKey,
+              amountPaid: session.amount_total ?? product.amount,
+              currency: session.currency ?? product.currency,
+              language,
+            });
+          }
+        } catch (emailErr) {
+          console.warn("[Webhook] Thank-you email failed:", emailErr);
+        }
+      }
+    } catch (err) {
+      console.error(`[Webhook] Failed to record order for product ${productKey}:`, err);
+      // Continue processing other products even if one fails
+    }
+  }
+
+  // ── For multi-product cart: send one combined email using the first product ──
+  if (productKeys.length > 1) {
     try {
-      if (customerEmail && product) {
+      const firstProduct = getProduct(productKeys[0]);
+      if (customerEmail && firstProduct) {
         const siteOrigin = (() => {
           try {
             return new URL(session.success_url ?? "").origin;
@@ -196,40 +258,45 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
           }
         })();
         const downloadUrl = `${siteOrigin}/payment-success?session_id=${session.id}`;
+        // Use a combined product name for the email subject
+        const combinedName = productKeys.length > 1
+          ? `${firstProduct.shortName ?? firstProduct.name} + ${productKeys.length - 1} more`
+          : (firstProduct.shortName ?? firstProduct.name);
 
         await sendPurchaseConfirmationEmail({
           customerEmail,
           customerName,
-          productName: product.name,
-          productShortName: product.shortName,
+          productName: combinedName,
+          productShortName: combinedName,
           downloadUrl,
-          licenseKey,
-          amountPaid: session.amount_total ?? product.amount,
-          currency: session.currency ?? product.currency,
+          licenseKey: allLicenseKeys[0], // first license key if any
+          amountPaid: session.amount_total ?? 0,
+          currency: session.currency ?? "chf",
           language,
         });
       }
     } catch (emailErr) {
-      // Email failure must never block order processing
-      console.warn("[Webhook] Thank-you email failed:", emailErr);
+      console.warn("[Webhook] Combined thank-you email failed:", emailErr);
     }
+  }
 
-    // ── Notify owner of new purchase ──────────────────────────────────────────
-    try {
-      const productName = product?.shortName ?? productKey;
-      const amount =
-        session.amount_total != null
-          ? `CHF ${(session.amount_total / 100).toFixed(2)}`
-          : "unknown amount";
-      await notifyOwner({
-        title: `New purchase: ${productName}`,
-        content: `${customerEmail ?? "unknown"} purchased **${productName}** for ${amount}.${licenseKey ? `\n\nLicense key: \`${licenseKey}\`` : ""}\n\nStripe session: ${session.id}`,
-      });
-    } catch (notifyErr) {
-      console.warn("[Webhook] Owner notification failed:", notifyErr);
-    }
-  } catch (err) {
-    console.error("[Webhook] Failed to record order:", err);
-    throw err;
+  // ── Notify owner of new purchase ──────────────────────────────────────────
+  try {
+    const productNames = productKeys
+      .map((k) => getProduct(k)?.shortName ?? k)
+      .join(", ");
+    const amount =
+      session.amount_total != null
+        ? `CHF ${(session.amount_total / 100).toFixed(2)}`
+        : "unknown amount";
+    const licenseInfo = allLicenseKeys.length > 0
+      ? `\n\nLicense key(s): ${allLicenseKeys.map((k) => `\`${k}\``).join(", ")}`
+      : "";
+    await notifyOwner({
+      title: `New purchase: ${productNames}`,
+      content: `${customerEmail ?? "unknown"} purchased **${productNames}** for ${amount}.${licenseInfo}\n\nStripe session: ${session.id}`,
+    });
+  } catch (notifyErr) {
+    console.warn("[Webhook] Owner notification failed:", notifyErr);
   }
 }

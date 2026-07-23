@@ -147,13 +147,24 @@ const UPSELL_MAP: Record<string, Array<{
 };
 
 function UpsellOffer({
-  purchasedProductKey,
+  purchasedProductKeys,
   onDismiss,
 }: {
-  purchasedProductKey: string;
+  purchasedProductKeys: string[];
   onDismiss: () => void;
 }) {
-  const offers = UPSELL_MAP[purchasedProductKey] ?? [];
+  // Collect all upsell offers from all purchased products, then filter out
+  // any product the user already bought in this session
+  const purchasedSet = new Set(purchasedProductKeys);
+  const seen = new Set<string>();
+  const offers = purchasedProductKeys
+    .flatMap((key) => UPSELL_MAP[key] ?? [])
+    .filter((offer) => {
+      if (purchasedSet.has(offer.productKey)) return false; // already bought
+      if (seen.has(offer.productKey)) return false; // deduplicate
+      seen.add(offer.productKey);
+      return true;
+    });
   if (offers.length === 0) return null;
 
   const createCartCheckout = trpc.stripe.createCartCheckout.useMutation({
@@ -310,11 +321,11 @@ export default function PaymentSuccess() {
     { enabled: !!sessionId, retry: 2 }
   );
 
-  // Fetch license key for any product that requires one (BudgetManager + bundles)
+  // Fetch license key if ANY product in the session requires one (BudgetManager + bundles)
   const requiresLicenseKey =
-    (data?.productKey?.includes("budget-manager") ||
-      data?.productKey?.includes("bundle")) ??
-    false;
+    (data?.productKeys ?? (data?.productKey ? [data.productKey] : [])).some(
+      (k) => k.includes("budget-manager") || k.includes("bundle")
+    );
   const { data: licenseData, isLoading: licenseLoading } = trpc.stripe.getLicenseBySession.useQuery(
     { sessionId },
     {
@@ -339,17 +350,21 @@ export default function PaymentSuccess() {
     }
   }, [licenseData?.licenseKey, data?.productKey]);
 
-  const downloadPath = data?.productKey ? DOWNLOAD_PATHS[data.productKey] : null;
-  const downloadLabel = data?.productKey ? getDownloadLabel(data.productKey) : null;
+  // Build download list for all purchased products
+  const allProductKeys = data?.productKeys ?? (data?.productKey ? [data.productKey] : []);
+  const downloadItems = allProductKeys
+    .map((key) => ({
+      key,
+      path: DOWNLOAD_PATHS[key] ?? null,
+      label: getDownloadLabel(key),
+    }))
+    .filter((item) => item.path !== null);
 
-  // All paths are now unified in DOWNLOAD_PATHS
-  const finalDownloadPath = downloadPath;
-
-  // Show upsell for every product except bundles (bundles already contain multiple items)
+  // Show upsell for any successful payment
   const showUpsell =
     !upsellDismissed &&
-    !!data?.productKey &&
-    data.status === "paid";
+    allProductKeys.length > 0 &&
+    data?.status === "paid";
 
   return (
     <div
@@ -440,16 +455,21 @@ export default function PaymentSuccess() {
                 </div>
               )}
 
-              {finalDownloadPath && (
-                <a
-                  href={finalDownloadPath}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-[#c9a84c] text-[#1a2744] py-3.5 px-6 text-sm font-bold uppercase tracking-widest hover:bg-[#1a2744] hover:text-white transition-all rounded-xl shadow-md"
-                >
-                  <Download className="h-4 w-4" />
-                  {downloadLabel ?? "Download"}
-                </a>
+              {downloadItems.length > 0 && (
+                <div className="w-full flex flex-col gap-2">
+                  {downloadItems.map((item) => (
+                    <a
+                      key={item.key}
+                      href={item.path!}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 bg-[#c9a84c] text-[#1a2744] py-3.5 px-6 text-sm font-bold uppercase tracking-widest hover:bg-[#1a2744] hover:text-white transition-all rounded-xl shadow-md"
+                    >
+                      <Download className="h-4 w-4" />
+                      {item.label ?? "Download"}
+                    </a>
+                  ))}
+                </div>
               )}
 
               <div className="flex flex-col sm:flex-row gap-3 w-full pt-2">
@@ -475,10 +495,10 @@ export default function PaymentSuccess() {
           )}
         </div>
 
-        {/* Upsell offer — shown after every successful purchase */}
-        {showUpsell && data?.productKey && (
+        {/* Upsell offer — shown after every successful purchase, filtered to exclude already-purchased items */}
+        {showUpsell && (
           <UpsellOffer
-            purchasedProductKey={data.productKey}
+            purchasedProductKeys={allProductKeys}
             onDismiss={() => setUpsellDismissed(true)}
           />
         )}

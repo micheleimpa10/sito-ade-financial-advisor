@@ -130,9 +130,16 @@ export const stripeRouter = router({
           throw new TRPCError({ code: "FORBIDDEN", message: "Session does not belong to this user" });
         }
       }
+      // Support both single-product (product_key) and multi-product cart (product_keys)
+      const productKeysRaw = session.metadata?.product_keys ?? session.metadata?.product_key ?? "";
+      const productKeys = productKeysRaw
+        .split(",")
+        .map((k: string) => k.trim())
+        .filter(Boolean);
       return {
         status: session.payment_status,
-        productKey: session.metadata?.product_key ?? null,
+        productKey: productKeys[0] ?? null,
+        productKeys,
         // Only return email if payment is completed
         customerEmail: session.payment_status === "paid" ? (session.customer_details?.email ?? null) : null,
       };

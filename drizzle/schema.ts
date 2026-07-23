@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { int, mysqlEnum, mysqlTable, text, timestamp, uniqueIndex, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -33,8 +33,10 @@ export const orders = mysqlTable("orders", {
   id: int("id").autoincrement().primaryKey(),
   /** Internal user ID who made the purchase — null for guest purchases (no account required) */
   userId: int("userId"),
-  /** Stripe Checkout Session ID — used to look up full session details */
-  stripeSessionId: varchar("stripeSessionId", { length: 255 }).notNull().unique(),
+  /** Stripe Checkout Session ID — used to look up full session details.
+   * NOT unique alone — a cart session can have multiple products (one row per product).
+   * Uniqueness is enforced by the composite index (stripeSessionId, productKey) below. */
+  stripeSessionId: varchar("stripeSessionId", { length: 255 }).notNull(),
   /** Stripe Payment Intent ID (populated after checkout.session.completed webhook) */
   stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 255 }),
   /** Product key from our products.ts catalogue (e.g. 'moving-guide') */
@@ -47,7 +49,10 @@ export const orders = mysqlTable("orders", {
   paymentStatus: varchar("paymentStatus", { length: 32 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-});
+}, (table) => ({
+  /** Composite unique index: one row per (session, product) — supports multi-product cart sessions */
+  sessionProductIdx: uniqueIndex("orders_session_product_idx").on(table.stripeSessionId, table.productKey),
+}));
 
 export type Order = typeof orders.$inferSelect;
 export type InsertOrder = typeof orders.$inferInsert;

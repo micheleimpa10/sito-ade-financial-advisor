@@ -146,6 +146,12 @@ const UPSELL_MAP: Record<string, Array<{
   ],
 };
 
+// Products included inside each bundle — used to suppress upsell for already-owned components
+const BUNDLE_CONTENTS: Record<string, string[]> = {
+  "single-bundle": ["financial-agenda-single", "budget-manager-personal"],
+  "family-bundle": ["financial-agenda-couples", "budget-manager-family"],
+};
+
 function UpsellOffer({
   purchasedProductKeys,
   onDismiss,
@@ -153,9 +159,13 @@ function UpsellOffer({
   purchasedProductKeys: string[];
   onDismiss: () => void;
 }) {
-  // Collect all upsell offers from all purchased products, then filter out
-  // any product the user already bought in this session
+  // Expand purchased set to include products contained inside any purchased bundle
   const purchasedSet = new Set(purchasedProductKeys);
+  for (const key of purchasedProductKeys) {
+    for (const component of BUNDLE_CONTENTS[key] ?? []) {
+      purchasedSet.add(component);
+    }
+  }
   const seen = new Set<string>();
   const offers = purchasedProductKeys
     .flatMap((key) => UPSELL_MAP[key] ?? [])
@@ -315,11 +325,32 @@ export default function PaymentSuccess() {
   const params = new URLSearchParams(window.location.search);
   const sessionId = params.get("session_id") ?? "";
   const [upsellDismissed, setUpsellDismissed] = useState(false);
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const { data, isLoading, error } = trpc.stripe.verifySession.useQuery(
     { sessionId },
     { enabled: !!sessionId, retry: 2 }
   );
+
+  // Confirm the order as soon as we know the payment is paid.
+  // PRIMARY registration path: saves order to DB, generates license, sends email.
+  // Webhook is backup only. Idempotent via onDuplicateKeyUpdate.
+  const confirmOrder = trpc.stripe.confirmOrder.useMutation({
+    onSuccess: () => {
+      setOrderConfirmed(true);
+      console.log("[PaymentSuccess] Order confirmed and email sent.");
+    },
+    onError: (err) => {
+      console.error("[PaymentSuccess] confirmOrder failed:", err.message);
+    },
+  });
+
+  useEffect(() => {
+    if (data?.status === "paid" && sessionId && !orderConfirmed && !confirmOrder.isPending && !confirmOrder.isSuccess) {
+      confirmOrder.mutate({ sessionId });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.status, sessionId, orderConfirmed]);
 
   // Fetch license key if ANY product in the session requires one (BudgetManager + bundles)
   const requiresLicenseKey =

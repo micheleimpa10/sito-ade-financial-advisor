@@ -107,7 +107,7 @@ function detectLanguage(session: Stripe.Checkout.Session): string {
   return "en";
 }
 
-async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+export async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   // Support both single-product (product_key) and multi-product cart (product_keys)
   const productKeysRaw = session.metadata?.product_keys ?? session.metadata?.product_key ?? "";
   const productKeys = productKeysRaw

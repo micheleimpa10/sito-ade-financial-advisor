@@ -6,6 +6,7 @@ import { getProduct, PRODUCTS } from "../products";
 import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
 import { eq, desc, inArray } from "drizzle-orm";
 import Stripe from "stripe";
+import { handleCheckoutCompleted } from "../stripeWebhook";
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY;
@@ -287,4 +288,21 @@ export const stripeRouter = router({
   products: publicProcedure.query(() => {
     return Object.values(PRODUCTS);
   }),
+
+  /**
+   * Confirm an order directly from the client after a successful Stripe payment.
+   * PRIMARY registration path: saves order to DB, generates license, sends email.
+   * Webhook is backup only. Idempotent via onDuplicateKeyUpdate.
+   */
+  confirmOrder: publicProcedure
+    .input(z.object({ sessionId: z.string() }))
+    .mutation(async ({ input }) => {
+      const stripe = getStripe();
+      const session = await stripe.checkout.sessions.retrieve(input.sessionId);
+      if (session.payment_status !== "paid") {
+        throw new TRPCError({ code: "BAD_REQUEST", message: "Payment not completed" });
+      }
+      await handleCheckoutCompleted(session);
+      return { success: true };
+    }),
 });

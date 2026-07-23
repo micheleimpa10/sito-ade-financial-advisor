@@ -51,7 +51,7 @@ const translations = {
           theme: "Wellness, mobility, and trusted professional connections.",
           activities:
             "Pilates practice, informal networking, and guidance around reimbursable wellness services.",
-          location: "Geneva, Switzerland",
+          location: "Zurich, Switzerland",
         },
         {
           date: "June 7th",
@@ -78,7 +78,7 @@ const translations = {
           theme: "Tax efficiency, wealth preservation, and strategic planning.",
           activities:
             "Interactive workshop, Q&A session, and personalized consultation insights.",
-          location: "Bern, Switzerland",
+          location: "Zug, Switzerland",
         },
         {
           date: "April 20th",
@@ -88,7 +88,7 @@ const translations = {
           theme: "Holistic wellness, community building, and professional connections.",
           activities:
             "Yoga session, meditation, wellness talks, and networking aperitivo.",
-          location: "Lugano, Switzerland",
+          location: "Zurich, Switzerland",
         },
       ],
     },
@@ -170,7 +170,7 @@ const translations = {
           theme: "Benessere, mobilità e connessioni professionali di fiducia.",
           activities:
             "Pratica di Pilates, networking informale e guida sui servizi di benessere rimborsabili.",
-          location: "Ginevra, Svizzera",
+          location: "Zurigo, Svizzera",
         },
         {
           date: "7 Giugno",
@@ -197,7 +197,7 @@ const translations = {
           theme: "Efficienza fiscale, preservazione della ricchezza e pianificazione strategica.",
           activities:
             "Workshop interattivo, sessione Q&A e approfondimenti di consulenza personalizzata.",
-          location: "Berna, Svizzera",
+          location: "Zugo, Svizzera",
         },
         {
           date: "20 Aprile",
@@ -207,7 +207,7 @@ const translations = {
           theme: "Benessere olistico, costruzione della comunità e connessioni professionali.",
           activities:
             "Sessione di yoga, meditazione, talk sul benessere e aperitivo di networking.",
-          location: "Lugano, Svizzera",
+          location: "Zurigo, Svizzera",
         },
       ],
     },
@@ -289,7 +289,7 @@ const translations = {
           theme: "Bien-être, mobilité et connexions professionnelles de confiance.",
           activities:
             "Pratique du Pilates, réseautage informel et conseils sur les services de bien-être remboursables.",
-          location: "Genève, Suisse",
+          location: "Zurich, Suisse",
         },
         {
           date: "7 Juin",
@@ -316,7 +316,7 @@ const translations = {
           theme: "Efficacité fiscale, préservation de la richesse et planification stratégique.",
           activities:
             "Atelier interactif, session Q&A et aperçus de consultation personnalisée.",
-          location: "Berne, Suisse",
+          location: "Zoug, Suisse",
         },
         {
           date: "20 Avril",
@@ -326,7 +326,7 @@ const translations = {
           theme: "Bien-être holistique, création de communauté et connexions professionnelles.",
           activities:
             "Séance de yoga, méditation, talks bien-être et apéritif de réseautage.",
-          location: "Lugano, Suisse",
+          location: "Zurich, Suisse",
         },
       ],
     },
@@ -408,7 +408,7 @@ const translations = {
           theme: "Wellness, Mobilität und vertrauensvolle berufliche Verbindungen.",
           activities:
             "Pilates-Praxis, informelles Networking und Anleitung zu erstattungsfähigen Wellnessdienstleistungen.",
-          location: "Genf, Schweiz",
+          location: "Zürich, Schweiz",
         },
         {
           date: "7. Juni",
@@ -435,7 +435,7 @@ const translations = {
           theme: "Steuereffizienz, Vermögensschutz und strategische Planung.",
           activities:
             "Interaktiver Workshop, Fragerunde und Einblicke in personalisierte Beratung.",
-          location: "Bern, Schweiz",
+          location: "Zug, Schweiz",
         },
         {
           date: "20. April",
@@ -445,7 +445,7 @@ const translations = {
           theme: "Ganzheitliches Wohlbefinden, Gemeinschaftsbildung und berufliche Verbindungen.",
           activities:
             "Yoga-Sitzung, Meditation, Wellness-Talks und Networking-Aperitif.",
-          location: "Lugano, Schweiz",
+          location: "Zürich, Schweiz",
         },
       ],
     },

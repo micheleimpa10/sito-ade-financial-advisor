@@ -376,18 +376,38 @@ export default function PaymentSuccess() {
   // save the budget-manager license under the right key regardless of product order.
   useEffect(() => {
     const byProduct = (licenseData as any)?.licensesByProduct ?? {};
+
+    // Case 1: Direct budget-manager-personal / budget-manager-family purchase
     if (byProduct["budget-manager-personal"]) {
       localStorage.setItem("sbp-license", byProduct["budget-manager-personal"]);
-      console.log("[PaymentSuccess] Personal BudgetManager license saved");
+      console.log("[PaymentSuccess] Personal BudgetManager license saved (direct)");
     }
     if (byProduct["budget-manager-family"]) {
       localStorage.setItem("sbpf-license", byProduct["budget-manager-family"]);
-      console.log("[PaymentSuccess] Family BudgetManager license saved");
+      console.log("[PaymentSuccess] Family BudgetManager license saved (direct)");
     }
-    // Fallback for single-product purchase
-    if (!byProduct["budget-manager-personal"] && !byProduct["budget-manager-family"] && licenseData?.licenseKey) {
+
+    // Case 2: Bundle purchases — license is stored under the bundle key, not the component key.
+    // single-bundle contains budget-manager-personal → sbp-license
+    // family-bundle contains budget-manager-family  → sbpf-license
+    if (byProduct["single-bundle"]) {
+      localStorage.setItem("sbp-license", byProduct["single-bundle"]);
+      console.log("[PaymentSuccess] Personal BudgetManager license saved (from single-bundle)");
+    }
+    if (byProduct["family-bundle"]) {
+      localStorage.setItem("sbpf-license", byProduct["family-bundle"]);
+      console.log("[PaymentSuccess] Family BudgetManager license saved (from family-bundle)");
+    }
+
+    // Case 3: Fallback for single-product purchase where licensesByProduct is empty
+    const hasAnyLicense =
+      byProduct["budget-manager-personal"] ||
+      byProduct["budget-manager-family"] ||
+      byProduct["single-bundle"] ||
+      byProduct["family-bundle"];
+    if (!hasAnyLicense && licenseData?.licenseKey) {
       const allKeys = data?.productKeys ?? (data?.productKey ? [data.productKey] : []);
-      const budgetKey = allKeys.find((k) => k.includes("budget-manager"));
+      const budgetKey = allKeys.find((k) => k.includes("budget-manager") || k.includes("bundle"));
       if (budgetKey) {
         const storageKey = budgetKey.includes("family") ? "sbpf-license" : "sbp-license";
         localStorage.setItem(storageKey, licenseData.licenseKey);

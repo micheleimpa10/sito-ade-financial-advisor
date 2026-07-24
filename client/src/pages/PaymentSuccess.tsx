@@ -10,10 +10,10 @@ const DOWNLOAD_PATHS: Record<string, string> = {
   "moving-guide": "/manus-storage/Moving_to_Switzerland_Complete_Guide_5b39cb12.zip",
   "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_3f80b1c5.zip",
   "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_b7235d06.zip",
-  "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v3_9b946417.zip",
-  "budget-manager-family": "/manus-storage/05_Family_LIVE_v3_9bb4f2e9.zip",
-  "single-bundle": "/manus-storage/06_Bundle_LIVE_v3_727bcaa3.zip",
-  "family-bundle": "/manus-storage/07_Bundle_LIVE_v3_f88993aa.zip",
+  "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v4_5db7626b.zip",
+  "budget-manager-family": "/manus-storage/05_Family_LIVE_v4_6e506a5e.zip",
+  "single-bundle": "/manus-storage/06_Bundle_LIVE_v4_7e342914.zip",
+  "family-bundle": "/manus-storage/07_Bundle_LIVE_v4_6b7ebda5.zip",
 };
 
 function getDownloadLabel(productKey: string): string | null {

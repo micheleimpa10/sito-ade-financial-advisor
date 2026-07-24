@@ -4,7 +4,7 @@ import Stripe from "stripe";
 import { randomBytes } from "crypto";
 import { getDb } from "./db";
 import { orders, licenses } from "../drizzle/schema";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { notifyOwner } from "./_core/notification";
 import { getProduct } from "./products";
 import { sendPurchaseConfirmationEmail } from "./email";
@@ -192,19 +192,21 @@ export async function handleCheckoutCompleted(session: Stripe.Checkout.Session) 
           // In that case we must fetch the real orderId from the DB.
           let orderId = (result as any).insertId ?? 0;
           if (orderId === 0) {
+            // CRITICAL: filter by BOTH sessionId AND productKey to get the correct order
+            // when multiple products are in the same session (e.g. single-bundle + family-bundle)
             const existingOrder = await db
               .select({ id: orders.id })
               .from(orders)
-              .where(eq(orders.stripeSessionId, session.id))
+              .where(and(eq(orders.stripeSessionId, session.id), eq(orders.productKey, productKey)))
               .limit(1);
             orderId = existingOrder[0]?.id ?? 0;
           }
 
-          // Check if a license already exists for this order (idempotent)
+          // Check if a license already exists for this specific order+product (idempotent)
           const existingLicense = await db
             .select({ licenseKey: licenses.licenseKey })
             .from(licenses)
-            .where(eq(licenses.orderId, orderId))
+            .where(and(eq(licenses.orderId, orderId), eq(licenses.productKey, productKey)))
             .limit(1);
 
           if (existingLicense.length > 0) {

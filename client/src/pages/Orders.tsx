@@ -9,13 +9,13 @@ import { getLoginUrl } from "@/const";
 import { toast } from "sonner";
 
 const DOWNLOAD_PATHS: Record<string, string> = {
-  "moving-guide": "/manus-storage/01_Moving_to_Switzerland_Complete_Guide_2026_ea576a78.zip",
+  "moving-guide": "/manus-storage/Moving_to_Switzerland_Complete_Guide_5b39cb12.zip",
   "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_3f80b1c5.zip",
   "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_b7235d06.zip",
-  "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v2_2537098d.zip",
-  "budget-manager-family": "/manus-storage/05_Family_LIVE_v2_a629c260.zip",
-  "single-bundle": "/manus-storage/06_Bundle_LIVE_v2_3ff662fe.zip",
-  "family-bundle": "/manus-storage/07_Bundle_LIVE_v2_e6f29ec2.zip",
+  "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v3_9b946417.zip",
+  "budget-manager-family": "/manus-storage/05_Family_LIVE_v3_9bb4f2e9.zip",
+  "single-bundle": "/manus-storage/06_Bundle_LIVE_v3_727bcaa3.zip",
+  "family-bundle": "/manus-storage/07_Bundle_LIVE_v3_f88993aa.zip",
 };
 
 function formatAmount(amount: number | null | undefined, currency: string | null | undefined) {

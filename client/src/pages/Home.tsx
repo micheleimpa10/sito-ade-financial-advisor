@@ -2195,8 +2195,8 @@ export default function HomePage() {
                 </ul>
                 <div className="flex items-center justify-between mt-auto">
                   <div>
-                    <p className="text-3xl font-bold text-[#c9a84c]" style={{ fontFamily: "'Playfair Display', serif" }}>CHF 29.90</p>
-                    <p className="text-white/35 line-through text-xs">CHF 37.80</p>
+                    <p className="text-3xl font-bold text-[#c9a84c]" style={{ fontFamily: "'Playfair Display', serif" }}>CHF 39.90</p>
+                    <p className="text-white/35 line-through text-xs">CHF 48.80</p>
                   </div>
                   <button
                     onClick={() => handleBuyNow("single-bundle")}
@@ -2249,8 +2249,8 @@ export default function HomePage() {
                 </ul>
                 <div className="flex items-center justify-between mt-auto">
                   <div>
-                    <p className="text-3xl font-bold text-[#c9a84c]" style={{ fontFamily: "'Playfair Display', serif" }}>CHF 39.90</p>
-                    <p className="text-white/35 line-through text-xs">CHF 52.80</p>
+                    <p className="text-3xl font-bold text-[#c9a84c]" style={{ fontFamily: "'Playfair Display', serif" }}>CHF 49.90</p>
+                    <p className="text-white/35 line-through text-xs">CHF 59.80</p>
                   </div>
                   <button
                     onClick={() => handleBuyNow("family-bundle")}

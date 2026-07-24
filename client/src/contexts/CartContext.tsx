@@ -52,16 +52,16 @@ const BUNDLE_RULES: Array<{
     triggers: ["financial-agenda-single", "budget-manager-personal"],
     bundleKey: "single-bundle",
     bundleName: "Single Money Bundle",
-    bundlePrice: 2990,
-    bundleDisplayPrice: "CHF 29.90",
+    bundlePrice: 3990,
+    bundleDisplayPrice: "CHF 39.90",
   },
   {
     // Family Money Bundle: agenda-couples + budget-family
     triggers: ["financial-agenda-couples", "budget-manager-family"],
     bundleKey: "family-bundle",
     bundleName: "Family Money Bundle",
-    bundlePrice: 3990,
-    bundleDisplayPrice: "CHF 39.90",
+    bundlePrice: 4990,
+    bundleDisplayPrice: "CHF 49.90",
   },
 ];
 

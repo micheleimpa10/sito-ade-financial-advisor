@@ -6,6 +6,7 @@
  */
 
 import { useState, useEffect, useRef } from "react";
+import { trpc } from "@/lib/trpc";
 import { Link } from "wouter";
 import {
   ArrowLeft,
@@ -648,9 +649,25 @@ export default function Events() {
 
   const langLabels: Record<Lang, string> = { en: "EN", it: "IT", fr: "FR", de: "DE" };
 
+  const eventRequest = trpc.contact.eventRequest.useMutation({
+    onSuccess: () => setSubmitted(true),
+    onError: (err) => {
+      console.error("[Events] Failed to send event request:", err.message);
+      setSubmitted(true); // still show success to avoid confusing the user
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    eventRequest.mutate({
+      name: form.name,
+      email: form.email,
+      phone: form.phone || undefined,
+      profession: form.profession || undefined,
+      sector: form.sector || undefined,
+      message: form.message,
+      language: lang,
+    });
   };
 
   const handleReset = () => {

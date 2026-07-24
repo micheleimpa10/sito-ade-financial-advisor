@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { randomBytes } from "crypto";
 import { getDb } from "./db";
 import { orders, licenses } from "../drizzle/schema";
+import { eq } from "drizzle-orm";
 import { notifyOwner } from "./_core/notification";
 import { getProduct } from "./products";
 import { sendPurchaseConfirmationEmail } from "./email";
@@ -186,22 +187,43 @@ export async function handleCheckoutCompleted(session: Stripe.Checkout.Session) 
       if (product?.requiresLicenseKey) {
         try {
           const tier = productKey.includes("family") ? "family" : "personal";
-          const orderId = (result as any).insertId ?? 0;
-          licenseKey = generateLicenseKey();
 
-          await db.insert(licenses).values({
-            licenseKey,
-            orderId,
-            productKey,
-            tier,
-            customerEmail: customerEmail ?? undefined,
-          }).onDuplicateKeyUpdate({
-            // If duplicate (retry), keep existing key — do not overwrite
-            set: { productKey },
-          });
+          // When onDuplicateKeyUpdate fires, MySQL returns insertId=0.
+          // In that case we must fetch the real orderId from the DB.
+          let orderId = (result as any).insertId ?? 0;
+          if (orderId === 0) {
+            const existingOrder = await db
+              .select({ id: orders.id })
+              .from(orders)
+              .where(eq(orders.stripeSessionId, session.id))
+              .limit(1);
+            orderId = existingOrder[0]?.id ?? 0;
+          }
+
+          // Check if a license already exists for this order (idempotent)
+          const existingLicense = await db
+            .select({ licenseKey: licenses.licenseKey })
+            .from(licenses)
+            .where(eq(licenses.orderId, orderId))
+            .limit(1);
+
+          if (existingLicense.length > 0) {
+            // Reuse the existing license key — do not generate a new one
+            licenseKey = existingLicense[0].licenseKey;
+            console.log(`[Webhook] Reusing existing license key for order ${orderId}: ${licenseKey}`);
+          } else {
+            licenseKey = generateLicenseKey();
+            await db.insert(licenses).values({
+              licenseKey,
+              orderId,
+              productKey,
+              tier,
+              customerEmail: customerEmail ?? undefined,
+            });
+            console.log(`[Webhook] License key generated: ${licenseKey} for product ${productKey}`);
+          }
 
           allLicenseKeys.push(licenseKey);
-          console.log(`[Webhook] License key generated: ${licenseKey} for product ${productKey}`);
         } catch (licErr) {
           console.warn("[Webhook] License key generation failed:", licErr);
           licenseKey = undefined;

@@ -301,12 +301,28 @@ export const stripeRouter = router({
   confirmOrder: publicProcedure
     .input(z.object({ sessionId: z.string() }))
     .mutation(async ({ input }) => {
+      // Idempotency check: if order already exists in DB, skip processing entirely.
+      // This prevents re-sending emails when the user revisits the payment-success page
+      // (e.g. by clicking the download link in the confirmation email).
+      const db = await getDb();
+      if (db) {
+        const existing = await db
+          .select({ id: orders.id })
+          .from(orders)
+          .where(eq(orders.stripeSessionId, input.sessionId))
+          .limit(1);
+        if (existing.length > 0) {
+          console.log(`[confirmOrder] Order already exists for session ${input.sessionId}, skipping`);
+          return { success: true, alreadyProcessed: true };
+        }
+      }
+
       const stripe = getStripe();
       const session = await stripe.checkout.sessions.retrieve(input.sessionId);
       if (session.payment_status !== "paid") {
         throw new TRPCError({ code: "BAD_REQUEST", message: "Payment not completed" });
       }
       await handleCheckoutCompleted(session);
-      return { success: true };
+      return { success: true, alreadyProcessed: false };
     }),
 });

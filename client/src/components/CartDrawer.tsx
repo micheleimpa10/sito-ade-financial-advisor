@@ -12,6 +12,7 @@ export function CartDrawer() {
       if (data.url) {
         toast.info("Redirecting to checkout…");
         window.open(data.url, "_blank");
+        clearCart();
         closeCart();
       }
     },

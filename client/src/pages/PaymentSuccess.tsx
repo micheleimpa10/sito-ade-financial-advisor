@@ -494,32 +494,55 @@ export default function PaymentSuccess() {
                 .
               </p>
 
-              {/* License key — shown for BudgetManager and bundle products */}
-              {requiresLicenseKey && (
-                <div className="w-full">
-                  {licenseLoading ? (
-                    <div className="w-full border border-[#c9a84c]/40 rounded-xl p-5 bg-[#f8f5f0] flex items-center justify-center gap-2 text-[#1a2744]/50 text-sm">
-                      <Loader2 className="h-4 w-4 animate-spin text-[#c9a84c]" />
-                      Generating your license key…
-                    </div>
-                  ) : licenseData?.licenseKey ? (
-                    <LicenseKeyBox licenseKey={licenseData.licenseKey} />
-                  ) : (
-                    <div className="w-full border border-[#c9a84c]/40 rounded-xl p-5 bg-[#f8f5f0] text-center">
-                      <p className="text-[#1a2744]/60 text-sm">
-                        Your license key is being generated. Please check your email shortly, or{" "}
-                        <button
-                          onClick={() => window.location.reload()}
-                          className="text-[#c9a84c] underline hover:no-underline"
-                        >
-                          refresh this page
-                        </button>
-                        .
-                      </p>
-                    </div>
-                  )}
-                </div>
-              )}
+              {/* License key(s) — shown for BudgetManager and bundle products */}
+              {requiresLicenseKey && (() => {
+                const PRODUCT_LABELS: Record<string, string> = {
+                  "budget-manager-personal": "BudgetManager Pro — Personal",
+                  "budget-manager-family": "BudgetManager Pro — Family",
+                  "single-bundle": "Single Money Bundle (BudgetManager Personal)",
+                  "family-bundle": "Family Money Bundle (BudgetManager Family)",
+                };
+                const byProduct = (licenseData as any)?.licensesByProduct ?? {};
+                const licenseEntries: { label: string; key: string }[] = Object.entries(byProduct)
+                  .filter(([pk]) => PRODUCT_LABELS[pk])
+                  .map(([pk, lk]) => ({ label: PRODUCT_LABELS[pk], key: lk as string }));
+                // Fallback: single license
+                if (licenseEntries.length === 0 && licenseData?.licenseKey) {
+                  licenseEntries.push({ label: "License Key", key: licenseData.licenseKey });
+                }
+                return (
+                  <div className="w-full flex flex-col gap-3">
+                    {licenseLoading ? (
+                      <div className="w-full border border-[#c9a84c]/40 rounded-xl p-5 bg-[#f8f5f0] flex items-center justify-center gap-2 text-[#1a2744]/50 text-sm">
+                        <Loader2 className="h-4 w-4 animate-spin text-[#c9a84c]" />
+                        Generating your license key…
+                      </div>
+                    ) : licenseEntries.length > 0 ? (
+                      licenseEntries.map((entry) => (
+                        <div key={entry.key}>
+                          {licenseEntries.length > 1 && (
+                            <p className="text-xs font-semibold text-[#1a2744]/60 uppercase tracking-wide mb-1 pl-1">{entry.label}</p>
+                          )}
+                          <LicenseKeyBox licenseKey={entry.key} />
+                        </div>
+                      ))
+                    ) : (
+                      <div className="w-full border border-[#c9a84c]/40 rounded-xl p-5 bg-[#f8f5f0] text-center">
+                        <p className="text-[#1a2744]/60 text-sm">
+                          Your license key is being generated. Please check your email shortly, or{" "}
+                          <button
+                            onClick={() => window.location.reload()}
+                            className="text-[#c9a84c] underline hover:no-underline"
+                          >
+                            refresh this page
+                          </button>
+                          .
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
 
               {downloadItems.length > 0 && (
                 <div className="w-full flex flex-col gap-2">

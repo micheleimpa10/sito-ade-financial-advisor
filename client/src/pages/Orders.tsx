@@ -12,10 +12,10 @@ const DOWNLOAD_PATHS: Record<string, string> = {
   "moving-guide": "/manus-storage/Moving_to_Switzerland_Complete_Guide_5b39cb12.zip",
   "financial-agenda-couples": "/manus-storage/02_Financial_Agenda_Couples_3f80b1c5.zip",
   "financial-agenda-single": "/manus-storage/03_Financial_Agenda_Single_b7235d06.zip",
-  "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v4_5db7626b.zip",
-  "budget-manager-family": "/manus-storage/05_Family_LIVE_v4_6e506a5e.zip",
-  "single-bundle": "/manus-storage/06_Bundle_LIVE_v4_7e342914.zip",
-  "family-bundle": "/manus-storage/07_Bundle_LIVE_v4_6b7ebda5.zip",
+  "budget-manager-personal": "/manus-storage/04_Personal_LIVE_v5_9469a341.zip",
+  "budget-manager-family": "/manus-storage/05_Family_LIVE_v5_24c1826e.zip",
+  "single-bundle": "/manus-storage/06_Bundle_LIVE_v5_7c0a3dc6.zip",
+  "family-bundle": "/manus-storage/07_Bundle_LIVE_v5_f58d890c.zip",
 };
 
 function formatAmount(amount: number | null | undefined, currency: string | null | undefined) {
